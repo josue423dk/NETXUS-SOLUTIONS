@@ -1,32 +1,49 @@
-# React + TypeScript + Vite
+Netxus Solutions | MVP Development
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+🚀 Sobre la Empresa
 
-Currently, two official plugins are available:
+Netxus Solutions es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento. Nuestra misión es transformar necesidades empresariales en productos tecnológicos escalables, intuitivos y optimizados, priorizando siempre la calidad del código, la experiencia del usuario (UX) y la eficiencia técnica.
+👥 Fundadores
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Netxus Solutions fue co-fundada por un equipo de profesionales comprometidos con la excelencia técnica:
 
-## React Compiler
+    Alex Josué Montaña: Líder Técnico y Desarrollador Full Stack. Especializado en arquitectura de sistemas, optimización de rendimiento y despliegue de infraestructura profesional.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+    Iván Rufino: Líder de Producto y Diseño UI/UX. Especializado en la creación de interfaces responsivas, accesibles y orientadas a la conversión, garantizando la identidad visual de nuestros proyectos.
 
-## Expanding the Oxlint configuration
+🛠 Desarrollo de Proyecto (Sprint MVP)
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Este repositorio gestiona el ciclo de vida del MVP actual. Nuestro enfoque de trabajo se basa en metodologías ágiles, adaptadas para maximizar la velocidad de entrega sin comprometer la calidad.
+Flujo de Trabajo (Workflow)
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+Para asegurar el éxito de cada Sprint, el equipo sigue este proceso riguroso:
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+    To Do: Tareas validadas y priorizadas listas para ejecución.
+
+    In Progress: Fase de desarrollo activo.
+
+    Code Review: Proceso de revisión por pares obligatorio para asegurar la integridad arquitectónica y la ausencia de errores.
+
+    Done: Entregables finalizados, validados en vivo y verificados en producción.
+
+📋 Normas del Equipo
+
+La cultura técnica de Netxus Solutions se fundamenta en los siguientes pilares:
+
+    Transparencia Total: Es obligatorio registrar cada avance y cambio en el Project Board del repositorio.
+
+    Integridad del Código: No se acepta ningún ticket en el estado 'Done' sin haber pasado previamente por una revisión de código (Code Review) realizada por el otro fundador.
+
+    Documentación Activa: Cualquier desafío técnico, bug o decisión de arquitectura debe documentarse inmediatamente en el Issue de GitHub correspondiente antes de proceder a la resolución.
+
+    Calidad sobre Cantidad: Todo código debe seguir estándares de clean code y buenas prácticas de tipado (TypeScript).
+
+💻 Tech Stack
+
+    Frontend: React, TypeScript, Tailwind CSS
+
+    Infraestructura: Despliegue continuo en Vercel/Netlify
+
+    Calidad: Auditorías técnicas frecuentes (Lighthouse), pruebas de rendimiento y optimización de UX.
+
+Desarrollado y mantenido por el equipo técnico de Netxus Solutions.
