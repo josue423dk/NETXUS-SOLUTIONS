@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:is([data-theme="dark"] *));
+
 @theme {
   --color-primary-900: #0A2E30;
   --color-primary-700: #0F4C4C;
@@ -22,6 +24,19 @@
   --toggle-bg-dark: #0A2E30;
   --toggle-bg-light: #1C7C7E;
   --toggle-icon: #0F4C4C;
+
+  --animate-float: float 4.5s ease-in-out infinite alternate;
+  --animate-fade-in: fadeIn 0.5s ease-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 [data-theme="dark"] {
