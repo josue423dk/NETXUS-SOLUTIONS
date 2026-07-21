@@ -1,6 +1,5 @@
 Netxus Solutions | MVP Development
-
-🚀 Sobre la Empresa
+Sobre la Empresa
 
 Netxus Solutions es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento. Nuestra misión es transformar necesidades empresariales en productos tecnológicos escalables, intuitivos y optimizados, priorizando siempre la calidad del código, la experiencia del usuario (UX) y la eficiencia técnica.
 👥 Fundadores
@@ -11,7 +10,7 @@ Netxus Solutions fue co-fundada por un equipo de profesionales comprometidos con
 
     Iván Rufino: Líder de Producto y Diseño UI/UX. Especializado en la creación de interfaces responsivas, accesibles y orientadas a la conversión, garantizando la identidad visual de nuestros proyectos.
 
-🛠 Desarrollo de Proyecto (Sprint MVP)
+Desarrollo de Proyecto (Sprint MVP)
 
 Este repositorio gestiona el ciclo de vida del MVP actual. Nuestro enfoque de trabajo se basa en metodologías ágiles, adaptadas para maximizar la velocidad de entrega sin comprometer la calidad.
 Flujo de Trabajo (Workflow)
@@ -26,7 +25,7 @@ Para asegurar el éxito de cada Sprint, el equipo sigue este proceso riguroso:
 
     Done: Entregables finalizados, validados en vivo y verificados en producción.
 
-📋 Normas del Equipo
+Normas del Equipo
 
 La cultura técnica de Netxus Solutions se fundamenta en los siguientes pilares:
 
@@ -38,7 +37,7 @@ La cultura técnica de Netxus Solutions se fundamenta en los siguientes pilares:
 
     Calidad sobre Cantidad: Todo código debe seguir estándares de clean code y buenas prácticas de tipado (TypeScript).
 
-💻 Tech Stack
+Tech Stack
 
     Frontend: React, TypeScript, Tailwind CSS
 
