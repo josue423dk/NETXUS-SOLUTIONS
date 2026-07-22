@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "animate.css";
 
 @variant dark (&:is([data-theme="dark"] *));
 
@@ -58,9 +59,9 @@
   --color-warning: #FF9800;
   --color-error: #EF5350;
 
-  --logo-gradient: linear-gradient(90deg, #FFB800 0%, #FF6B00 50%, #E8351A 100%);
+  --logo-gradient: linear-gradient(180deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
   --logo-wordmark: #FFFFFF;
-  --logo-x-gradient: linear-gradient(90deg, #FF6B00 0%, #E8351A 100%);
+  --logo-x-gradient: linear-gradient(90deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
 }
 
 .hero-obj-transition {
@@ -78,19 +79,4 @@
 
 [letter-animation="breath"] > span {
   display: inline-block;
-  animation:
-    breath 1200ms ease
-    calc(var(--index) * 100 * 1ms)
-    infinite alternate;
-}
-
-@keyframes breath {
-  from {
-    animation-timing-function: ease-out;
-  }
-  to {
-    transform: translateY(-5px) scale(1.25);
-    text-shadow: 0 0 25px var(--glow-color, #2DD4BF);
-    animation-timing-function: ease-in-out;
-  }
 }

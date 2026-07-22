@@ -1,5 +1,6 @@
 import { useState } from "react"
 import type { NavItem } from "../../types"
+import { Logo } from "../ui/Logo"
 import { ThemeToggle } from "../ui/ThemeToggle"
 
 const navLinks: NavItem[] = [
@@ -18,8 +19,8 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-neutral-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="/" className="text-xl font-bold tracking-tight text-white">
-            Netxus
+          <a href="/" className="flex-shrink-0">
+            <Logo />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
