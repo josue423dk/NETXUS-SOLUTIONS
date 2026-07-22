@@ -79,16 +79,32 @@ export function Footer() {
   return (
     <footer className="bg-neutral-50 border-t border-neutral-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="col-span-2 lg:col-span-4">
             <Logo size="sm" />
-            <p className="mt-2 text-sm text-neutral-700 leading-relaxed max-w-xs">
+            <p className="hidden lg:block mt-2 text-sm text-neutral-700 leading-relaxed max-w-xs">
               Transformamos ideas en soluciones digitales. Desarrollo de software a medida
               con tecnología de vanguardia.
             </p>
+            <div className="lg:hidden mt-3">
+              <div className="flex gap-2">
+                {socialIcons.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-8 h-8 rounded-lg bg-neutral-100 border border-neutral-300 flex items-center justify-center text-neutral-700 hover:text-primary-700 hover:border-primary-700 transition-all"
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="hidden lg:block lg:col-span-2">
             <h3 className="text-xs font-semibold text-primary-900 mb-2">Navegación</h3>
             <ul className="space-y-1.5">
               {navLinks.map((l) => (
@@ -127,7 +143,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="hidden lg:block lg:col-span-2">
             <h3 className="text-xs font-semibold text-primary-900 mb-2">Redes</h3>
             <div className="flex gap-2">
               {socialIcons.map((s) => (
