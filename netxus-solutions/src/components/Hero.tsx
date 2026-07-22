@@ -3,13 +3,23 @@ import { useTheme } from "../hooks/useTheme"
 
 import heroBgLight from "../assets/hero/hero-bg-light.webp"
 import heroBgDark from "../assets/hero/hero-bg-dark.webp"
+import heroBgLightMovil from "../assets/hero/hero-bg-light-movil.png"
+import heroBgDarkMovil from "../assets/hero/hero-bg-dark-movil.png"
 import heroObjLight from "../assets/hero/hero-object-light.png"
 import heroObjDark from "../assets/hero/hero-object-dark.png"
+
+const MOBILE_BREAKPOINT = 768
+
+function getBgImage(isDark: boolean, isMobile: boolean): string {
+  if (isMobile) return isDark ? heroBgDarkMovil : heroBgLightMovil
+  return isDark ? heroBgDark : heroBgLight
+}
 
 function getInitialBg(): string {
   if (typeof localStorage === "undefined") return heroBgDark
   const saved = localStorage.getItem("theme")
-  return saved === "light" ? heroBgLight : heroBgDark
+  const isMobile = window.innerWidth < MOBILE_BREAKPOINT
+  return getBgImage(saved === "light", isMobile)
 }
 
 function getInitialObj(): string {
@@ -29,6 +39,7 @@ export function Hero() {
   const [nextBg, setNextBg] = useState<string | null>(null)
   const [showNext, setShowNext] = useState(false)
   const [objectSrc, setObjectSrc] = useState(getInitialObj)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < MOBILE_BREAKPOINT)
 
   const [offset, setOffset] = useState({ x: 0, y: 0 })
 
@@ -40,16 +51,22 @@ export function Hero() {
   const currentRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
-    const newBg = isDark ? heroBgDark : heroBgLight
+    const handleResize = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const newBg = getBgImage(isDark, isMobile)
     const newObj = isDark ? heroObjDark : heroObjLight
 
     if (newBg === bgSrc) return
 
     if (!preloaded.current) {
       preloaded.current = true
-      const otherBg = isDark ? heroBgLight : heroBgDark
-      const otherObj = isDark ? heroObjLight : heroObjDark
-      ;[otherBg, otherObj].forEach((src) => {
+      const otherThemeBgs = [heroBgLight, heroBgDark, heroBgLightMovil, heroBgDarkMovil]
+      const otherObjs = [heroObjLight, heroObjDark]
+      ;[...otherThemeBgs, ...otherObjs].forEach((src) => {
         const img = new Image()
         img.src = src
       })
@@ -72,7 +89,7 @@ export function Hero() {
       }, 500)
     }
     img.src = newBg
-  }, [isDark])
+  }, [isDark, isMobile])
 
   const handlePointer = useCallback((clientX: number, clientY: number) => {
     const section = sectionRef.current
@@ -194,7 +211,7 @@ export function Hero() {
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold mt-6 text-white leading-[1.1]" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)" }}>
             Transformar ideas en{" "}
-            <span className="hero-animated-text animate__animated animate__backInUp">productos      digitales</span>
+            <span className="hero-animated-text animate__animated animate__backInUp">productos digitales</span>
           </h1>
 
           <p className="mt-8 text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
