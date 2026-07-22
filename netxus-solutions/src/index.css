@@ -1,1 +1,82 @@
 @import "tailwindcss";
+@import "animate.css";
+
+@variant dark (&:is([data-theme="dark"] *));
+
+@theme {
+  --color-primary-900: #0A2E30;
+  --color-primary-700: #0F4C4C;
+  --color-primary-500: #1C7C7E;
+  --color-accent-400: #2DD4BF;
+  --color-neutral-900: #16211F;
+  --color-neutral-700: #435151;
+  --color-neutral-500: #77898A;
+  --color-neutral-300: #C7D3D3;
+  --color-neutral-100: #ECF1F1;
+  --color-neutral-50: #F7FAFA;
+  --color-success: #1E8E5A;
+  --color-warning: #92620A;
+  --color-error: #B3261E;
+
+  --logo-gradient: linear-gradient(180deg, #0F4C4C 0%, #1C7C7E 50%, #2DD4BF 100%);
+  --logo-wordmark: #0A2E30;
+  --logo-x-gradient: linear-gradient(90deg, #1C7C7E 0%, #2DD4BF 100%);
+
+  --toggle-bg-dark: #0A2E30;
+  --toggle-bg-light: #1C7C7E;
+  --toggle-icon: #0F4C4C;
+
+  --animate-float: floatNatural 8s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.5s ease-out;
+}
+
+@keyframes floatNatural {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(10px, -16px) rotate(1.2deg); }
+  40%  { transform: translate(-6px, -8px) rotate(-0.8deg); }
+  60%  { transform: translate(14px, 4px) rotate(0.6deg); }
+  80%  { transform: translate(-4px, -12px) rotate(-0.4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+[data-theme="dark"] {
+  --color-primary-900: #FF6B00;
+  --color-primary-700: #E8351A;
+  --color-primary-500: #FF8C00;
+  --color-accent-400: #FFB800;
+  --color-neutral-900: #FFFFFF;
+  --color-neutral-700: #B0B7C3;
+  --color-neutral-500: #666666;
+  --color-neutral-300: #333333;
+  --color-neutral-100: #1A1A1A;
+  --color-neutral-50: #000000;
+  --color-success: #4CAF50;
+  --color-warning: #FF9800;
+  --color-error: #EF5350;
+
+  --logo-gradient: linear-gradient(180deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
+  --logo-wordmark: #FFFFFF;
+  --logo-x-gradient: linear-gradient(90deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
+}
+
+.hero-obj-transition {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-animated-text {
+  display: inline-block;
+  color: #2DD4BF;
+}
+
+[data-theme="dark"] .hero-animated-text {
+  color: #FFB800;
+}
+
+[letter-animation="breath"] > span {
+  display: inline-block;
+}
