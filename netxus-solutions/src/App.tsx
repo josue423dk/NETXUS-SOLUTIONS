@@ -1,4 +1,5 @@
 import { Navbar } from './components/layout/Navbar'
+import { Footer } from './components/layout/Footer'
 import { Hero } from './components/Hero'
 import './App.css'
 
@@ -9,6 +10,7 @@ function App() {
       <main>
         <Hero />
       </main>
+      <Footer />
     </div>
   )
 }
