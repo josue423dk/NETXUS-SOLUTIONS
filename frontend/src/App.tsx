@@ -1,7 +1,6 @@
 import { Navbar } from './components/layout/Navbar'
 import { Footer } from './components/layout/Footer'
-import { Hero } from './components/Hero'
-import './App.css'
+import { Hero } from './components/sections/Hero'
 
 function App() {
   return (

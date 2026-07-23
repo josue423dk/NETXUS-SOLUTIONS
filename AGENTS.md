@@ -27,21 +27,32 @@
 
 ---
 
-## 3. Estructura de carpetas
+## 3. Estructura de carpetas (Monorepo)
 
-src/
-├─ assets/ # imágenes, íconos, fuentes locales
-├─ components/
-│ ├─ ui/ # componentes atómicos reutilizables (ButtonPrimary, ButtonSecondary, Badge, Input...)
-│ ├─ layout/ # Navbar, Footer
-│ └─ sections/ # HeroSection, ServiceCard, PortfolioCard, ContactForm
-├─ pages/ # una carpeta o archivo por vista (Inicio, Servicios, Portafolio, Contacto)
-├─ hooks/ # custom hooks
-├─ lib/ # utils, helpers, validaciones de formularios
-├─ styles/ # estilos globales, fuentes @font-face si aplica
-├─ types/ # tipos e interfaces compartidas
-└─ main.tsx
-
+```
+/
+├─ frontend/               # Vite + React + TypeScript
+│  └─ src/
+│     ├─ assets/           # imágenes, íconos, fuentes locales
+│     ├─ components/
+│     │  ├─ ui/            # componentes atómicos (ButtonPrimary, Badge, Input...)
+│     │  ├─ layout/        # Navbar, Footer
+│     │  └─ sections/      # HeroSection, ServiceCard, PortfolioCard, ContactForm
+│     ├─ pages/            # vistas (Inicio, Servicios, Portafolio, Contacto)
+│     ├─ hooks/            # custom hooks
+│     ├─ lib/              # utils, helpers, validaciones de formularios
+│     ├─ styles/           # estilos globales (@theme, animaciones, fuentes)
+│     └─ types/            # tipos e interfaces compartidas
+├─ backend/                # Express + Mongoose
+│  └─ src/
+│     ├─ config/           # conexión a BD (db.js)
+│     ├─ controllers/      # lógica de rutas
+│     ├─ models/           # schemas de Mongoose
+│     ├─ routes/           # definición de rutas
+│     └─ server.js         # entry point
+├─ AGENTS.md
+└─ .gitignore
+```
 
 **Convención de archivos:** `PascalCase.tsx` para componentes, `camelCase.ts` para hooks/utils.
 
@@ -49,7 +60,7 @@ src/
 
 ## 4. Design System → Tailwind tokens
 
-Los CSS tokens se definen en `src/index.css` vía `@theme` de Tailwind v4. Los valores se intercambian según el atributo `data-theme` en `<html>`.
+Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Tailwind v4. Los valores se intercambian según el atributo `data-theme` en `<html>`.
 
 ### Tema claro (light) — `data-theme="light"` (predeterminado)
 

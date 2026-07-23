@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react"
-import { useTheme } from "../hooks/useTheme"
+import { useTheme } from "../../hooks/useTheme"
 
-import heroBgLight from "../assets/hero/hero-bg-light.webp"
-import heroBgDark from "../assets/hero/hero-bg-dark.webp"
-import heroBgLightMovil from "../assets/hero/hero-bg-light-movil.png"
-import heroBgDarkMovil from "../assets/hero/hero-bg-dark-movil.png"
-import heroObjLight from "../assets/hero/hero-object-light.png"
-import heroObjDark from "../assets/hero/hero-object-dark.png"
+import heroBgLight from "../../assets/hero/hero-bg-light.webp"
+import heroBgDark from "../../assets/hero/hero-bg-dark.webp"
+import heroBgLightMovil from "../../assets/hero/hero-bg-light-movil.png"
+import heroBgDarkMovil from "../../assets/hero/hero-bg-dark-movil.png"
+import heroObjLight from "../../assets/hero/hero-object-light.png"
+import heroObjDark from "../../assets/hero/hero-object-dark.png"
 
 const MOBILE_BREAKPOINT = 768
 
@@ -182,74 +182,74 @@ export function Hero() {
 
       <div className="absolute inset-0 bg-black/30 dark:bg-black/70" />
 
-      <div
-        ref={objRef}
-        className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] hero-obj-transition"
-        style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
-      >
         <div
-          className="transition-all duration-500 ease-out
-            hover:scale-105
-            hover:drop-shadow-[0_0_30px_rgba(45,212,191,0.7)]
-            dark:hover:drop-shadow-[0_0_20px_rgba(255,184,0,0.4)]"
+          ref={objRef}
+          className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] hero-obj-transition"
+          style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
         >
-          <img
-            key={isDark ? "obj-dark" : "obj-light"}
-            src={objectSrc}
-            alt="Netxus Solutions — objeto decorativo flotante"
-            loading="lazy"
-            className="w-full h-auto animate-fade-in"
-          />
-        </div>
-      </div>
-
-      <div className="relative z-10 h-screen flex items-center px-4 sm:px-6">
-        <div className="w-full lg:max-w-2xl pt-20 lg:ml-[8%] xl:ml-[10%]">
-          <span className="inline-block text-accent-400 dark:text-primary-500 font-semibold tracking-[0.2em] text-sm sm:text-base lg:text-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
-            CONSULTORÍA EN DESARROLLO DE SOFTWARE
-          </span>
-
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold mt-6 text-white leading-[1.1]" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)" }}>
-            Transformar ideas en{" "}
-            <span className="hero-animated-text animate__animated animate__backInUp">productos digitales</span>
-          </h1>
-
-          <p className="mt-8 text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
-            Creamos soluciones digitales escalables, intuitivas y
-            optimizadas, priorizando la calidad del código, la experiencia
-            de usuario y la eficiencia técnica.
-          </p>
-
-          <div className="flex flex-wrap gap-4 sm:gap-5 mt-10">
-            <a
-              href="#"
-              className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-4 bg-primary-700 text-white font-semibold rounded-lg text-base sm:text-lg hover:opacity-90 transition-opacity"
-            >
-              Empezá tu proyecto
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 border-2 border-white/80 text-white font-semibold rounded-lg text-base sm:text-lg hover:bg-white/10 transition-all"
-            >
-              Ver servicios
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
+          <div
+            className="transition-all duration-500 ease-out
+              hover:scale-105
+              hover:drop-shadow-[0_0_30px_rgba(45,212,191,0.7)]
+              dark:hover:drop-shadow-[0_0_20px_rgba(255,184,0,0.4)]"
+          >
+            <img
+              key={isDark ? "obj-dark" : "obj-light"}
+              src={objectSrc}
+              alt="Netxus Solutions — objeto decorativo flotante"
+              loading="lazy"
+              className="w-full h-auto animate-fade-in"
+            />
           </div>
         </div>
-      </div>
+
+        <div className="relative z-10 h-screen flex items-center px-4 sm:px-6">
+          <div className="w-full lg:max-w-2xl pt-20 lg:ml-[8%] xl:ml-[10%]">
+            <span className="inline-block text-accent-400 dark:text-primary-500 font-semibold tracking-[0.2em] text-sm sm:text-base lg:text-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+              CONSULTORÍA EN DESARROLLO DE SOFTWARE
+            </span>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold mt-6 text-white leading-[1.1]" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)" }}>
+              Transformar ideas en{" "}
+              <span className="hero-animated-text animate__animated animate__backInUp">productos digitales</span>
+            </h1>
+
+            <p className="mt-8 text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
+              Creamos soluciones digitales escalables, intuitivas y
+              optimizadas, priorizando la calidad del código, la experiencia
+              de usuario y la eficiencia técnica.
+            </p>
+
+            <div className="flex flex-wrap gap-4 sm:gap-5 mt-10">
+              <a
+                href="#"
+                className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-4 bg-primary-700 text-white font-semibold rounded-lg text-base sm:text-lg hover:opacity-90 transition-opacity"
+              >
+                Empezá tu proyecto
+              </a>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 border-2 border-white/80 text-white font-semibold rounded-lg text-base sm:text-lg hover:bg-white/10 transition-all"
+              >
+                Ver servicios
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
     </section>
   )
 }
