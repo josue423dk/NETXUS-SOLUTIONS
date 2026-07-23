@@ -209,9 +209,32 @@ Usar **Conventional Commits**:
 
 ---
 
-## 8. Checklist antes de cerrar una tarea
+## 8. Skills de Agente de IA
 
-- [ ] ¿Usé solo tokens del Design System (colores, tipografía, espaciado, radios, sombras)?
+Este proyecto incluye skills de agente de IA en `.opencode/skills/` para OpenCode. Estas skills proporcionan contexto y capacidades especializadas para flujos de trabajo complejos.
+
+### Skills Instaladas
+
+| Skill                    | Categoría  | Descripción                                              |
+|--------------------------|------------|----------------------------------------------------------|
+| `frontend-design`        | Diseño     | Principios de diseño UI: espaciado, color, responsive    |
+| `web-artifacts-builder`  | Diseño     | Construcción de artifacts HTML con React + Tailwind      |
+| `shadcn-ui`              | Diseño     | Conocimiento profundo de shadcn/ui components            |
+| `brand-guidelines`       | Diseño     | Tokens de marca (paleta, tipografía) cargados en sesión  |
+| `code-review-and-quality`| Desarrollo | Revisión de código en 5 ejes (correctness, readability)  |
+| `dependency-updater`     | Automatización | Actualización segura de dependencias sin romper       |
+
+### Cómo Usar las Skills
+
+Las skills se activan automáticamente cuando el agente detecta que la tarea encaja. También puedes invocarlas explícitamente:
+
+- **Frontend:** `frontend-design` para componentes UI, `brand-guidelines` para tokens de marca
+- **Code Review:** `code-review-and-quality` para revisión antes de mergear
+- **Dependencies:** `dependency-updater` para actualizar paquetes de forma segura
+
+## 9. Checklist antes de cerrar una tarea
+
+- [ ] ¿Usé solo tokens del Design System (colores, tipografía, espacio, radios, sombras)?
 - [ ] ¿El diseño es mobile-first y responde en `sm`, `md`, `lg`?
 - [ ] ¿Cumple contraste de accesibilidad (texto oscuro sobre fondos claros)?
 - [ ] ¿Los componentes están tipados y sin `any`?

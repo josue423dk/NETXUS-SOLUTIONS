@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { config } from "dotenv"
 import { connectDB } from "./config/db.js"
+import projectRoutes from "./routes/projectRoutes.js"
 
 config()
 
@@ -16,6 +17,8 @@ connectDB()
 app.get("/", (_req, res) => {
   res.json({ message: "Netxus Solutions API" })
 })
+
+app.use("/api/projects", projectRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`)
