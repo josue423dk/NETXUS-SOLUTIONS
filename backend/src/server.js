@@ -15,7 +15,7 @@ app.use(express.json())
 connectDB()
 
 app.get("/", (_req, res) => {
-  res.json({ message: "Netxus Solutions API" })
+  res.json({ message: "MONRU UX API" })
 })
 
 app.use("/api/projects", projectRoutes)

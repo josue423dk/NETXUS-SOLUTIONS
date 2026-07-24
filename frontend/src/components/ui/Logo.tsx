@@ -32,7 +32,7 @@ export function Logo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
           className={`${size === "sm" ? "text-lg" : size === "md" ? "text-xl" : "text-3xl"} font-extrabold tracking-tight`}
           style={{ color: "var(--logo-wordmark)", transition: "color 0.3s ease" }}
         >
-          Net
+          MONR
           <span
             style={{
               background: "var(--logo-x-gradient)",
@@ -42,16 +42,15 @@ export function Logo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
               transition: "background 0.3s ease",
             }}
           >
-            x
+            U
           </span>
-          us
         </span>
         {size !== "sm" && (
           <span
             className={`${subSizes[size]} font-medium ${subSpacing[size]}`}
             style={{ color: "var(--logo-wordmark)", transition: "color 0.3s ease" }}
           >
-            SOLUTIONS
+            UX
           </span>
         )}
       </div>

@@ -196,7 +196,7 @@ export function Hero() {
             <img
               key={isDark ? "obj-dark" : "obj-light"}
               src={objectSrc}
-              alt="Netxus Solutions — objeto decorativo flotante"
+              alt="MONRU UX — objeto decorativo flotante"
               loading="lazy"
               className="w-full h-auto animate-fade-in"
             />

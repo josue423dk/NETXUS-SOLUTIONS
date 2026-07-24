@@ -1,13 +1,13 @@
-# AGENTS.md — Netxus Solutions (Web MVP)
+# AGENTS.md — MONRU UX (Web MVP)
 
 > Este archivo define el contexto, reglas y convenciones que cualquier agente de IA (Claude Code, Cursor, Copilot, etc.) debe seguir al trabajar en este repositorio.
-> Fuente de verdad del Design System: `netxus-design-system.md` (v1).
+> Fuente de verdad del Design System: `monru-ux-design-system.md` (v1).
 
 ---
 
 ## 1. Sobre el proyecto
 
-**Netxus Solutions** es una consultora de desarrollo de software enfocada en soluciones digitales de alto rendimiento. El sitio web debe transmitir esa identidad: código de calidad, UX cuidada y eficiencia técnica.
+**MONRU UX** es una consultora de desarrollo de software enfocada en soluciones digitales de alto rendimiento. El sitio web debe transmitir esa identidad: código de calidad, UX cuidada y eficiencia técnica.
 
 - **Stack:** Vite + React + TypeScript
 - **Estilos:** Tailwind CSS (con tokens del Design System mapeados en `tailwind.config.ts`)
@@ -171,7 +171,7 @@ Cada componente en `src/components/{layout|sections|ui}/NombreComponente.tsx`, c
 
 ## 6. Seguridad y Hacking Defensivo (Requisito Obligatorio)
 
-Para garantizar que el MVP de Netxus Solutions nazca robusto y protegido contra vulnerabilidades comunes, todo código desarrollado debe contemplar las siguientes prácticas de seguridad desde su concepción:
+Para garantizar que el MVP de MONRU UX nazca robusto y protegido contra vulnerabilidades comunes, todo código desarrollado debe contemplar las siguientes prácticas de seguridad desde su concepción:
 
 ### 1. Manejo seguro de Formularios y Entradas
 - **Sanitización y Validación:** Nunca confiar en el input del usuario. Validar tanto en el cliente (React Hook Form / Zod) como simular validaciones estrictas en lógica de envío.

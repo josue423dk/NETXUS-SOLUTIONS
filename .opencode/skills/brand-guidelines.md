@@ -7,7 +7,7 @@ tags: [branding, tokens, design-system, colors, typography]
 
 # Brand Guidelines Skill
 
-Esta skill carga los tokens de la marca Netxus Solutions en cada sesion, asegurando consistencia visual en todo el codigo generado.
+Esta skill carga los tokens de la marca MONRU UX en cada sesion, asegurando consistencia visual en todo el codigo generado.
 
 ## Paleta Oficial (Variante 2 - Teal/verde azulado)
 

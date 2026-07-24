@@ -1,4 +1,4 @@
-# Skills de Agente de IA - Netxus Solutions
+# Skills de Agente de IA - MONRU UX
 
 Este archivo lista las skills de agente de IA instaladas para OpenCode en este proyecto.
 
