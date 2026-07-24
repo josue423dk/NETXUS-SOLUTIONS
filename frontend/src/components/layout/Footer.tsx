@@ -65,7 +65,7 @@ const socialIcons = [
   },
   {
     label: "Email",
-    href: "mailto:contacto@netxus.solutions",
+    href: "mailto:contacto@monru.ux",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -93,8 +93,8 @@ export function Footer() {
           style={{ WebkitTextStroke: "1px rgba(128,128,128,0.08)" }}
           aria-hidden="true"
         >
-          <span>Netxus Solutions es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
-          <span>Netxus Solutions es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
+          <span>MONRU UX es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
+          <span>MONRU UX es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
         </span>
       </div>
 
@@ -114,7 +114,7 @@ export function Footer() {
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="M22 4l-10 8L2 4" />
                 </svg>
-                contacto@netxus.solutions
+                contacto@monru.ux
               </span>
             </div>
           </div>
@@ -185,7 +185,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-neutral-300/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-500">
-            &copy; {new Date().getFullYear()} Netxus Solutions. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} MONRU UX. Todos los derechos reservados.
           </p>
           <div className="flex gap-2.5">
             {socialIcons.map((s) => (
