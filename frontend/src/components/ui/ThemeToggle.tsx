@@ -20,7 +20,7 @@ export function ThemeToggle() {
   return (
     <button
       role="switch"
-      aria-checked={!dark}
+      aria-checked={dark}
       onClick={toggle}
       className="relative w-14 h-7 rounded-full flex items-center px-0.5 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       style={{

@@ -58,10 +58,17 @@ export function Hero() {
   }, [])
 
   useEffect(() => {
+    let ticking = false
     const onScroll = () => {
-      const y = window.scrollY
-      const h = window.innerHeight
-      setScrollProgress(clamp(y / h, 0, 1))
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY
+          const h = window.innerHeight
+          setScrollProgress(clamp(y / h, 0, 1))
+          ticking = false
+        })
+        ticking = true
+      }
     }
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -243,7 +250,7 @@ export function Hero() {
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold mt-6 text-white leading-[1.1]" style={{ textShadow: "0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)" }}>
               Transformar ideas en{" "}
-              <span className="hero-animated-text animate__animated animate__backInUp">productos digitales</span>
+              <span className="hero-animated-text animate-back-in-up">productos digitales</span>
             </h1>
 
             <p className="mt-8 text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
@@ -254,14 +261,14 @@ export function Hero() {
 
             <div className="flex flex-wrap gap-4 sm:gap-5 mt-10">
               <a
-                href="#"
-                className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-4 bg-primary-700 text-white font-semibold rounded-lg text-base sm:text-lg hover:opacity-90 transition-opacity"
+                href="#planes"
+                className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-4 bg-primary-700 text-white font-semibold rounded-lg text-base sm:text-lg hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Empezá tu proyecto
               </a>
               <a
-                href="#"
-                className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 border-2 border-white/80 text-white font-semibold rounded-lg text-base sm:text-lg hover:bg-white/10 transition-all"
+                href="#trabajos"
+                className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 border-2 border-white/80 text-white font-semibold rounded-lg text-base sm:text-lg hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Ver servicios
                 <svg

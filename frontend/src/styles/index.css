@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "animate.css";
 
 @variant dark (&:is([data-theme="dark"] *));
 
@@ -28,6 +27,7 @@
 
   --animate-float: floatNatural 8s ease-in-out infinite;
   --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-back-in-up: backInUp 0.6s ease-out;
 }
 
 @keyframes floatNatural {
@@ -42,6 +42,11 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes backInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 [data-theme="dark"] {
@@ -62,6 +67,10 @@
   --logo-gradient: linear-gradient(180deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
   --logo-wordmark: #FFFFFF;
   --logo-x-gradient: linear-gradient(90deg, #FFD200 0%, #FF8C00 50%, #E8231A 100%);
+
+  --toggle-bg-dark: #FF6B00;
+  --toggle-bg-light: #FF8C00;
+  --toggle-icon: #E8351A;
 }
 
 .hero-obj-transition {
@@ -70,13 +79,14 @@
 
 .hero-animated-text {
   display: inline-block;
-  color: #2DD4BF;
+  color: var(--color-accent-400);
 }
 
-[data-theme="dark"] .hero-animated-text {
-  color: #FFB800;
+.footer-marquee {
+  animation: footerMarquee 100s linear infinite;
 }
 
-[letter-animation="breath"] > span {
-  display: inline-block;
+@keyframes footerMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

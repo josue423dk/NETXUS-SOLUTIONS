@@ -4,7 +4,9 @@ import { PricingCard } from "./PricingCard"
 import { useScrollReveal } from "../../hooks/useScrollReveal"
 
 export function PricingSection() {
-  const [activePlanId, setActivePlanId] = useState("profesional")
+  const [activePlanId, setActivePlanId] = useState(
+    () => planes.find((p) => p.destacado)?.id ?? planes[1].id
+  )
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
   const { ref: tabsRef, isVisible: tabsVisible } = useScrollReveal()
   const { ref: tableRef, isVisible: tableVisible } = useScrollReveal()
@@ -14,7 +16,6 @@ export function PricingSection() {
   return (
     <section id="planes" className="py-16 sm:py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div
           ref={headerRef}
           className={`

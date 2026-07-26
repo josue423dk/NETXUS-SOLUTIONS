@@ -86,6 +86,8 @@ export function PricingCard({ plan }: PricingCardProps) {
         </ul>
 
         <button
+          type="button"
+          aria-label={`Seleccionar plan ${plan.nombre}`}
           className={`
             mt-8 w-full py-3 px-6 rounded-lg font-semibold text-sm
             transition-colors duration-200

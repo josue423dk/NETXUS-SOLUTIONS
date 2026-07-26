@@ -1,13 +1,6 @@
+import { useState } from "react"
 import { Logo } from "../ui/Logo"
-
-const navLinks = [
-  { label: "Trabajos", href: "#trabajos" },
-  { label: "Cotización", href: "/cotizacion" },
-  { label: "Planes", href: "#planes" },
-  { label: "Quiénes somos", href: "/quienes-somos" },
-  { label: "Integrantes", href: "/integrantes" },
-  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
-]
+import { navLinks } from "../../data/navigation"
 
 const serviceLinks = [
   { label: "Desarrollo Web", href: "/cotizacion" },
@@ -17,15 +10,15 @@ const serviceLinks = [
 ]
 
 const legalLinks = [
-  { label: "Términos y condiciones", href: "#" },
-  { label: "Política de privacidad", href: "#" },
-  { label: "Cookies", href: "#" },
+  { label: "Términos y condiciones", href: "/terminos" },
+  { label: "Política de privacidad", href: "/privacidad" },
+  { label: "Cookies", href: "/cookies" },
 ]
 
 const socialIcons = [
   {
     label: "WhatsApp",
-    href: "#",
+    href: "https://wa.me/5491100000000",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -34,7 +27,7 @@ const socialIcons = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://instagram.com/monru.ux",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -45,7 +38,7 @@ const socialIcons = [
   },
   {
     label: "LinkedIn",
-    href: "#",
+    href: "https://linkedin.com/company/monru-ux",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -56,7 +49,7 @@ const socialIcons = [
   },
   {
     label: "GitHub",
-    href: "#",
+    href: "https://github.com/monru-ux",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
@@ -76,17 +69,19 @@ const socialIcons = [
 ]
 
 export function Footer() {
+  const [email, setEmail] = useState("")
+  const [subscribed, setSubscribed] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email.trim()) {
+      setSubscribed(true)
+      setEmail("")
+    }
+  }
+
   return (
     <footer className="relative border-t border-neutral-300/50 bg-neutral-50/60 dark:bg-neutral-50/60 backdrop-blur-xl overflow-hidden">
-      <style>{`
-        @keyframes footerMarquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .footer-marquee {
-          animation: footerMarquee 100s linear infinite;
-        }
-      `}</style>
       <div className="absolute inset-x-0 top-0 bottom-28 lg:bottom-36 flex items-center justify-start overflow-hidden pointer-events-none select-none">
         <span
           className="footer-marquee text-[clamp(8rem,22vw,20rem)] font-heading font-bold leading-none whitespace-nowrap text-neutral-900/5 dark:text-neutral-900/5"
@@ -164,21 +159,32 @@ export function Footer() {
               Recibí novedades y contenido exclusivo.
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
               className="flex flex-col gap-2"
             >
-              <input
-                type="email"
-                placeholder="tu@email.com"
-                aria-label="Tu correo electrónico"
-                className="w-full px-4 py-2.5 text-sm rounded-lg bg-neutral-100 border border-neutral-300 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-700/30 focus:border-primary-700 transition-all"
-              />
-              <button
-                type="submit"
-                className="w-full px-4 py-2.5 text-sm font-semibold rounded-lg bg-primary-700 text-white hover:bg-primary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700/50"
-              >
-                Suscribir
-              </button>
+              {subscribed ? (
+                <p className="text-sm text-success font-medium py-2.5">
+                  ¡Gracias por suscribirte!
+                </p>
+              ) : (
+                <>
+                  <input
+                    type="email"
+                    placeholder="tu@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    aria-label="Tu correo electrónico"
+                    className="w-full px-4 py-2.5 text-sm rounded-lg bg-neutral-100 border border-neutral-300 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-700/30 focus:border-primary-700 transition-all"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full px-4 py-2.5 text-sm font-semibold rounded-lg bg-primary-700 text-white hover:bg-primary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700/50"
+                  >
+                    Suscribir
+                  </button>
+                </>
+              )}
             </form>
           </div>
         </div>

@@ -1,19 +1,21 @@
-import { useState } from "react"
-import type { NavItem } from "../../types"
+import { useState, useEffect, useCallback } from "react"
 import { Logo } from "../ui/Logo"
 import { ThemeToggle } from "../ui/ThemeToggle"
-
-const navLinks: NavItem[] = [
-  { label: "Trabajos", href: "#trabajos" },
-  { label: "Cotización", href: "/cotizacion" },
-  { label: "Planes", href: "#planes" },
-  { label: "Quiénes somos", href: "/quienes-somos" },
-  { label: "Integrantes", href: "/integrantes" },
-  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
-]
+import { navLinks } from "../../data/navigation"
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setOpen(false)
+  }, [])
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("keydown", handleEscape)
+      return () => document.removeEventListener("keydown", handleEscape)
+    }
+  }, [open, handleEscape])
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-neutral-300">
@@ -40,7 +42,8 @@ export function Navbar() {
             <button
               className="md:hidden text-neutral-900"
               onClick={() => setOpen(!open)}
-              aria-label="Abrir menú"
+              aria-expanded={open}
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}
             >
               {open ? (
                 <svg
@@ -80,13 +83,14 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-neutral-50 border-t border-neutral-300">
+        <div className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
           <div className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
+                role="menuitem"
                 className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
               >
                 {link.label}
