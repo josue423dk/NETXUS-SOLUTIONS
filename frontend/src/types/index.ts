@@ -22,3 +22,21 @@ export interface Project {
   createdAt?: string
   updatedAt?: string
 }
+
+export interface PlanFeature {
+  label: string
+  included: boolean
+}
+
+export interface Plan {
+  id: string
+  nombre: string
+  precio: number
+  precioPeriodo: string
+  moneda: string
+  descripción: string
+  features: PlanFeature[]
+  badge?: string
+  destacado: boolean
+  ctaLabel: string
+}

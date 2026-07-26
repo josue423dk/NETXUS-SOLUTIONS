@@ -4,9 +4,9 @@ import { Logo } from "../ui/Logo"
 import { ThemeToggle } from "../ui/ThemeToggle"
 
 const navLinks: NavItem[] = [
-  { label: "Trabajos", href: "/trabajos" },
+  { label: "Trabajos", href: "#trabajos" },
   { label: "Cotización", href: "/cotizacion" },
-  { label: "Planes", href: "/planes" },
+  { label: "Planes", href: "#planes" },
   { label: "Quiénes somos", href: "/quienes-somos" },
   { label: "Integrantes", href: "/integrantes" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
