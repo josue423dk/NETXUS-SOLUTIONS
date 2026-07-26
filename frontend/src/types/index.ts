@@ -3,12 +3,22 @@ export interface NavItem {
   href: string
 }
 
+export type CategoriaProyecto =
+  | "desarrollo-web"
+  | "apps-moviles"
+  | "sistemas-a-medida"
+  | "consultoria"
+
 export interface Project {
   _id?: string
   nombre: string
   descripción: string
   imagen?: string
+  imagenDark?: string
   tags?: string[]
+  url?: string
+  categoria?: CategoriaProyecto
+  destacado?: boolean
   createdAt?: string
   updatedAt?: string
 }

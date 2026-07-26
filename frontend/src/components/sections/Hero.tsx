@@ -42,6 +42,7 @@ export function Hero() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < MOBILE_BREAKPOINT)
 
   const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   const preloaded = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
@@ -54,6 +55,16 @@ export function Hero() {
     const handleResize = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY
+      const h = window.innerHeight
+      setScrollProgress(clamp(y / h, 0, 1))
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   useEffect(() => {
@@ -162,8 +173,14 @@ export function Hero() {
   }, [handlePointer])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen overflow-hidden"
+    >
+      <div
+        className="absolute inset-0"
+        style={{ opacity: 1 - scrollProgress, transition: "opacity 0.1s" }}
+      >
         <img
           src={bgSrc}
           alt=""
@@ -180,12 +197,19 @@ export function Hero() {
         )}
       </div>
 
-      <div className="absolute inset-0 bg-black/30 dark:bg-black/70" />
+      <div
+        className="absolute inset-0 bg-black/30 dark:bg-black/70"
+        style={{ opacity: 1 - scrollProgress, transition: "opacity 0.1s" }}
+      />
 
         <div
           ref={objRef}
           className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] hero-obj-transition"
-          style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
+          style={{
+            transform: `translate(${offset.x}px, ${offset.y}px) scale(${1 - scrollProgress * 0.05})`,
+            opacity: 1 - scrollProgress,
+            transition: "transform 0.1s, opacity 0.1s",
+          }}
         >
           <div
             className="transition-all duration-500 ease-out
@@ -203,7 +227,15 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative z-10 h-screen flex items-center px-4 sm:px-6">
+        <div
+          className="relative z-10 h-screen flex items-center px-4 sm:px-6"
+          style={{
+            transform: `scale(${1 - scrollProgress * 0.05})`,
+            opacity: 1 - scrollProgress,
+            pointerEvents: scrollProgress > 0.8 ? "none" : "auto",
+            transition: "transform 0.1s, opacity 0.1s",
+          }}
+        >
           <div className="w-full lg:max-w-2xl pt-20 lg:ml-[8%] xl:ml-[10%]">
             <span className="inline-block text-accent-400 dark:text-primary-500 font-semibold tracking-[0.2em] text-sm sm:text-base lg:text-lg" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
               CONSULTORÍA EN DESARROLLO DE SOFTWARE
