@@ -1,21 +1,5 @@
-import { Navbar } from './components/layout/Navbar'
-import { Footer } from './components/layout/Footer'
-import { Hero } from './components/sections/Hero'
-import { TrabajosGrid } from './components/sections/TrabajosGrid'
-import { PricingSection } from './components/sections/PricingSection'
+import { AppRouter } from "./router"
 
-function App() {
-  return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900">
-      <Navbar />
-      <main>
-        <Hero />
-        <TrabajosGrid />
-        <PricingSection />
-      </main>
-      <Footer />
-    </div>
-  )
+export default function App() {
+  return <AppRouter />
 }
-
-export default App

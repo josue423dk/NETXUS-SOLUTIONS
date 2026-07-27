@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { Logo } from "../ui/Logo"
 import { navLinks } from "../../data/navigation"
 
@@ -71,9 +72,11 @@ const socialIcons = [
 export function Footer() {
   const [email, setEmail] = useState("")
   const [subscribed, setSubscribed] = useState(false)
+  const [honeypot, setHoneypot] = useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot) return
     if (email.trim()) {
       setSubscribed(true)
       setEmail("")
@@ -119,9 +122,15 @@ export function Footer() {
             <ul className="space-y-2">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
-                    {l.label}
-                  </a>
+                  {l.href.startsWith("#") ? (
+                    <a href={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -132,9 +141,9 @@ export function Footer() {
             <ul className="space-y-2">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
+                  <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -145,9 +154,9 @@ export function Footer() {
             <ul className="space-y-2">
               {legalLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
+                  <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -168,6 +177,16 @@ export function Footer() {
                 </p>
               ) : (
                 <>
+                  <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" tabIndex={-1}>
+                    <input
+                      type="text"
+                      name="website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
                   <input
                     type="email"
                     placeholder="tu@email.com"

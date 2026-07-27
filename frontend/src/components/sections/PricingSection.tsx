@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { planes, featureLabels, featureMatrix } from "../../data/planes"
 import { PricingCard } from "./PricingCard"
 import { useScrollReveal } from "../../hooks/useScrollReveal"
@@ -12,6 +12,22 @@ export function PricingSection() {
   const { ref: tableRef, isVisible: tableVisible } = useScrollReveal()
 
   const activePlan = planes.find((p) => p.id === activePlanId) ?? planes[1]
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const currentIndex = planes.findIndex((p) => p.id === activePlanId)
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault()
+        const nextIndex = (currentIndex + 1) % planes.length
+        setActivePlanId(planes[nextIndex].id)
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault()
+        const prevIndex = (currentIndex - 1 + planes.length) % planes.length
+        setActivePlanId(planes[prevIndex].id)
+      }
+    },
+    [activePlanId]
+  )
 
   return (
     <section id="planes" className="py-16 sm:py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-50">
@@ -40,6 +56,8 @@ export function PricingSection() {
         {/* Tabs */}
         <div
           ref={tabsRef}
+          role="tablist"
+          onKeyDown={handleKeyDown}
           className={`
             flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-14
             transition-all duration-700 ease-out delay-100
@@ -49,6 +67,9 @@ export function PricingSection() {
           {planes.map((plan) => (
             <button
               key={plan.id}
+              role="tab"
+              aria-selected={activePlanId === plan.id}
+              tabIndex={activePlanId === plan.id ? 0 : -1}
               onClick={() => setActivePlanId(plan.id)}
               className={`
                 relative px-5 py-2.5 rounded-lg text-sm font-semibold

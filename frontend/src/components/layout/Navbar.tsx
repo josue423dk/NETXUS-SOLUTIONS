@@ -1,10 +1,13 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
+import { Link, NavLink } from "react-router-dom"
 import { Logo } from "../ui/Logo"
 import { ThemeToggle } from "../ui/ThemeToggle"
 import { navLinks } from "../../data/navigation"
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") setOpen(false)
@@ -17,29 +20,70 @@ export function Navbar() {
     }
   }, [open, handleEscape])
 
+  useEffect(() => {
+    if (!open) return
+    const menu = menuRef.current
+    if (!menu) return
+    const focusable = menu.querySelectorAll<HTMLElement>(
+      'a, button, [tabindex]:not([tabindex="-1"])'
+    )
+    if (focusable.length > 0) focusable[0].focus()
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener("keydown", handleTab)
+    return () => document.removeEventListener("keydown", handleTab)
+  }, [open])
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-neutral-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0">
             <Logo />
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-neutral-700 hover:text-primary-900 transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith("#") ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <NavLink
+                  key={link.href}
+                  to={link.href}
+                  className={({ isActive }) =>
+                    `text-sm transition-colors ${
+                      isActive
+                        ? "text-primary-700 font-semibold"
+                        : "text-neutral-700 hover:text-primary-900"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              )
+            )}
           </div>
 
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <button
+              ref={toggleRef}
               className="md:hidden text-neutral-900"
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -83,19 +127,31 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
+        <div ref={menuRef} className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
           <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                role="menuitem"
-                className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith("#") ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  role="menuitem"
+                  className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onClick={() => setOpen(false)}
+                  role="menuitem"
+                  className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
