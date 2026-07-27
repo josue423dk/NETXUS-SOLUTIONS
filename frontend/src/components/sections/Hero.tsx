@@ -108,7 +108,7 @@ export function Hero() {
       }, 500)
     }
     img.src = newBg
-  }, [isDark, isMobile])
+  }, [isDark, isMobile, bgSrc])
 
   const handlePointer = useCallback((clientX: number, clientY: number) => {
     const section = sectionRef.current
