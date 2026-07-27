@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useTheme } from "../../hooks/useTheme"
+import { HashLink } from "../ui/HashLink"
 
 import heroBgLight from "../../assets/hero/hero-bg-light.webp"
 import heroBgDark from "../../assets/hero/hero-bg-dark.webp"
@@ -211,11 +212,10 @@ export function Hero() {
 
         <div
           ref={objRef}
-          className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] hero-obj-transition"
+          className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] will-change-transform"
           style={{
             transform: `translate(${offset.x}px, ${offset.y}px) scale(${1 - scrollProgress * 0.05})`,
             opacity: 1 - scrollProgress,
-            transition: "transform 0.1s, opacity 0.1s",
           }}
         >
           <div
@@ -260,13 +260,13 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4 sm:gap-5 mt-10">
-              <a
+              <HashLink
                 href="#planes"
                 className="inline-flex items-center px-7 sm:px-8 py-3 sm:py-4 bg-primary-700 text-white font-semibold rounded-lg text-base sm:text-lg hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Empezá tu proyecto
-              </a>
-              <a
+              </HashLink>
+              <HashLink
                 href="#trabajos"
                 className="inline-flex items-center gap-2 px-7 sm:px-8 py-3 sm:py-4 border-2 border-white/80 text-white font-semibold rounded-lg text-base sm:text-lg hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
@@ -285,7 +285,7 @@ export function Hero() {
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
-              </a>
+              </HashLink>
             </div>
           </div>
         </div>

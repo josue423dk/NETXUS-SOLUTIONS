@@ -1,13 +1,20 @@
 import { useState, useEffect, useCallback, useRef } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
+import { HashLink } from "../ui/HashLink"
 import { Logo } from "../ui/Logo"
 import { ThemeToggle } from "../ui/ThemeToggle"
 import { navLinks } from "../../data/navigation"
+import { useActiveSection } from "../../hooks/useActiveSection"
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const { pathname } = useLocation()
+  const hashIds = navLinks
+    .filter((l) => l.href.startsWith("#"))
+    .map((l) => l.href.slice(1))
+  const activeSection = useActiveSection(hashIds)
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") setOpen(false)
@@ -45,7 +52,7 @@ export function Navbar() {
   }, [open])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md border-b border-neutral-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md border-b border-neutral-300 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex-shrink-0">
@@ -53,15 +60,25 @@ export function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) =>
-              link.href.startsWith("#") ? (
-                <a
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith("#")
+              const sectionId = isHash ? link.href.slice(1) : null
+              const isActiveSection = isHash && pathname === "/" && activeSection === sectionId
+              return isHash ? (
+                <HashLink
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                  className={`relative text-sm transition-colors ${
+                    isActiveSection
+                      ? "text-primary-700 font-semibold"
+                      : "text-neutral-700 hover:text-primary-900"
+                  }`}
                 >
                   {link.label}
-                </a>
+                  {isActiveSection && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-700 rounded-full" />
+                  )}
+                </HashLink>
               ) : (
                 <NavLink
                   key={link.href}
@@ -77,7 +94,7 @@ export function Navbar() {
                   {link.label}
                 </NavLink>
               )
-            )}
+            })}
           </div>
 
           <div className="flex items-center gap-3">
@@ -129,17 +146,24 @@ export function Navbar() {
       {open && (
         <div ref={menuRef} className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
           <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) =>
-              link.href.startsWith("#") ? (
-                <a
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith("#")
+              const sectionId = isHash ? link.href.slice(1) : null
+              const isActiveSection = isHash && pathname === "/" && activeSection === sectionId
+              return isHash ? (
+                <HashLink
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
                   role="menuitem"
-                  className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                  className={`block text-sm transition-colors ${
+                    isActiveSection
+                      ? "text-primary-700 font-semibold"
+                      : "text-neutral-700 hover:text-primary-900"
+                  }`}
                 >
                   {link.label}
-                </a>
+                </HashLink>
               ) : (
                 <Link
                   key={link.href}
@@ -151,7 +175,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               )
-            )}
+            })}
           </div>
         </div>
       )}

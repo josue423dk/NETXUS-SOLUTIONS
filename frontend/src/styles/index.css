@@ -2,6 +2,11 @@
 
 @variant dark (&:is([data-theme="dark"] *));
 
+html {
+  scroll-padding-top: 4rem;
+  scroll-behavior: smooth;
+}
+
 @theme {
   --color-primary-900: #0A2E30;
   --color-primary-700: #0F4C4C;
@@ -38,6 +43,12 @@
   --animate-float: floatNatural 8s ease-in-out infinite;
   --animate-fade-in: fadeIn 0.5s ease-out;
   --animate-back-in-up: backInUp 0.6s ease-out;
+  --animate-page-enter: pageEnter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-page-exit: pageExit 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-page-enter-from-bottom: pageEnterFromBottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-page-enter-from-top: pageEnterFromTop 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-page-exit-down: pageExitDown 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  --animate-page-exit-up: pageExitUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 @keyframes floatNatural {
@@ -99,4 +110,162 @@
 @keyframes footerMarquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+/* ===== Professional page transition system — overlapping sections ===== */
+
+/* --- Base page section (normal flow) --- */
+.page-section {
+  will-change: transform, opacity, filter;
+}
+
+/* --- Active section (fully visible, on top) --- */
+.sec-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  filter: blur(0);
+  pointer-events: auto;
+  z-index: 10;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Inactive section (hidden behind active) --- */
+.sec-inactive {
+  opacity: 0;
+  transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ==========  3D Perspective Slide Transition  ========== */
+.sec-entering.dir-down {
+  animation: secEnterDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.sec-entering.dir-up {
+  animation: secEnterUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.sec-exiting.dir-down {
+  animation: secExitDown 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.sec-exiting.dir-up {
+  animation: secExitUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes secEnterDown {
+  0%   { transform: translate3d(0, 100vh, 0) scale(0.85) rotateY(-8deg); opacity: 0; filter: blur(12px); }
+  35%  { opacity: 0.7; }
+  100% { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+}
+@keyframes secEnterUp {
+  0%   { transform: translate3d(0, -100vh, 0) scale(0.85) rotateY(8deg); opacity: 0; filter: blur(12px); }
+  35%  { opacity: 0.7; }
+  100% { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+}
+@keyframes secExitDown {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+  40%  { transform: translate3d(0, 40px, 0) scale(0.96) rotateY(3deg); opacity: 0.6; filter: blur(5px); }
+  100% { transform: translate3d(0, 100vh, 0) scale(0.85) rotateY(10deg); opacity: 0; filter: blur(14px); }
+}
+@keyframes secExitUp {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+  40%  { transform: translate3d(0, -40px, 0) scale(0.96) rotateY(-3deg); opacity: 0.6; filter: blur(5px); }
+  100% { transform: translate3d(0, -100vh, 0) scale(0.85) rotateY(-10deg); opacity: 0; filter: blur(14px); }
+}
+
+/* ==========  Gradient Wipe Transition (alternative)  ========== */
+@keyframes gradientWipeRight {
+  0%   { clip-path: inset(0 100% 0 0); opacity: 1; filter: blur(0); }
+  100% { clip-path: inset(0 0% 0 0); opacity: 1; filter: blur(0); }
+}
+@keyframes gradientWipeLeft {
+  0%   { clip-path: inset(0 0% 0 100%); opacity: 1; filter: blur(0); }
+  100% { clip-path: inset(0 0% 0 0); opacity: 1; filter: blur(0); }
+}
+.sec-entering.dir-down.gradient-wipe {
+  animation: gradientWipeRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.sec-entering.dir-up.gradient-wipe {
+  animation: gradientWipeLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ==========  Flip Transition (3D perspective)  ========== */
+@keyframes flipEnterRight {
+  0%   { transform: perspective(1200px) rotateY(-90deg) scale(0.9); opacity: 0; filter: blur(8px); }
+  60%  { opacity: 0.8; filter: blur(2px); }
+  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes flipEnterLeft {
+  0%   { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(8px); }
+  60%  { opacity: 0.8; filter: blur(2px); }
+  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes flipExitRight {
+  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
+  100% { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(8px); }
+}
+@keyframes secExitFlipRight {
+  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
+  100% { transform: perspective(1200px) rotateY(-90deg) scale(0.9); opacity: 0; filter: blur(12px); }
+}
+@keyframes secExitFlipLeft {
+  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
+  100% { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(12px); }
+}
+
+/* Stagger cascade — applied via --stagger-index CSS custom property */
+.sec-entering > * {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.sec-entering > *:nth-child(1) { animation: staggerIn 0.5s ease-out 0ms both; }
+.sec-entering > *:nth-child(2) { animation: staggerIn 0.5s ease-out 60ms both; }
+.sec-entering > *:nth-child(3) { animation: staggerIn 0.5s ease-out 120ms both; }
+.sec-entering > *:nth-child(4) { animation: staggerIn 0.5s ease-out 180ms both; }
+.sec-entering > *:nth-child(5) { animation: staggerIn 0.5s ease-out 240ms both; }
+.sec-entering > *:nth-child(6) { animation: staggerIn 0.5s ease-out 300ms both; }
+.sec-entering > *:nth-child(n+7) { animation: staggerIn 0.5s ease-out 360ms both; }
+@keyframes staggerIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========  prefers-reduced-motion  ========== */
+@media (prefers-reduced-motion: reduce) {
+  .sec-active,
+  .sec-inactive,
+  .sec-entering,
+  .sec-exiting,
+  .sec-entering > *,
+  .sec-exiting > * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .sec-active { opacity: 1; transform: none; filter: none; pointer-events: auto; z-index: 10; }
+  .sec-inactive { opacity: 0; transform: none; filter: blur(8px); pointer-events: none; z-index: 1; }
+  .sec-entering > *, .sec-exiting > * { opacity: 1; transform: none; }
+}
+
+/* Route-level page transition for Layout */
+.page-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.page-transitioning-route {
+  animation: pageSwapRoute 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageSwapRoute {
+  0%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  30%  { opacity: 0; transform: scale(0.94) translateY(30px); filter: blur(10px); }
+  60%  { opacity: 0; transform: scale(0.94) translateY(-20px); filter: blur(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
 }
