@@ -1,19 +1,6 @@
 import { useScrollReveal } from "../hooks/useScrollReveal"
-
-const equipo = [
-  {
-    nombre: "Alex Josue Montana",
-    rol: "Tech Lead",
-    descripcion:
-      "Arquitecto de software especializado en sistemas escalables. Define la estrategia técnica y garantiza la calidad del código.",
-  },
-  {
-    nombre: "Ivan Rufino",
-    rol: "Product & Design Lead",
-    descripcion:
-      "Diseñador de producto con enfoque en UX research y diseño de interfaces. Traduce necesidades de negocio en experiencias digitales.",
-  },
-]
+import { equipo } from "../data/equipo"
+import { TeamCard } from "../components/sections/TeamCard"
 
 export function Integrantes() {
   const { ref, isVisible } = useScrollReveal()
@@ -40,33 +27,8 @@ export function Integrantes() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          {equipo.map((miembro) => (
-            <div
-              key={miembro.nombre}
-              className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-50"
-            >
-              <div className="w-16 h-16 rounded-full bg-primary-700/10 flex items-center justify-center mb-4">
-                <svg
-                  className="w-8 h-8 text-primary-700"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </div>
-              <h2 className="font-heading font-semibold text-xl text-primary-900">
-                {miembro.nombre}
-              </h2>
-              <span className="inline-block mt-1 text-xs font-semibold tracking-wider uppercase text-accent-400">
-                {miembro.rol}
-              </span>
-              <p className="mt-3 text-sm text-neutral-700 leading-relaxed">
-                {miembro.descripcion}
-              </p>
-            </div>
+          {equipo.map((miembro, index) => (
+            <TeamCard key={miembro.nombre} member={miembro} index={index} />
           ))}
         </div>
       </div>

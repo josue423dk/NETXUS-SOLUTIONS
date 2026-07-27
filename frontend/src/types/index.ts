@@ -40,3 +40,11 @@ export interface Plan {
   destacado: boolean
   ctaLabel: string
 }
+
+export interface TeamMember {
+  nombre: string
+  rol: string
+  descripcion: string
+  linkedin?: string
+  github?: string
+}
