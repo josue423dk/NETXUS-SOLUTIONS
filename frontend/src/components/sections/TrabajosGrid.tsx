@@ -16,7 +16,7 @@ export function TrabajosGrid() {
             ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
           `}
         >
-          <span className="inline-block text-accent-400 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
+          <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
             Nuestro trabajo
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 dark:text-neutral-900 leading-tight">

@@ -24,8 +24,11 @@ export function Layout() {
 
   return (
     <div className="min-h-screen bg-neutral-50 text-neutral-900">
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <main
+        id="main-content"
         className={
           isTransitioning ? "page-transitioning-route" : "page-visible"
         }

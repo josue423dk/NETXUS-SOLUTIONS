@@ -101,7 +101,9 @@ export function ContactForm() {
           type="text"
           value={form.nombre}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
+          aria-invalid={!!errors.nombre}
+          aria-describedby={errors.nombre ? "nombre-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
             errors.nombre
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -109,7 +111,7 @@ export function ContactForm() {
           placeholder="Tu nombre"
         />
         {errors.nombre && (
-          <p className="mt-1 text-xs text-error">{errors.nombre}</p>
+          <p id="nombre-error" className="mt-1 text-xs text-error">{errors.nombre}</p>
         )}
       </div>
 
@@ -123,7 +125,9 @@ export function ContactForm() {
           type="email"
           value={form.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
             errors.email
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -131,7 +135,7 @@ export function ContactForm() {
           placeholder="tu@email.com"
         />
         {errors.email && (
-          <p className="mt-1 text-xs text-error">{errors.email}</p>
+          <p id="email-error" className="mt-1 text-xs text-error">{errors.email}</p>
         )}
       </div>
 
@@ -145,7 +149,9 @@ export function ContactForm() {
           rows={4}
           value={form.mensaje}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 resize-y ${
+          aria-invalid={!!errors.mensaje}
+          aria-describedby={errors.mensaje ? "mensaje-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 resize-y ${
             errors.mensaje
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -153,7 +159,7 @@ export function ContactForm() {
           placeholder="Contanos sobre tu proyecto..."
         />
         {errors.mensaje && (
-          <p className="mt-1 text-xs text-error">{errors.mensaje}</p>
+          <p id="mensaje-error" className="mt-1 text-xs text-error">{errors.mensaje}</p>
         )}
       </div>
 

@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
           </div>
-          <h2 className="text-xl font-heading font-semibold text-neutral-900 mb-2">
+          <h2 className="text-xl font-heading font-semibold text-primary-900 dark:text-neutral-900 mb-2">
             Algo salió mal
           </h2>
           <p className="text-sm text-neutral-700 mb-6 max-w-md">
