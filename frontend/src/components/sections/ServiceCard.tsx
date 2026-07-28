@@ -45,7 +45,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div
       ref={ref}
-      className={`rounded-md border bg-neutral-50 p-6 sm:p-8 transition-all duration-700 ease-out ${
+      className={`rounded-md border bg-neutral-50 dark:bg-neutral-100 p-6 sm:p-8 transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       } ${
         service.destacado
@@ -61,7 +61,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
             : "bg-primary-700/10 text-primary-700"
         }`}
       >
-        {iconMap[service.icono]}
+        {iconMap[service.icono] ?? iconMap.web}
       </div>
       <h3 className="font-heading font-semibold text-lg text-primary-900 mb-2">
         {service.titulo}

@@ -20,8 +20,6 @@ export function AccordionItem({
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (!abierto) return
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target !== buttonRef.current) return
 
@@ -47,7 +45,7 @@ export function AccordionItem({
 
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [abierto, onKeyNavigation])
+  }, [onKeyNavigation])
 
   const questionId = `faq-question-${index}`
   const answerId = `faq-answer-${index}`

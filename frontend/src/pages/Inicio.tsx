@@ -36,7 +36,7 @@ export function Inicio() {
     scrollToSection,
     registerSection,
   } = useScrollPageTransition({
-    sectionIds: [...SECTION_IDS],
+    sectionIds: SECTION_IDS as unknown as string[],
   })
 
   useEffect(() => {

@@ -31,7 +31,7 @@ export function PricingSection() {
   )
 
   return (
-    <section id="planes" className="py-16 sm:py-20 lg:py-28 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4 sm:mx-6 lg:mx-8">
+    <section className="py-16 sm:py-20 lg:py-28 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4 sm:mx-6 lg:mx-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}

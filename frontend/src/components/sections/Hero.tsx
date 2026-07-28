@@ -6,14 +6,14 @@ export function Hero() {
       <div className="w-full lg:max-w-2xl pt-20 lg:ml-[8%] xl:ml-[10%]">
         <span
           className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm sm:text-base lg:text-lg"
-          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
+          style={{ textShadow: "var(--shadow-text-sm)" }}
         >
           CONSULTORÍA EN DESARROLLO DE SOFTWARE
         </span>
 
         <h1
           className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold mt-6 text-white leading-[1.1]"
-          style={{ textShadow: "0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)" }}
+          style={{ textShadow: "var(--shadow-text-md)" }}
         >
           Transformar ideas en{" "}
           <span className="hero-animated-text animate-back-in-up">productos digitales</span>
@@ -21,7 +21,7 @@ export function Hero() {
 
         <p
           className="mt-8 text-white/90 text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-xl"
-          style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}
+          style={{ textShadow: "var(--shadow-text-lg)" }}
         >
           Creamos soluciones digitales escalables, intuitivas y
           optimizadas, priorizando la calidad del código, la experiencia

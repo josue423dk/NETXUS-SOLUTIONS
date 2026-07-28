@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { z } from "zod"
 import { api } from "../../lib/api"
 
@@ -21,7 +21,6 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactData, string>>>({})
   const [status, setStatus] = useState<FormStatus>("idle")
   const [serverError, setServerError] = useState("")
-  const statusRef = useRef<HTMLDivElement>(null)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -83,7 +82,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div ref={statusRef} aria-live="assertive" aria-atomic="true">
+      <div aria-live="assertive" aria-atomic="true">
         {status === "error" && serverError && (
           <div className="p-3 rounded-lg bg-error/10 border border-error/20" role="alert">
             <p className="text-sm text-error">{serverError}</p>

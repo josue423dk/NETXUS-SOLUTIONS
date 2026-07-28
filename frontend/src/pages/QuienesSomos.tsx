@@ -63,9 +63,9 @@ export function QuienesSomos() {
                 <span className="text-4xl font-heading font-bold text-primary-700 dark:text-primary-500">
                   {item.paso}
                 </span>
-                <h2 className="mt-2 font-heading font-semibold text-primary-900">
+                <h3 className="mt-2 font-heading font-semibold text-primary-900">
                   {item.titulo}
-                </h2>
+                </h3>
                 <p className="mt-2 text-sm text-neutral-700 leading-relaxed">
                   {item.desc}
                 </p>

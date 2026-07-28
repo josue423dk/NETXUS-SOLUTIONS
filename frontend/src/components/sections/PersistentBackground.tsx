@@ -109,7 +109,6 @@ export function PersistentBackground() {
         inset: 0,
         zIndex: 0,
         pointerEvents: "none",
-        willChange: "filter",
       }}
     >
       <img

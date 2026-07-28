@@ -11,10 +11,9 @@ const sizeMap = {
 
 export function Spinner({ size = "md", className = "" }: SpinnerProps) {
   return (
-    <div className="flex items-center justify-center" role="status">
+    <div className="flex items-center justify-center" role="status" aria-label="Cargando">
       <div
         className={`${sizeMap[size]} border-primary-700 border-t-transparent rounded-full animate-spin ${className}`}
-        aria-label="Cargando"
       />
     </div>
   )

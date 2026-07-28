@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { HashLink } from "../ui/HashLink"
 import { Logo } from "../ui/Logo"
@@ -11,9 +11,10 @@ export function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null)
   const toggleButtonRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
-  const hashIds = navLinks
-    .filter((l) => l.href.startsWith("#"))
-    .map((l) => l.href.slice(1))
+  const hashIds = useMemo(() =>
+    navLinks.filter((l) => l.href.startsWith("#")).map((l) => l.href.slice(1)),
+    []
+  )
   const activeSection = useActiveSection(hashIds)
 
   const handleEscape = useCallback((e: KeyboardEvent) => {

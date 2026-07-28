@@ -77,7 +77,8 @@ export function Footer() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (honeypot) return
-    if (email.trim()) {
+    const form = e.target as HTMLFormElement
+    if (form.checkValidity() && email.trim()) {
       setSubscribed(true)
       setEmail("")
     }
@@ -118,7 +119,7 @@ export function Footer() {
           </div>
 
           <div className="hidden lg:block lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</h2>
+            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</p>
             <ul className="space-y-2">
               {navLinks.map((l) => (
                 <li key={l.href}>
@@ -137,7 +138,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</h2>
+            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</p>
             <ul className="space-y-2">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
@@ -150,7 +151,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</h2>
+            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</p>
             <ul className="space-y-2">
               {legalLinks.map((l) => (
                 <li key={l.label}>
@@ -163,7 +164,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</h2>
+            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</p>
             <p className="text-sm text-neutral-700 mb-3">
               Recibí novedades y contenido exclusivo.
             </p>
