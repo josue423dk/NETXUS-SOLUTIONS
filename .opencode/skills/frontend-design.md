@@ -34,8 +34,9 @@ Esta skill enseña al agente sobre espaciado, teoría del color, puntos de ruptu
 | lg     | 1280px      | 1200px            |
 
 ### Tipografía
-- **Títulos:** Space Grotesk (variable font)
-- **Cuerpo:** Inter (variable font)
+- **Títulos:** Neco (fuente local, `@font-face`)
+- **Cuerpo:** Switzer (fuente local, `@font-face`)
+- **Acento:** Clash Display (fuente local, `@font-face`)
 
 | Token    | Mobile | Desktop | Peso | Line-height | Uso                     |
 |----------|--------|---------|------|-------------|-------------------------|

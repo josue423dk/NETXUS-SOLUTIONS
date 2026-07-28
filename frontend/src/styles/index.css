@@ -91,6 +91,10 @@ body {
   --shadow-md: 0 4px 12px rgba(10,46,48,0.08);
   --shadow-lg: 0 12px 32px rgba(10,46,48,0.12);
 
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1280px;
+
   --logo-gradient: linear-gradient(180deg, #0F4C4C 0%, #1C7C7E 50%, #2DD4BF 100%);
   --logo-wordmark: #0A2E30;
   --logo-x-gradient: linear-gradient(90deg, #1C7C7E 0%, #2DD4BF 100%);

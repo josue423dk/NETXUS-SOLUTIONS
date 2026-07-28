@@ -266,3 +266,33 @@ Las skills se activan automáticamente cuando el agente detecta que la tarea enc
 - [ ] ¿El código implementa buenas prácticas de seguridad (prevención XSS, enlaces seguros con `noopener`, cero secretos hardcodeados)?
 - [ ] ¿El build corre sin errores (`npm run build`)?
 - [ ] ¿El commit sigue Conventional Commits?
+
+---
+
+## 10. Prioridad y Resolución de Conflictos entre Skills
+
+Este proyecto incluye skills en dos ubicaciones:
+- **`.opencode/skills/`** — Skills específicas del proyecto MONRU UX (tokens de marca, diseño específico)
+- **`.agents/skills/`** — Skills genéricas de metodología de diseño (anti-slop, estilos, utilidades)
+
+### Regla de Precedencia
+
+Cuando existan instrucciones contradictorias entre skills:
+
+1. **`AGENTS.md`** siempre tiene máxima autoridad (fuente de verdad)
+2. **`.opencode/skills/`** tiene precedencia sobre `.agents/skills/` (específico vs. genérico)
+3. **`.agents/skills/`** solo se usa como referencia metodológica cuando no hay conflicto
+
+### Skills Genéricas (`.agents/skills/`) — Solo Inspiración
+
+Las skills en `.agents/skills/` son protocolos de diseño reutilizables y **no aplican directamente** a los tokens de MONRU UX. Se usan para:
+- Metodología anti-slop (`design-taste-frontend`)
+- Generación de imágenes de marca (`brandkit`)
+- Referencia de estilos (`minimalist-ui`, `high-end-visual-design`)
+- Utilidades (`full-output-enforcement`, `image-to-code`, etc.)
+
+**Nota:** Algunas skills de `.agents/` contienen valores de color, tipografía o espaciado que **NO son compatibles** con el Design System de MONRU UX. Siempre usar los tokens definidos en `AGENTS.md` sección 4.
+
+### Skills Específicas (`.opencode/skills/`) — Autoritativas
+
+Estas skills contienen los tokens y reglas específicas de MONRU UX. Siempre tienen precedencia sobre las skills genéricas.

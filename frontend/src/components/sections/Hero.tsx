@@ -5,7 +5,7 @@ export function Hero() {
     <section className="relative min-h-screen z-10 flex items-center px-4 sm:px-6">
       <div className="w-full lg:max-w-2xl pt-20 lg:ml-[8%] xl:ml-[10%]">
         <span
-          className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm sm:text-base lg:text-lg"
+          className="inline-block text-white/90 dark:text-primary-500 font-accent tracking-[0.2em] text-sm sm:text-base lg:text-lg"
           style={{ textShadow: "var(--shadow-text-sm)" }}
         >
           CONSULTORÍA EN DESARROLLO DE SOFTWARE

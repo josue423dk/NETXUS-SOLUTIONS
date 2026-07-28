@@ -54,9 +54,9 @@ Esta skill carga los tokens de la marca MONRU UX en cada sesion, asegurando cons
 
 ## Tipografia
 
-- **Titulos:** Space Grotesk (variable font)
-- **Cuerpo:** Inter (variable font)
-- Ambas cargadas via Google Fonts
+- **Titulos:** Neco (fuente local, `@font-face`)
+- **Cuerpo:** Switzer (fuente local, `@font-face`)
+- **Acento:** Clash Display (fuente local, `@font-face`)
 
 | Token    | Mobile | Desktop | Peso | Line-height | Uso                     |
 |----------|--------|---------|------|-------------|-------------------------|
