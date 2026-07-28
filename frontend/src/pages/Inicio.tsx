@@ -1,10 +1,13 @@
-import { useEffect, lazy, Suspense } from "react"
+import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { PageTransitionWrapper } from "../components/sections/PageTransitionWrapper"
 import { useScrollPageTransition } from "../hooks/useScrollPageTransition"
+import { PersistentBackground } from "../components/sections/PersistentBackground"
+import { FloatingRobot } from "../components/sections/FloatingRobot"
 import { Hero } from "../components/sections/Hero"
 import { TrabajosGrid } from "../components/sections/TrabajosGrid"
 import { Spinner } from "../components/ui/Spinner"
+import { lazy, Suspense } from "react"
 
 const Cotizacion = lazy(() => import("./Cotizacion").then((m) => ({ default: m.Cotizacion })))
 const Integrantes = lazy(() => import("./Integrantes").then((m) => ({ default: m.Integrantes })))
@@ -50,6 +53,9 @@ export function Inicio() {
 
   return (
     <div>
+      <PersistentBackground />
+      <FloatingRobot />
+
       <PageTransitionWrapper
         isActive={activeIndex === 0}
         isNavigating={navigating}

@@ -7,7 +7,7 @@ export function TrabajosGrid() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal()
 
   return (
-    <section id="trabajos" className="py-16 sm:py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-50">
+    <section id="trabajos" className="py-16 sm:py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}

@@ -60,6 +60,11 @@ body {
   font-family: var(--font-body);
 }
 
+.backdrop-blur-xs {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
 @theme {
   --color-primary-900: #0A2E30;
   --color-primary-700: #0F4C4C;
@@ -174,15 +179,11 @@ body {
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
               filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.page-section:has(.sec-active) {
-  will-change: transform, opacity, filter;
-}
 
 /* --- Active section (fully visible, on top) --- */
 .sec-active {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  filter: blur(0);
   pointer-events: auto;
   z-index: 10;
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
@@ -308,13 +309,15 @@ body {
   .sec-active { opacity: 1; transform: none; filter: none; pointer-events: auto; z-index: 10; }
   .sec-inactive { opacity: 0; transform: none; filter: blur(8px); pointer-events: none; z-index: 1; }
   .sec-entering > *, .sec-exiting > * { opacity: 1; transform: none; }
+  .persistent-bg {
+    filter: blur(20px) saturate(1.2) !important;
+  }
 }
 
 /* Route-level page transition for Layout */
 .page-visible {
   opacity: 1;
   transform: none;
-  filter: blur(0);
   transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);

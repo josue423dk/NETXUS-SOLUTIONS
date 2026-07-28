@@ -12,7 +12,7 @@ export function Cotizacion() {
           as="h1"
         />
 
-        <div className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-50">
+        <div className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-50/80">
           <ContactForm />
         </div>
       </div>
