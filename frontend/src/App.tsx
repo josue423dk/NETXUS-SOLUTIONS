@@ -1,17 +1,10 @@
-import { Navbar } from './components/layout/Navbar'
-import { Footer } from './components/layout/Footer'
-import { Hero } from './components/sections/Hero'
+import { AppRouter } from "./router"
+import { ErrorBoundary } from "./components/ui/ErrorBoundary"
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900">
-      <Navbar />
-      <main>
-        <Hero />
-      </main>
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <AppRouter />
+    </ErrorBoundary>
   )
 }
-
-export default App

@@ -20,7 +20,7 @@ export function ThemeToggle() {
   return (
     <button
       role="switch"
-      aria-checked={!dark}
+      aria-checked={dark}
       onClick={toggle}
       className="relative w-14 h-7 rounded-full flex items-center px-0.5 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       style={{
@@ -44,6 +44,7 @@ export function ThemeToggle() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
             style={{ color: "var(--toggle-icon)" }}
           >
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
@@ -59,6 +60,7 @@ export function ThemeToggle() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
             style={{ color: "var(--toggle-icon)" }}
           >
             <circle cx="12" cy="12" r="5" />

@@ -7,7 +7,7 @@ tags: [branding, tokens, design-system, colors, typography]
 
 # Brand Guidelines Skill
 
-Esta skill carga los tokens de la marca Netxus Solutions en cada sesion, asegurando consistencia visual en todo el codigo generado.
+Esta skill carga los tokens de la marca MONRU UX en cada sesion, asegurando consistencia visual en todo el codigo generado.
 
 ## Paleta Oficial (Variante 2 - Teal/verde azulado)
 
@@ -34,9 +34,9 @@ Esta skill carga los tokens de la marca Netxus Solutions en cada sesion, asegura
 | Token         | Hex      | Uso                                    |
 |---------------|----------|----------------------------------------|
 | primary-900   | #FF6B00  | Texto principal, navbar, footer        |
-| primary-700   | #E8351A  | Boton primario, links, iconos activos  |
+| primary-700   | #D45800  | Boton primario, links, iconos activos  |
 | primary-500   | #FF8C00  | Hover/pressed sobre elementos 700      |
-| accent-400    | #FFB800  | Fondos de badges, gradiente hero, glow |
+| accent-400    | #FF8C00  | Fondos de badges, gradiente hero, glow |
 | neutral-900   | #FFFFFF  | Texto principal alternativo            |
 | neutral-700   | #B0B7C3  | Texto secundario / parrafos largos     |
 | neutral-500   | #666666  | Texto terciario, placeholders          |
@@ -54,9 +54,9 @@ Esta skill carga los tokens de la marca Netxus Solutions en cada sesion, asegura
 
 ## Tipografia
 
-- **Titulos:** Space Grotesk (variable font)
-- **Cuerpo:** Inter (variable font)
-- Ambas cargadas via Google Fonts
+- **Titulos:** Neco (fuente local, `@font-face`)
+- **Cuerpo:** Switzer (fuente local, `@font-face`)
+- **Acento:** Clash Display (fuente local, `@font-face`)
 
 | Token    | Mobile | Desktop | Peso | Line-height | Uso                     |
 |----------|--------|---------|------|-------------|-------------------------|

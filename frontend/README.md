@@ -1,10 +1,10 @@
-Netxus Solutions | MVP Development
+MONRU UX | MVP Development
 Sobre la Empresa
 
-Netxus Solutions es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento. Nuestra misión es transformar necesidades empresariales en productos tecnológicos escalables, intuitivos y optimizados, priorizando siempre la calidad del código, la experiencia del usuario (UX) y la eficiencia técnica.
+MONRU UX es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento. Nuestra misión es transformar necesidades empresariales en productos tecnológicos escalables, intuitivos y optimizados, priorizando siempre la calidad del código, la experiencia del usuario (UX) y la eficiencia técnica.
 
 👥 Fundadores:
-Netxus Solutions fue co-fundada por un equipo de profesionales comprometidos con la excelencia técnica:
+MONRU UX fue co-fundada por un equipo de profesionales comprometidos con la excelencia técnica:
 
     Alex Josué Montaña: Líder Técnico y Desarrollador Full Stack. Especializado en arquitectura de sistemas, optimización de rendimiento y despliegue de infraestructura profesional.
 
@@ -27,7 +27,7 @@ Para asegurar el éxito de cada Sprint, el equipo sigue este proceso riguroso:
 
 Normas del Equipo
 
-La cultura técnica de Netxus Solutions se fundamenta en los siguientes pilares:
+La cultura técnica de MONRU UX se fundamenta en los siguientes pilares:
 
     Transparencia Total: Es obligatorio registrar cada avance y cambio en el Project Board del repositorio.
 
@@ -45,4 +45,4 @@ Tech Stack
 
     Calidad: Auditorías técnicas frecuentes (Lighthouse), pruebas de rendimiento y optimización de UX.
 
-Desarrollado y mantenido por el equipo técnico de Netxus Solutions.
+Desarrollado y mantenido por el equipo técnico de MONRU UX.

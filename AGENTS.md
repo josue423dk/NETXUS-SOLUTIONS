@@ -1,17 +1,19 @@
-# AGENTS.md — Netxus Solutions (Web MVP)
+# AGENTS.md — MONRU UX (Web MVP)
 
 > Este archivo define el contexto, reglas y convenciones que cualquier agente de IA (Claude Code, Cursor, Copilot, etc.) debe seguir al trabajar en este repositorio.
-> Fuente de verdad del Design System: `netxus-design-system.md` (v1).
+> Fuente de verdad del Design System: `monru-ux-design-system.md` (v1).
 
 ---
 
 ## 1. Sobre el proyecto
 
-**Netxus Solutions** es una consultora de desarrollo de software enfocada en soluciones digitales de alto rendimiento. El sitio web debe transmitir esa identidad: código de calidad, UX cuidada y eficiencia técnica.
+**MONRU UX** es una consultora de desarrollo de software enfocada en soluciones digitales de alto rendimiento. El sitio web debe transmitir esa identidad: código de calidad, UX cuidada y eficiencia técnica.
 
-- **Stack:** Vite + React + TypeScript
-- **Estilos:** Tailwind CSS (con tokens del Design System mapeados en `tailwind.config.ts`)
+- **Stack Frontend:** Vite 8 + React 19 + TypeScript 6 + Tailwind CSS v4
+- **Stack Backend:** Express 4 + Mongoose 8
+- **Estilos:** Tailwind CSS v4 con tokens via `@theme` en `frontend/src/styles/index.css`
 - **Paleta oficial:** Variante 2 — Teal / verde azulado
+- **Fuentes:** Neco (títulos), Switzer (cuerpo), Clash Display (acento) — todas locales via `@font-face`
 
 ---
 
@@ -24,6 +26,9 @@
 5. **Nombrado de componentes alineado a Figma/React** (ver sección 5): `Navbar`, `Footer`, `ButtonPrimary`, `ButtonSecondary`, `ServiceCard`, `PortfolioCard`, `ContactForm`, `HeroSection`.
 6. **No introducir nuevas dependencias** sin justificarlo (preferir soluciones nativas de React/Tailwind).
 7. Antes de dar una tarea por terminada, verificar que compile (`npm run build`) y que no haya errores de lint/tipos.
+8. **Lazy loading obligatorio:** Todas las rutas y secciones deben usar `React.lazy` + `Suspense` para code splitting.
+9. **Separación de datos:** La data estática (servicios, portfolio, pricing, etc.) va en `src/data/`, no hardcodeada en componentes.
+10. **Manejo de errores:** Todo componente debe tener fallback de error. El `ErrorBoundary` global envuelve la app.
 
 ---
 
@@ -31,24 +36,27 @@
 
 ```
 /
-├─ frontend/               # Vite + React + TypeScript
+├─ frontend/               # Vite 8 + React 19 + TypeScript 6 + Tailwind v4
 │  └─ src/
 │     ├─ assets/           # imágenes, íconos, fuentes locales
 │     ├─ components/
-│     │  ├─ ui/            # componentes atómicos (ButtonPrimary, Badge, Input...)
-│     │  ├─ layout/        # Navbar, Footer
-│     │  └─ sections/      # HeroSection, ServiceCard, PortfolioCard, ContactForm
-│     ├─ pages/            # vistas (Inicio, Servicios, Portafolio, Contacto)
-│     ├─ hooks/            # custom hooks
-│     ├─ lib/              # utils, helpers, validaciones de formularios
+│     │  ├─ ui/            # componentes atómicos (ButtonPrimary, Logo, SectionHeader, ContactForm, HashLink, ErrorBoundary, AccordionItem, Spinner, ThemeToggle)
+│     │  ├─ layout/        # Layout, Navbar, Footer
+│     │  └─ sections/      # Hero, ServiceCard, PortfolioCard, TrabajosGrid, PricingSection, PricingCard, TeamCard, FloatingRobot, PageTransitionWrapper, PersistentBackground
+│     ├─ pages/            # vistas (Inicio, Cotizacion, QuienesSomos, Integrantes, PreguntasFrecuentes)
+│     ├─ hooks/            # custom hooks (useScrollReveal, useTheme, useActiveSection, useScrollPageTransition)
+│     ├─ data/             # data estática (navegación, servicios, portfolio, pricing, equipo, FAQ)
+│     ├─ lib/              # utils, helpers, api client
 │     ├─ styles/           # estilos globales (@theme, animaciones, fuentes)
 │     └─ types/            # tipos e interfaces compartidas
-├─ backend/                # Express + Mongoose
+├─ backend/                # Express 4 + Mongoose 8
 │  └─ src/
-│     ├─ config/           # conexión a BD (db.js)
-│     ├─ controllers/      # lógica de rutas
-│     ├─ models/           # schemas de Mongoose
-│     ├─ routes/           # definición de rutas
+│     ├─ config/           # db.js, env.js
+│     ├─ controllers/      # projectController.js
+│     ├─ models/           # Project.js
+│     ├─ routes/           # projectRoutes.js
+│     ├─ services/         # projectService.js
+│     ├─ middleware/        # validate.js, errorHandler.js
 │     └─ server.js         # entry point
 ├─ AGENTS.md
 └─ .gitignore
@@ -85,9 +93,9 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | Token | Hex | Uso |
 |---|---|---|
 | `primary-900` | `#FF6B00` | Texto principal, navbar, footer |
-| `primary-700` | `#E8351A` | Botón primario, links, iconos activos |
+| `primary-700` | `#D45800` | Botón primario, links, iconos activos |
 | `primary-500` | `#FF8C00` | Hover/pressed sobre elementos 700 |
-| `accent-400` | `#FFB800` | Fondos de badges, gradiente hero, glow decorativo |
+| `accent-400` | `#FF8C00` | Fondos de badges, gradiente hero, glow decorativo |
 | `neutral-900` | `#FFFFFF` | Texto principal alternativo |
 | `neutral-700` | `#B0B7C3` | Texto secundario / párrafos largos |
 | `neutral-500` | `#666666` | Texto terciario, placeholders |
@@ -98,13 +106,38 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | `warning` | `#FF9800` | Validaciones, avisos |
 | `error` | `#EF5350` | Errores de formulario |
 
+### Tokens de logo y toggle — Tema claro
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--logo-gradient` | `linear-gradient(180deg, #0F4C4C, #1C7C7E, #2DD4BF)` | Icono X del logo |
+| `--logo-wordmark` | `#0A2E30` | Texto "MONR" y "UX" |
+| `--logo-x-gradient` | `linear-gradient(90deg, #1C7C7E, #2DD4BF)` | Letra "U" del logo |
+| `--toggle-bg-dark` | `#0A2E30` | Fondo toggle en modo oscuro |
+| `--toggle-bg-light` | `#1C7C7E` | Fondo toggle en modo claro |
+| `--toggle-icon` | `#0F4C4C` | Icono del toggle |
+
+### Tokens de logo y toggle — Tema oscuro
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--logo-gradient` | `linear-gradient(180deg, #FFD200, #FF8C00, #E8231A)` | Icono X del logo |
+| `--logo-wordmark` | `#FFFFFF` | Texto "MONR" y "UX" |
+| `--logo-x-gradient` | `linear-gradient(90deg, #FFD200, #FF8C00, #E8231A)` | Letra "U" del logo |
+| `--toggle-bg-dark` | `#FF6B00` | Fondo toggle en modo oscuro |
+| `--toggle-bg-light` | `#FF8C00` | Fondo toggle en modo claro |
+| `--toggle-icon` | `#D45800` | Icono del toggle |
+
 **Regla de accesibilidad (obligatoria):** en tema claro, texto sobre fondo blanco o `neutral-50` debe usar `primary-700` o más oscuro, o `neutral-700`/`neutral-900`. `accent-400` es solo decorativo/fondo. En tema oscuro, texto sobre fondo `neutral-50` (#000000) debe usar `neutral-900` (#FFFFFF) o `neutral-700` (#B0B7C3).
 
 ### Tipografía
 
-- **Títulos:** Space Grotesk
-- **Cuerpo:** Inter
-- Ambas cargadas como variable fonts vía Google Fonts.
+- **Títulos:** Neco (fuente local, `@font-face` en `index.css`)
+- **Cuerpo:** Switzer (fuente local, `@font-face` en `index.css`)
+- **Acento:** Clash Display (fuente local, `@font-face` en `index.css`)
+- Token `--font-heading` controla títulos, cards, accordion, footer.
+- Token `--font-body` controla cuerpo, labels, botones.
+- Token `--font-accent` controla overlines, tags, badges.
 
 | Token | Mobile | Desktop | Peso | Line-height | Uso |
 |---|---|---|---|---|---|
@@ -151,19 +184,77 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | `md` | 1024px | 1120px |
 | `lg` | 1280px | 1200px |
 
+### Animaciones y Transiciones
+
+| Patrón | Implementación | Archivo |
+|--------|---------------|---------|
+| Scroll reveal | `IntersectionObserver` + CSS transitions | `useScrollReveal.ts` |
+| Transiciones de página | Scroll-based 3D perspective slides | `useScrollPageTransition.ts` |
+| Stagger cascade | CSS animation-delay por `:nth-child` | `index.css` |
+| Reduced motion | `prefers-reduced-motion: reduce` | `index.css` |
+| Transiciones sección | `sec-active`, `sec-inactive`, `sec-entering`, `sec-exiting` | `index.css` |
+
+**Reglas de animación:**
+- Solo animar `transform` y `opacity` (GPU-safe)
+- Usar `cubic-bezier` personalizado, nunca `linear` o `ease-in-out`
+- Respetar `prefers-reduced-motion`
+- No usar `window.addEventListener('scroll')` — usar `IntersectionObserver`
+
+### Performance
+
+- **Lazy loading:** `React.lazy` + `Suspense` para rutas y secciones
+- **Code splitting:** `manualChunks` en Vite para vendor (react, react-dom, react-router)
+- **Font loading:** `font-display: swap` en todas las `@font-face`
+- **Imágenes:** Formato WebP/AVIF cuando sea posible, `loading="lazy"` en imágenes below-the-fold
+- **CSS:** Tailwind v4 tree-shaking automático
+
 ---
 
-## 5. Componentes esperados
+## 5. Componentes del proyecto
 
+### Layout (`components/layout/`)
 | Componente | Descripción |
-|---|---|
-| `Navbar` | Navegación principal, fija/sticky |
-| `Footer` | Pie de página con links y datos de contacto |
-| `ButtonPrimary` / `ButtonSecondary` | Botones según jerarquía visual |
-| `ServiceCard` | Card para sección Servicios |
-| `PortfolioCard` | Card para sección Portafolio |
-| `ContactForm` | Formulario con estados: default, loading, success, error |
-| `HeroSection` | Sección hero de Inicio |
+|------------|-------------|
+| `Layout` | Wrapper global con Navbar, main, Footer y transiciones de página |
+| `Navbar` | Navegación principal, fija/sticky, mobile-first con hamburger menu |
+| `Footer` | Pie de página con links, newsletter form (honeypot anti-spam) |
+
+### UI (`components/ui/`)
+| Componente | Descripción |
+|------------|-------------|
+| `ButtonPrimary` | Botón multi-variante (primary/secondary/outline/ghost) con soporte link/button |
+| `ButtonSecondary` | Re-export de ButtonPrimary (mismo componente, diferente nombre de import) |
+| `Logo` | SVG logo con gradientes CSS custom properties para theme switching |
+| `SectionHeader` | Header reutilizable con overline/título/descripción |
+| `ContactForm` | Formulario con validación Zod, estados: idle/loading/success/error |
+| `HashLink` | Enlace hash con routing SPA-aware |
+| `ErrorBoundary` | Error boundary class-based con logging dev-only |
+| `AccordionItem` | Acordeón accesible con ARIA, keyboard navigation |
+| `Spinner` | Loading spinner con `role="status"` |
+| `ThemeToggle` | Toggle dark/light con localStorage, `role="switch"` |
+
+### Sections (`components/sections/`)
+| Componente | Descripción |
+|------------|-------------|
+| `Hero` | Sección hero de Inicio con background image y animaciones |
+| `ServiceCard` | Card para sección Servicios con iconos SVG y scroll reveal |
+| `PortfolioCard` | Card para sección Portafolio con imagen y descripción |
+| `TrabajosGrid` | Grid de trabajos/portafolio |
+| `PricingSection` | Sección de planes/pricing |
+| `PricingCard` | Card individual de pricing |
+| `TeamCard` | Card de miembro del equipo |
+| `FloatingRobot` | Elemento decorativo flotante (aria-hidden) |
+| `PageTransitionWrapper` | Wrapper para transiciones de página scroll-based |
+| `PersistentBackground` | Background persistente con transiciones |
+
+### Pages (`pages/`)
+| Página | Descripción |
+|--------|-------------|
+| `Inicio` | Landing page principal con todas las secciones |
+| `Cotizacion` | Página de cotización/presupuesto |
+| `QuienesSomos` | Información de la empresa |
+| `Integrantes` | Equipo/credits |
+| `PreguntasFrecuentes` | FAQ con acordeón |
 
 Cada componente en `src/components/{layout|sections|ui}/NombreComponente.tsx`, con su lógica y estilos co-ubicados (sin CSS externo salvo casos justificados).
 
@@ -171,7 +262,7 @@ Cada componente en `src/components/{layout|sections|ui}/NombreComponente.tsx`, c
 
 ## 6. Seguridad y Hacking Defensivo (Requisito Obligatorio)
 
-Para garantizar que el MVP de Netxus Solutions nazca robusto y protegido contra vulnerabilidades comunes, todo código desarrollado debe contemplar las siguientes prácticas de seguridad desde su concepción:
+Para garantizar que el MVP de MONRU UX nazca robusto y protegido contra vulnerabilidades comunes, todo código desarrollado debe contemplar las siguientes prácticas de seguridad desde su concepción:
 
 ### 1. Manejo seguro de Formularios y Entradas
 - **Sanitización y Validación:** Nunca confiar en el input del usuario. Validar tanto en el cliente (React Hook Form / Zod) como simular validaciones estrictas en lógica de envío.
@@ -241,3 +332,33 @@ Las skills se activan automáticamente cuando el agente detecta que la tarea enc
 - [ ] ¿El código implementa buenas prácticas de seguridad (prevención XSS, enlaces seguros con `noopener`, cero secretos hardcodeados)?
 - [ ] ¿El build corre sin errores (`npm run build`)?
 - [ ] ¿El commit sigue Conventional Commits?
+
+---
+
+## 10. Prioridad y Resolución de Conflictos entre Skills
+
+Este proyecto incluye skills en dos ubicaciones:
+- **`.opencode/skills/`** — Skills específicas del proyecto MONRU UX (tokens de marca, diseño específico)
+- **`.agents/skills/`** — Skills genéricas de metodología de diseño (anti-slop, estilos, utilidades)
+
+### Regla de Precedencia
+
+Cuando existan instrucciones contradictorias entre skills:
+
+1. **`AGENTS.md`** siempre tiene máxima autoridad (fuente de verdad)
+2. **`.opencode/skills/`** tiene precedencia sobre `.agents/skills/` (específico vs. genérico)
+3. **`.agents/skills/`** solo se usa como referencia metodológica cuando no hay conflicto
+
+### Skills Genéricas (`.agents/skills/`) — Solo Inspiración
+
+Las skills en `.agents/skills/` son protocolos de diseño reutilizables y **no aplican directamente** a los tokens de MONRU UX. Se usan para:
+- Metodología anti-slop (`design-taste-frontend`)
+- Generación de imágenes de marca (`brandkit`)
+- Referencia de estilos (`minimalist-ui`, `high-end-visual-design`)
+- Utilidades (`full-output-enforcement`, `image-to-code`, etc.)
+
+**Nota:** Algunas skills de `.agents/` contienen valores de color, tipografía o espaciado que **NO son compatibles** con el Design System de MONRU UX. Siempre usar los tokens definidos en `AGENTS.md` sección 4.
+
+### Skills Específicas (`.opencode/skills/`) — Autoritativas
+
+Estas skills contienen los tokens y reglas específicas de MONRU UX. Siempre tienen precedencia sobre las skills genéricas.
