@@ -13,7 +13,7 @@ export function TeamCard({ member, index }: TeamCardProps) {
     <div
       ref={ref}
       className={`
-        rounded-md overflow-hidden
+        group rounded-md overflow-hidden
         bg-neutral-50 dark:bg-neutral-100
         border border-neutral-300/50
         shadow-md hover:shadow-lg
@@ -42,9 +42,9 @@ export function TeamCard({ member, index }: TeamCardProps) {
             <h3 className="font-heading font-semibold text-xl text-primary-900 dark:text-neutral-900 leading-snug">
               {member.nombre}
             </h3>
-            <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide bg-accent-400/15 dark:bg-primary-500/15 text-primary-700 dark:text-primary-700 border border-accent-400/20 dark:border-primary-500/20">
+            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               {member.rol}
-            </span>
+            </p>
           </div>
         </div>
 

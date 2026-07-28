@@ -102,9 +102,12 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 
 ### Tipografía
 
-- **Títulos:** Space Grotesk
-- **Cuerpo:** Inter
-- Ambas cargadas como variable fonts vía Google Fonts.
+- **Títulos:** Neco (fuente local, `@font-face` en `index.css`)
+- **Cuerpo:** Switzer (fuente local, `@font-face` en `index.css`)
+- **Acento:** Clash Display (fuente local, `@font-face` en `index.css`)
+- Token `--font-heading` controla títulos, cards, accordion, footer.
+- Token `--font-body` controla cuerpo, labels, botones.
+- Token `--font-accent` controla overlines, tags, badges.
 
 | Token | Mobile | Desktop | Peso | Line-height | Uso |
 |---|---|---|---|---|---|

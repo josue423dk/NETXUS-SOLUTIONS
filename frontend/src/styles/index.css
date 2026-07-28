@@ -1,5 +1,45 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("../assets/fonts/ClashDisplay_Complete/Fonts/WEB/fonts/ClashDisplay-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neco";
+  src: url("../assets/fonts/Neco_Complete/Fonts/WEB/fonts/Neco-Variable.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neco";
+  src: url("../assets/fonts/Neco_Complete/Fonts/WEB/fonts/Neco-VariableItalic.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/Switzer_Complete/Fonts/WEB/fonts/Switzer-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/Switzer_Complete/Fonts/WEB/fonts/Switzer-VariableItalic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @variant dark (&:is([data-theme="dark"] *));
 
 html {
@@ -26,8 +66,9 @@ body {
   --color-warning: #92620A;
   --color-error: #B3261E;
 
-  --font-heading: "Cormorant", serif;
-  --font-body: "Montserrat", sans-serif;
+  --font-heading: "Neco", serif;
+  --font-body: "Switzer", sans-serif;
+  --font-accent: "ClashDisplay", sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;

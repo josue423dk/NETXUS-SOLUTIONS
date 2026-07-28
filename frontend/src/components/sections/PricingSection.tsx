@@ -40,7 +40,7 @@ export function PricingSection() {
             ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
           `}
         >
-          <span className="inline-block text-accent-400 dark:text-primary-500 font-semibold tracking-[0.2em] text-sm uppercase">
+          <span className="inline-block text-accent-400 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
             Nuestros planes
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 dark:text-neutral-900 leading-tight">
@@ -82,19 +82,8 @@ export function PricingSection() {
               `}
             >
               {plan.nombre}
-              {plan.badge && (
-                <span
-                  className={`
-                    ml-2 inline-block px-2 py-0.5 rounded-full text-xs font-medium
-                    ${
-                      activePlanId === plan.id
-                        ? "bg-white/20 text-white"
-                        : "bg-accent-400/15 text-primary-700 dark:bg-primary-500/15 dark:text-primary-700"
-                    }
-                  `}
-                >
-                  {plan.badge}
-                </span>
+              {plan.destacado && (
+                <span className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent-400 dark:bg-primary-500 align-middle" />
               )}
             </button>
           ))}

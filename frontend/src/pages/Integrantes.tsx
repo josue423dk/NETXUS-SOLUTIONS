@@ -9,7 +9,7 @@ export function Integrantes() {
     <section className="py-24 sm:py-28 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
-          <span className="inline-block text-accent-400 font-semibold tracking-[0.2em] text-sm uppercase">
+          <span className="inline-block text-accent-400 font-accent tracking-[0.2em] text-sm uppercase">
             Equipo
           </span>
           <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 leading-tight">
