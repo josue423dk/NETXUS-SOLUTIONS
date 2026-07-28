@@ -1,24 +1,17 @@
 import { servicios } from "../data/servicios"
 import { ServiceCard } from "../components/sections/ServiceCard"
+import { SectionHeader } from "../components/ui/SectionHeader"
 
 export function QuienesSomos() {
   return (
     <>
       <section className="py-24 sm:py-28 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
-            Quiénes somos
-          </span>
-          <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 leading-tight">
-            Hacemos realidad tus ideas
-          </h1>
-          <p className="mt-6 text-base sm:text-lg text-neutral-700 leading-relaxed max-w-2xl mx-auto">
-            En <strong>MONRU UX</strong> creemos que el software de calidad nace
-            de equipos chicos, enfocados y con altos estándares técnicos.
-            Trabajamos codo a codo con nuestros clientes para transformar
-            conceptos en productos digitales escalables, seguros y con una
-            experiencia de usuario cuidada al detalle.
-          </p>
+        <div className="max-w-3xl mx-auto">
+          <SectionHeader
+            overline="Quiénes somos"
+            title="Hacemos realidad tus ideas"
+            description="En MONRU UX creemos que el software de calidad nace de equipos chicos, enfocados y con altos estándares técnicos. Trabajamos codo a codo con nuestros clientes para transformar conceptos en productos digitales escalables, seguros y con una experiencia de usuario cuidada al detalle."
+          />
           <p className="mt-4 text-base sm:text-lg text-neutral-700 leading-relaxed max-w-2xl mx-auto">
             Nuestro enfoque combina craftsmanship en el código con diseño
             centrado en el usuario, priorizando rendimiento, accesibilidad

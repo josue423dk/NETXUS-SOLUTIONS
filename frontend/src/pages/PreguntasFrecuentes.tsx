@@ -2,6 +2,7 @@ import { useState, useCallback } from "react"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 import { faqs } from "../data/faqs"
 import { AccordionItem } from "../components/ui/AccordionItem"
+import { SectionHeader } from "../components/ui/SectionHeader"
 
 export function PreguntasFrecuentes() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -42,18 +43,11 @@ export function PreguntasFrecuentes() {
   return (
     <section className="py-24 sm:py-28 px-4">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
-            FAQ
-          </span>
-          <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 leading-tight">
-            Preguntas frecuentes
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-neutral-700 max-w-xl mx-auto leading-relaxed">
-            Respuestas a las dudas más comunes sobre nuestros servicios y
-            proceso de trabajo.
-          </p>
-        </div>
+        <SectionHeader
+          overline="FAQ"
+          title="Preguntas frecuentes"
+          description="Respuestas a las dudas más comunes sobre nuestros servicios y proceso de trabajo."
+        />
 
         <div
           ref={ref}

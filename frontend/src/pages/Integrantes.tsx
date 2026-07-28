@@ -1,6 +1,7 @@
 import { useScrollReveal } from "../hooks/useScrollReveal"
 import { equipo } from "../data/equipo"
 import { TeamCard } from "../components/sections/TeamCard"
+import { SectionHeader } from "../components/ui/SectionHeader"
 
 export function Integrantes() {
   const { ref, isVisible } = useScrollReveal()
@@ -8,18 +9,12 @@ export function Integrantes() {
   return (
     <section className="py-24 sm:py-28 px-4">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-14">
-          <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
-            Equipo
-          </span>
-          <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 leading-tight">
-            Conocé al equipo
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-neutral-700 max-w-xl mx-auto leading-relaxed">
-            Detrás de cada proyecto hay personas comprometidas con la calidad
-            y la innovación.
-          </p>
-        </div>
+        <SectionHeader
+          overline="Equipo"
+          title="Conocé al equipo"
+          description="Detrás de cada proyecto hay personas comprometidas con la calidad y la innovación."
+          className="mb-14"
+        />
 
         <div
           ref={ref}
