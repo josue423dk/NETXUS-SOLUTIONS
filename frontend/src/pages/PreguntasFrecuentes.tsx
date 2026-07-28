@@ -41,7 +41,7 @@ export function PreguntasFrecuentes() {
   )
 
   return (
-    <section className="py-24 sm:py-28 px-4">
+    <section className="py-24 sm:py-28 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
       <div className="max-w-3xl mx-auto">
         <SectionHeader
           overline="FAQ"
@@ -52,7 +52,7 @@ export function PreguntasFrecuentes() {
 
         <div
           ref={ref}
-          className={`rounded-md border border-neutral-300/50 dark:border-neutral-300/30 shadow-md px-6 bg-neutral-50/80 dark:bg-neutral-100/80 transition-all duration-700 ease-out ${
+          className={`rounded-md border border-neutral-300/50 dark:border-neutral-300/30 shadow-md px-6 bg-neutral-100/50 dark:bg-neutral-100/80 backdrop-blur-xl transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           role="region"

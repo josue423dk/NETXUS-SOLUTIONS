@@ -29,7 +29,7 @@ export function PricingCard({ plan }: PricingCardProps) {
           <span className="text-4xl sm:text-5xl font-heading font-bold text-primary-700 dark:text-primary-700">
             ${plan.precio.toLocaleString("es-AR")}
           </span>
-          <span className="text-sm text-neutral-500 dark:text-neutral-500">/ {plan.precioPeriodo}</span>
+          <span className="text-sm text-neutral-700 dark:text-neutral-500">/ {plan.precioPeriodo}</span>
         </div>
 
         <p className="mt-4 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed">

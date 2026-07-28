@@ -7,7 +7,7 @@ export function Integrantes() {
   const { ref, isVisible } = useScrollReveal()
 
   return (
-    <section className="py-24 sm:py-28 px-4">
+    <section className="py-24 sm:py-28 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           overline="Equipo"

@@ -3,7 +3,7 @@ import { SectionHeader } from "../components/ui/SectionHeader"
 
 export function Cotizacion() {
   return (
-    <section className="py-24 sm:py-28 px-4">
+    <section className="py-24 sm:py-28 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
       <div className="max-w-2xl mx-auto">
         <SectionHeader
           overline="Cotización"
@@ -12,7 +12,7 @@ export function Cotizacion() {
           as="h1"
         />
 
-        <div className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-50/80">
+        <div className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-100/50 backdrop-blur-xl">
           <ContactForm />
         </div>
       </div>

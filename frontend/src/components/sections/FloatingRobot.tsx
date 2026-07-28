@@ -7,7 +7,7 @@ export function FloatingRobot() {
 
   return (
     <div
-      className="fixed z-50 w-[180px] sm:w-[260px] lg:w-[380px]"
+      className="fixed z-50 animate-float w-[180px] sm:w-[260px] lg:w-[380px]"
       style={{
         right: "2%",
         top: "10%",

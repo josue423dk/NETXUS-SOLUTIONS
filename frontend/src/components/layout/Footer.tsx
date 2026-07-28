@@ -84,7 +84,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-neutral-300/50 bg-neutral-50/60 dark:bg-neutral-50/60 backdrop-blur-xl overflow-hidden">
+    <footer className="relative border-t border-neutral-300/50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md overflow-hidden">
       <div className="absolute inset-x-0 top-0 bottom-28 lg:bottom-36 flex items-center justify-start overflow-hidden pointer-events-none select-none">
         <span
           className="footer-marquee text-[clamp(8rem,22vw,20rem)] font-heading font-bold leading-none whitespace-nowrap text-neutral-900/5 dark:text-neutral-900/5"
@@ -209,7 +209,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-neutral-300/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-neutral-700">
             &copy; {new Date().getFullYear()} MONRU UX. Todos los derechos reservados.
           </p>
           <div className="flex gap-2.5">
