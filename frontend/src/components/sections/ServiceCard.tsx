@@ -45,30 +45,34 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div
       ref={ref}
-      className={`rounded-md border bg-neutral-50 dark:bg-neutral-100 p-6 sm:p-8 transition-all duration-700 ease-out ${
+      className={`p-1.5 rounded-[20px] bg-black/[0.03] dark:bg-white/[0.03] transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      } ${
-        service.destacado
-          ? "border-accent-400/50 shadow-lg"
-          : "border-neutral-300/50 shadow-md hover:shadow-lg"
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <div
-        className={`w-14 h-14 rounded-lg flex items-center justify-center mb-5 ${
+        className={`rounded-[14px] border bg-neutral-50 dark:bg-neutral-100 p-6 sm:p-8 ${
           service.destacado
-            ? "bg-primary-700 text-white"
-            : "bg-primary-700/10 text-primary-700"
+            ? "border-accent-400/50 shadow-lg"
+            : "border-neutral-300/50 shadow-md hover:shadow-lg"
         }`}
       >
-        {iconMap[service.icono] ?? iconMap.web}
+        <div
+          className={`w-14 h-14 rounded-lg flex items-center justify-center mb-5 ${
+            service.destacado
+              ? "bg-primary-700 text-white"
+              : "bg-primary-700/10 text-primary-700"
+          }`}
+        >
+          {iconMap[service.icono] ?? iconMap.web}
+        </div>
+        <h3 className="font-heading font-semibold text-lg text-primary-900 mb-2">
+          {service.titulo}
+        </h3>
+        <p className="text-sm text-neutral-700 leading-relaxed">
+          {service.descripcion}
+        </p>
       </div>
-      <h3 className="font-heading font-semibold text-lg text-primary-900 mb-2">
-        {service.titulo}
-      </h3>
-      <p className="text-sm text-neutral-700 leading-relaxed">
-        {service.descripcion}
-      </p>
     </div>
   )
 }

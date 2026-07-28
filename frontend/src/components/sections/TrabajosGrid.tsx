@@ -17,7 +17,6 @@ export function TrabajosGrid() {
           `}
         >
           <SectionHeader
-            overline="Nuestro trabajo"
             title="Proyectos recientes"
             description="Soluciones digitales que desarrollamos para nuestros clientes, priorizando calidad, rendimiento y experiencia de usuario."
             as="h2"

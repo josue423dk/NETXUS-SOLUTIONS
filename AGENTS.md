@@ -9,9 +9,11 @@
 
 **MONRU UX** es una consultora de desarrollo de software enfocada en soluciones digitales de alto rendimiento. El sitio web debe transmitir esa identidad: código de calidad, UX cuidada y eficiencia técnica.
 
-- **Stack:** Vite + React + TypeScript
-- **Estilos:** Tailwind CSS (con tokens del Design System mapeados en `tailwind.config.ts`)
+- **Stack Frontend:** Vite 8 + React 19 + TypeScript 6 + Tailwind CSS v4
+- **Stack Backend:** Express 4 + Mongoose 8
+- **Estilos:** Tailwind CSS v4 con tokens via `@theme` en `frontend/src/styles/index.css`
 - **Paleta oficial:** Variante 2 — Teal / verde azulado
+- **Fuentes:** Neco (títulos), Switzer (cuerpo), Clash Display (acento) — todas locales via `@font-face`
 
 ---
 
@@ -24,6 +26,9 @@
 5. **Nombrado de componentes alineado a Figma/React** (ver sección 5): `Navbar`, `Footer`, `ButtonPrimary`, `ButtonSecondary`, `ServiceCard`, `PortfolioCard`, `ContactForm`, `HeroSection`.
 6. **No introducir nuevas dependencias** sin justificarlo (preferir soluciones nativas de React/Tailwind).
 7. Antes de dar una tarea por terminada, verificar que compile (`npm run build`) y que no haya errores de lint/tipos.
+8. **Lazy loading obligatorio:** Todas las rutas y secciones deben usar `React.lazy` + `Suspense` para code splitting.
+9. **Separación de datos:** La data estática (servicios, portfolio, pricing, etc.) va en `src/data/`, no hardcodeada en componentes.
+10. **Manejo de errores:** Todo componente debe tener fallback de error. El `ErrorBoundary` global envuelve la app.
 
 ---
 
@@ -31,24 +36,27 @@
 
 ```
 /
-├─ frontend/               # Vite + React + TypeScript
+├─ frontend/               # Vite 8 + React 19 + TypeScript 6 + Tailwind v4
 │  └─ src/
 │     ├─ assets/           # imágenes, íconos, fuentes locales
 │     ├─ components/
-│     │  ├─ ui/            # componentes atómicos (ButtonPrimary, Badge, Input...)
-│     │  ├─ layout/        # Navbar, Footer
-│     │  └─ sections/      # HeroSection, ServiceCard, PortfolioCard, ContactForm
-│     ├─ pages/            # vistas (Inicio, Servicios, Portafolio, Contacto)
-│     ├─ hooks/            # custom hooks
-│     ├─ lib/              # utils, helpers, validaciones de formularios
+│     │  ├─ ui/            # componentes atómicos (ButtonPrimary, Logo, SectionHeader, ContactForm, HashLink, ErrorBoundary, AccordionItem, Spinner, ThemeToggle)
+│     │  ├─ layout/        # Layout, Navbar, Footer
+│     │  └─ sections/      # Hero, ServiceCard, PortfolioCard, TrabajosGrid, PricingSection, PricingCard, TeamCard, FloatingRobot, PageTransitionWrapper, PersistentBackground
+│     ├─ pages/            # vistas (Inicio, Cotizacion, QuienesSomos, Integrantes, PreguntasFrecuentes)
+│     ├─ hooks/            # custom hooks (useScrollReveal, useTheme, useActiveSection, useScrollPageTransition)
+│     ├─ data/             # data estática (navegación, servicios, portfolio, pricing, equipo, FAQ)
+│     ├─ lib/              # utils, helpers, api client
 │     ├─ styles/           # estilos globales (@theme, animaciones, fuentes)
 │     └─ types/            # tipos e interfaces compartidas
-├─ backend/                # Express + Mongoose
+├─ backend/                # Express 4 + Mongoose 8
 │  └─ src/
-│     ├─ config/           # conexión a BD (db.js)
-│     ├─ controllers/      # lógica de rutas
-│     ├─ models/           # schemas de Mongoose
-│     ├─ routes/           # definición de rutas
+│     ├─ config/           # db.js, env.js
+│     ├─ controllers/      # projectController.js
+│     ├─ models/           # Project.js
+│     ├─ routes/           # projectRoutes.js
+│     ├─ services/         # projectService.js
+│     ├─ middleware/        # validate.js, errorHandler.js
 │     └─ server.js         # entry point
 ├─ AGENTS.md
 └─ .gitignore
@@ -176,19 +184,77 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | `md` | 1024px | 1120px |
 | `lg` | 1280px | 1200px |
 
+### Animaciones y Transiciones
+
+| Patrón | Implementación | Archivo |
+|--------|---------------|---------|
+| Scroll reveal | `IntersectionObserver` + CSS transitions | `useScrollReveal.ts` |
+| Transiciones de página | Scroll-based 3D perspective slides | `useScrollPageTransition.ts` |
+| Stagger cascade | CSS animation-delay por `:nth-child` | `index.css` |
+| Reduced motion | `prefers-reduced-motion: reduce` | `index.css` |
+| Transiciones sección | `sec-active`, `sec-inactive`, `sec-entering`, `sec-exiting` | `index.css` |
+
+**Reglas de animación:**
+- Solo animar `transform` y `opacity` (GPU-safe)
+- Usar `cubic-bezier` personalizado, nunca `linear` o `ease-in-out`
+- Respetar `prefers-reduced-motion`
+- No usar `window.addEventListener('scroll')` — usar `IntersectionObserver`
+
+### Performance
+
+- **Lazy loading:** `React.lazy` + `Suspense` para rutas y secciones
+- **Code splitting:** `manualChunks` en Vite para vendor (react, react-dom, react-router)
+- **Font loading:** `font-display: swap` en todas las `@font-face`
+- **Imágenes:** Formato WebP/AVIF cuando sea posible, `loading="lazy"` en imágenes below-the-fold
+- **CSS:** Tailwind v4 tree-shaking automático
+
 ---
 
-## 5. Componentes esperados
+## 5. Componentes del proyecto
 
+### Layout (`components/layout/`)
 | Componente | Descripción |
-|---|---|
-| `Navbar` | Navegación principal, fija/sticky |
-| `Footer` | Pie de página con links y datos de contacto |
-| `ButtonPrimary` / `ButtonSecondary` | Botones según jerarquía visual |
-| `ServiceCard` | Card para sección Servicios |
-| `PortfolioCard` | Card para sección Portafolio |
-| `ContactForm` | Formulario con estados: default, loading, success, error |
-| `HeroSection` | Sección hero de Inicio |
+|------------|-------------|
+| `Layout` | Wrapper global con Navbar, main, Footer y transiciones de página |
+| `Navbar` | Navegación principal, fija/sticky, mobile-first con hamburger menu |
+| `Footer` | Pie de página con links, newsletter form (honeypot anti-spam) |
+
+### UI (`components/ui/`)
+| Componente | Descripción |
+|------------|-------------|
+| `ButtonPrimary` | Botón multi-variante (primary/secondary/outline/ghost) con soporte link/button |
+| `ButtonSecondary` | Re-export de ButtonPrimary (mismo componente, diferente nombre de import) |
+| `Logo` | SVG logo con gradientes CSS custom properties para theme switching |
+| `SectionHeader` | Header reutilizable con overline/título/descripción |
+| `ContactForm` | Formulario con validación Zod, estados: idle/loading/success/error |
+| `HashLink` | Enlace hash con routing SPA-aware |
+| `ErrorBoundary` | Error boundary class-based con logging dev-only |
+| `AccordionItem` | Acordeón accesible con ARIA, keyboard navigation |
+| `Spinner` | Loading spinner con `role="status"` |
+| `ThemeToggle` | Toggle dark/light con localStorage, `role="switch"` |
+
+### Sections (`components/sections/`)
+| Componente | Descripción |
+|------------|-------------|
+| `Hero` | Sección hero de Inicio con background image y animaciones |
+| `ServiceCard` | Card para sección Servicios con iconos SVG y scroll reveal |
+| `PortfolioCard` | Card para sección Portafolio con imagen y descripción |
+| `TrabajosGrid` | Grid de trabajos/portafolio |
+| `PricingSection` | Sección de planes/pricing |
+| `PricingCard` | Card individual de pricing |
+| `TeamCard` | Card de miembro del equipo |
+| `FloatingRobot` | Elemento decorativo flotante (aria-hidden) |
+| `PageTransitionWrapper` | Wrapper para transiciones de página scroll-based |
+| `PersistentBackground` | Background persistente con transiciones |
+
+### Pages (`pages/`)
+| Página | Descripción |
+|--------|-------------|
+| `Inicio` | Landing page principal con todas las secciones |
+| `Cotizacion` | Página de cotización/presupuesto |
+| `QuienesSomos` | Información de la empresa |
+| `Integrantes` | Equipo/credits |
+| `PreguntasFrecuentes` | FAQ con acordeón |
 
 Cada componente en `src/components/{layout|sections|ui}/NombreComponente.tsx`, con su lógica y estilos co-ubicados (sin CSS externo salvo casos justificados).
 

@@ -17,17 +17,14 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
       ref={ref}
       className={`
         group relative break-inside-avoid mb-6
-        rounded-md overflow-hidden
-        bg-neutral-50 dark:bg-neutral-100
-        border border-neutral-300/50
-        shadow-md hover:shadow-lg
+        p-1.5 rounded-[20px] bg-black/[0.03] dark:bg-white/[0.03]
         transition-all duration-700 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
       `}
       style={{ transitionDelay: `${index * 100}ms` }}
       tabIndex={0}
     >
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-[14px] bg-neutral-50 dark:bg-neutral-100 border border-neutral-300/50 shadow-md hover:shadow-lg">
         <img
           src={imageSrc}
           alt={`Proyecto: ${project.nombre}`}
@@ -94,16 +91,16 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
             </a>
           )}
         </div>
-      </div>
 
-      <div className="p-5 sm:p-6">
-        <h3 className="font-heading font-semibold text-lg text-primary-900 dark:text-neutral-900 leading-snug">
-          {project.nombre}
-        </h3>
+        <div className="p-5 sm:p-6">
+          <h3 className="font-heading font-semibold text-lg text-primary-900 dark:text-neutral-900 leading-snug">
+            {project.nombre}
+          </h3>
 
-        <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed line-clamp-3">
-          {project.descripción}
-        </p>
+          <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed line-clamp-3">
+            {project.descripción}
+          </p>
+        </div>
       </div>
     </div>
   )

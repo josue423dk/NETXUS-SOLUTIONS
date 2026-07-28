@@ -7,9 +7,11 @@ interface HashLinkProps {
   className?: string
   onClick?: () => void
   role?: string
+  style?: React.CSSProperties
+  tabIndex?: number
 }
 
-export function HashLink({ href, children, className, onClick, role }: HashLinkProps) {
+export function HashLink({ href, children, className, onClick, role, style, tabIndex }: HashLinkProps) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -28,7 +30,7 @@ export function HashLink({ href, children, className, onClick, role }: HashLinkP
   )
 
   return (
-    <a href={href} onClick={handleClick} className={className} role={role}>
+    <a href={href} onClick={handleClick} className={className} role={role} style={style} tabIndex={tabIndex}>
       {children}
     </a>
   )

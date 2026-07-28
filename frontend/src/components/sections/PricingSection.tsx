@@ -41,7 +41,6 @@ export function PricingSection() {
           `}
         >
           <SectionHeader
-            overline="Nuestros planes"
             title="Elige tu plan"
             description="Soluciones flexibles para cada etapa de tu negocio. Todos nuestros planes incluyen las mejores prácticas de desarrollo y soporte dedicado."
             as="h2"

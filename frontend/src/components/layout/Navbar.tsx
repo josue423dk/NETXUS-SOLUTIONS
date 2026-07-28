@@ -56,9 +56,9 @@ export function Navbar() {
   }, [open])
 
   return (
-    <nav aria-label="Navegación principal" className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md border-b border-neutral-300 transition-colors duration-500">
+    <nav aria-label="Navegación principal" className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl rounded-full bg-neutral-50/80 dark:bg-neutral-50/80 backdrop-blur-xl shadow-lg border border-neutral-300/50 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           <Link to="/" className="flex-shrink-0">
             <Logo />
           </Link>
@@ -103,56 +103,39 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <button
-              ref={toggleButtonRef}
-              className="md:hidden text-neutral-900"
-              onClick={() => setOpen(!open)}
-              aria-expanded={open}
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            >
-              {open ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-              ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </svg>
-              )}
-            </button>
+              <button
+                ref={toggleButtonRef}
+                className="md:hidden text-neutral-900 p-1"
+                onClick={() => setOpen(!open)}
+                aria-expanded={open}
+                aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              >
+                <span className="flex flex-col justify-center items-center w-6 h-6 gap-1.5">
+                  <span
+                    className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
+                      open ? "rotate-45 translate-y-[4px]" : ""
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-6 bg-current transition-all duration-300 ${
+                      open ? "opacity-0" : ""
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
+                      open ? "-rotate-45 -translate-y-[4px]" : ""
+                    }`}
+                  />
+                </span>
+              </button>
           </div>
         </div>
       </div>
 
       {open && (
-        <div ref={menuRef} className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
+        <div ref={menuRef} className="md:hidden border-t border-neutral-300/50 rounded-b-3xl overflow-hidden" role="menu">
           <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isHash = link.href.startsWith("#")
               const sectionId = isHash ? link.href.slice(1) : null
               const isActiveSection = isHash && pathname === "/" && activeSection === sectionId
@@ -162,6 +145,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   role="menuitem"
+                  style={{ animation: `menuFadeInUp 0.3s ease-out ${index * 50}ms both` }}
                   className={`block text-sm transition-colors ${
                     isActiveSection
                       ? "text-primary-700 font-semibold"
@@ -176,6 +160,7 @@ export function Navbar() {
                   to={link.href}
                   onClick={() => setOpen(false)}
                   role="menuitem"
+                  style={{ animation: `menuFadeInUp 0.3s ease-out ${index * 50}ms both` }}
                   className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
                 >
                   {link.label}

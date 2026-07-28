@@ -1,5 +1,5 @@
 interface SectionHeaderProps {
-  overline: string
+  overline?: string
   title: string
   description?: string
   as?: "h1" | "h2"
@@ -15,10 +15,12 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={`text-center mb-12 ${className}`}>
-      <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
-        {overline}
-      </span>
-      <Tag className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-900 dark:text-neutral-900 leading-tight">
+      {overline && (
+        <span className="inline-block text-primary-700 dark:text-primary-500 font-accent tracking-[0.2em] text-sm uppercase">
+          {overline}
+        </span>
+      )}
+      <Tag className={`font-heading font-bold text-primary-900 dark:text-neutral-900 leading-tight ${overline ? "mt-3 text-3xl sm:text-4xl lg:text-5xl" : "text-3xl sm:text-4xl lg:text-5xl"}`}>
         {title}
       </Tag>
       {description && (
