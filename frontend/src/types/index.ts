@@ -48,3 +48,9 @@ export interface TeamMember {
   linkedin?: string
   github?: string
 }
+
+export interface FaqItem {
+  pregunta: string
+  respuesta: string
+  categoria?: string
+}

@@ -7,6 +7,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: var(--font-body);
+}
+
 @theme {
   --color-primary-900: #0A2E30;
   --color-primary-700: #0F4C4C;
@@ -22,8 +26,8 @@ html {
   --color-warning: #92620A;
   --color-error: #B3261E;
 
-  --font-heading: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: "Cormorant", serif;
+  --font-body: "Montserrat", sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
