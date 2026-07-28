@@ -47,6 +47,7 @@ export function PreguntasFrecuentes() {
           overline="FAQ"
           title="Preguntas frecuentes"
           description="Respuestas a las dudas más comunes sobre nuestros servicios y proceso de trabajo."
+          as="h1"
         />
 
         <div

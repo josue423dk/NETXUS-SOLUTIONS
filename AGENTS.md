@@ -85,9 +85,9 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | Token | Hex | Uso |
 |---|---|---|
 | `primary-900` | `#FF6B00` | Texto principal, navbar, footer |
-| `primary-700` | `#E8351A` | Botón primario, links, iconos activos |
+| `primary-700` | `#D45800` | Botón primario, links, iconos activos |
 | `primary-500` | `#FF8C00` | Hover/pressed sobre elementos 700 |
-| `accent-400` | `#FFB800` | Fondos de badges, gradiente hero, glow decorativo |
+| `accent-400` | `#FF8C00` | Fondos de badges, gradiente hero, glow decorativo |
 | `neutral-900` | `#FFFFFF` | Texto principal alternativo |
 | `neutral-700` | `#B0B7C3` | Texto secundario / párrafos largos |
 | `neutral-500` | `#666666` | Texto terciario, placeholders |
@@ -97,6 +97,28 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | `success` | `#4CAF50` | Confirmación de formulario |
 | `warning` | `#FF9800` | Validaciones, avisos |
 | `error` | `#EF5350` | Errores de formulario |
+
+### Tokens de logo y toggle — Tema claro
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--logo-gradient` | `linear-gradient(180deg, #0F4C4C, #1C7C7E, #2DD4BF)` | Icono X del logo |
+| `--logo-wordmark` | `#0A2E30` | Texto "MONR" y "UX" |
+| `--logo-x-gradient` | `linear-gradient(90deg, #1C7C7E, #2DD4BF)` | Letra "U" del logo |
+| `--toggle-bg-dark` | `#0A2E30` | Fondo toggle en modo oscuro |
+| `--toggle-bg-light` | `#1C7C7E` | Fondo toggle en modo claro |
+| `--toggle-icon` | `#0F4C4C` | Icono del toggle |
+
+### Tokens de logo y toggle — Tema oscuro
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--logo-gradient` | `linear-gradient(180deg, #FFD200, #FF8C00, #E8231A)` | Icono X del logo |
+| `--logo-wordmark` | `#FFFFFF` | Texto "MONR" y "UX" |
+| `--logo-x-gradient` | `linear-gradient(90deg, #FFD200, #FF8C00, #E8231A)` | Letra "U" del logo |
+| `--toggle-bg-dark` | `#FF6B00` | Fondo toggle en modo oscuro |
+| `--toggle-bg-light` | `#FF8C00` | Fondo toggle en modo claro |
+| `--toggle-icon` | `#D45800` | Icono del toggle |
 
 **Regla de accesibilidad (obligatoria):** en tema claro, texto sobre fondo blanco o `neutral-50` debe usar `primary-700` o más oscuro, o `neutral-700`/`neutral-900`. `accent-400` es solo decorativo/fondo. En tema oscuro, texto sobre fondo `neutral-50` (#000000) debe usar `neutral-900` (#FFFFFF) o `neutral-700` (#B0B7C3).
 

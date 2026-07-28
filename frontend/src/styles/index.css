@@ -126,9 +126,9 @@ body {
 
 [data-theme="dark"] {
   --color-primary-900: #FF6B00;
-  --color-primary-700: #E8351A;
+  --color-primary-700: #D45800;
   --color-primary-500: #FF8C00;
-  --color-accent-400: #FFB800;
+  --color-accent-400: #FF8C00;
   --color-neutral-900: #FFFFFF;
   --color-neutral-700: #B0B7C3;
   --color-neutral-500: #666666;
@@ -145,7 +145,7 @@ body {
 
   --toggle-bg-dark: #FF6B00;
   --toggle-bg-light: #FF8C00;
-  --toggle-icon: #E8351A;
+  --toggle-icon: #D45800;
 }
 
 .hero-obj-transition {
@@ -170,6 +170,11 @@ body {
 
 /* --- Base page section (normal flow) --- */
 .page-section {
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-section:has(.sec-active) {
   will-change: transform, opacity, filter;
 }
 

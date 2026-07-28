@@ -21,7 +21,7 @@ const socialIcons = [
     label: "WhatsApp",
     href: "https://wa.me/5491100000000",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
       </svg>
     ),
@@ -30,7 +30,7 @@ const socialIcons = [
     label: "Instagram",
     href: "https://instagram.com/monru.ux",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -41,7 +41,7 @@ const socialIcons = [
     label: "LinkedIn",
     href: "https://linkedin.com/company/monru-ux",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
         <rect x="2" y="9" width="4" height="12" />
         <circle cx="4" cy="4" r="2" />
@@ -52,7 +52,7 @@ const socialIcons = [
     label: "GitHub",
     href: "https://github.com/monru-ux",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
       </svg>
     ),
@@ -61,7 +61,7 @@ const socialIcons = [
     label: "Email",
     href: "mailto:contacto@monru.ux",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="2" y="4" width="20" height="16" rx="2" />
         <path d="M22 4l-10 8L2 4" />
       </svg>
@@ -108,7 +108,7 @@ export function Footer() {
             </p>
             <div className="mt-4">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-700/10 text-primary-700 text-xs font-accent border border-primary-700/20">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="M22 4l-10 8L2 4" />
                 </svg>
@@ -118,7 +118,7 @@ export function Footer() {
           </div>
 
           <div className="hidden lg:block lg:col-span-2">
-            <h3 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</h3>
+            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</h2>
             <ul className="space-y-2">
               {navLinks.map((l) => (
                 <li key={l.href}>
@@ -137,7 +137,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</h3>
+            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</h2>
             <ul className="space-y-2">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
@@ -150,7 +150,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</h3>
+            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</h2>
             <ul className="space-y-2">
               {legalLinks.map((l) => (
                 <li key={l.label}>
@@ -163,7 +163,7 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 lg:col-span-2">
-            <h3 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</h3>
+            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</h2>
             <p className="text-sm text-neutral-700 mb-3">
               Recibí novedades y contenido exclusivo.
             </p>

@@ -63,8 +63,10 @@ export function PricingSection() {
           {planes.map((plan) => (
             <button
               key={plan.id}
+              id={`tab-${plan.id}`}
               role="tab"
               aria-selected={activePlanId === plan.id}
+              aria-controls="tabpanel-plans"
               tabIndex={activePlanId === plan.id ? 0 : -1}
               onClick={() => setActivePlanId(plan.id)}
               className={`
@@ -86,7 +88,7 @@ export function PricingSection() {
         </div>
 
         {/* Card del plan seleccionado */}
-        <div className="max-w-lg mx-auto">
+        <div role="tabpanel" id="tabpanel-plans" aria-labelledby={`tab-${activePlan.id}`} className="max-w-lg mx-auto">
           <PricingCard plan={activePlan} key={activePlan.id} />
         </div>
 

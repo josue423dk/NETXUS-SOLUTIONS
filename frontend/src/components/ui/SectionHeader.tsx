@@ -10,7 +10,7 @@ export function SectionHeader({
   overline,
   title,
   description,
-  as: Tag = "h1",
+  as: Tag = "h2",
   className = "",
 }: SectionHeaderProps) {
   return (

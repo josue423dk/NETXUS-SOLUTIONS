@@ -1,14 +1,16 @@
-import { useEffect } from "react"
+import { useEffect, lazy, Suspense } from "react"
 import { useLocation } from "react-router-dom"
 import { PageTransitionWrapper } from "../components/sections/PageTransitionWrapper"
 import { useScrollPageTransition } from "../hooks/useScrollPageTransition"
-import { Cotizacion } from "./Cotizacion"
-import { Integrantes } from "./Integrantes"
-import { PreguntasFrecuentes } from "./PreguntasFrecuentes"
-import { QuienesSomos } from "./QuienesSomos"
 import { Hero } from "../components/sections/Hero"
 import { TrabajosGrid } from "../components/sections/TrabajosGrid"
-import { PricingSection } from "../components/sections/PricingSection"
+import { Spinner } from "../components/ui/Spinner"
+
+const Cotizacion = lazy(() => import("./Cotizacion").then((m) => ({ default: m.Cotizacion })))
+const Integrantes = lazy(() => import("./Integrantes").then((m) => ({ default: m.Integrantes })))
+const PreguntasFrecuentes = lazy(() => import("./PreguntasFrecuentes").then((m) => ({ default: m.PreguntasFrecuentes })))
+const QuienesSomos = lazy(() => import("./QuienesSomos").then((m) => ({ default: m.QuienesSomos })))
+const PricingSection = lazy(() => import("../components/sections/PricingSection").then((m) => ({ default: m.PricingSection })))
 
 const SECTION_IDS = [
   "hero",
@@ -92,7 +94,9 @@ export function Inicio() {
           ref={(el) => registerSection(2, el)}
           className="min-h-screen"
         >
-          <Cotizacion />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
+            <Cotizacion />
+          </Suspense>
         </div>
       </PageTransitionWrapper>
 
@@ -108,7 +112,9 @@ export function Inicio() {
           ref={(el) => registerSection(3, el)}
           className="min-h-screen"
         >
-          <PricingSection />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
+            <PricingSection />
+          </Suspense>
         </div>
       </PageTransitionWrapper>
 
@@ -124,7 +130,9 @@ export function Inicio() {
           ref={(el) => registerSection(4, el)}
           className="min-h-screen"
         >
-          <QuienesSomos />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
+            <QuienesSomos />
+          </Suspense>
         </div>
       </PageTransitionWrapper>
 
@@ -140,7 +148,9 @@ export function Inicio() {
           ref={(el) => registerSection(5, el)}
           className="min-h-screen"
         >
-          <Integrantes />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
+            <Integrantes />
+          </Suspense>
         </div>
       </PageTransitionWrapper>
 
@@ -156,7 +166,9 @@ export function Inicio() {
           ref={(el) => registerSection(6, el)}
           className="min-h-screen"
         >
-          <PreguntasFrecuentes />
+          <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
+            <PreguntasFrecuentes />
+          </Suspense>
         </div>
       </PageTransitionWrapper>
     </div>

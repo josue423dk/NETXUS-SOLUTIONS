@@ -11,6 +11,7 @@ export function QuienesSomos() {
             overline="Quiénes somos"
             title="Hacemos realidad tus ideas"
             description="En MONRU UX creemos que el software de calidad nace de equipos chicos, enfocados y con altos estándares técnicos. Trabajamos codo a codo con nuestros clientes para transformar conceptos en productos digitales escalables, seguros y con una experiencia de usuario cuidada al detalle."
+            as="h1"
           />
           <p className="mt-4 text-base sm:text-lg text-neutral-700 leading-relaxed max-w-2xl mx-auto">
             Nuestro enfoque combina craftsmanship en el código con diseño
@@ -59,12 +60,12 @@ export function QuienesSomos() {
               },
             ].map((item) => (
               <div key={item.paso}>
-                <span className="text-4xl font-heading font-bold text-accent-400/60">
+                <span className="text-4xl font-heading font-bold text-primary-700 dark:text-primary-500">
                   {item.paso}
                 </span>
-                <h3 className="mt-2 font-heading font-semibold text-primary-900">
+                <h2 className="mt-2 font-heading font-semibold text-primary-900">
                   {item.titulo}
-                </h3>
+                </h2>
                 <p className="mt-2 text-sm text-neutral-700 leading-relaxed">
                   {item.desc}
                 </p>

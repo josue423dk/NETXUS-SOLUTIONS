@@ -9,7 +9,7 @@ import { useActiveSection } from "../../hooks/useActiveSection"
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const toggleRef = useRef<HTMLButtonElement>(null)
+  const toggleButtonRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
   const hashIds = navLinks
     .filter((l) => l.href.startsWith("#"))
@@ -28,7 +28,10 @@ export function Navbar() {
   }, [open, handleEscape])
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      toggleButtonRef.current?.focus()
+      return
+    }
     const menu = menuRef.current
     if (!menu) return
     const focusable = menu.querySelectorAll<HTMLElement>(
@@ -52,7 +55,7 @@ export function Navbar() {
   }, [open])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md border-b border-neutral-300 transition-colors duration-500">
+    <nav aria-label="Navegación principal" className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md border-b border-neutral-300 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex-shrink-0">
@@ -100,43 +103,45 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <button
-              ref={toggleRef}
+              ref={toggleButtonRef}
               className="md:hidden text-neutral-900"
               onClick={() => setOpen(!open)}
               aria-expanded={open}
               aria-label={open ? "Cerrar menú" : "Abrir menú"}
             >
               {open ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
               ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <line x1="3" y1="12" x2="21" y2="12" />
-                  <line x1="3" y1="18" x2="21" y2="18" />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                  </svg>
               )}
             </button>
           </div>

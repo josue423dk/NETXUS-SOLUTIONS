@@ -13,6 +13,7 @@ export function Integrantes() {
           overline="Equipo"
           title="Conocé al equipo"
           description="Detrás de cada proyecto hay personas comprometidas con la calidad y la innovación."
+          as="h1"
           className="mb-14"
         />
 

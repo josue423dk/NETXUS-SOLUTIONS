@@ -9,6 +9,7 @@ export function Cotizacion() {
           overline="Cotización"
           title="Contanos sobre tu proyecto"
           description="Completá el formulario y nos pondremos en contacto para entender tus necesidades y preparar una propuesta personalizada."
+          as="h1"
         />
 
         <div className="rounded-md border border-neutral-300/50 shadow-md p-6 sm:p-8 bg-neutral-50">

@@ -42,12 +42,14 @@ export function Hero() {
   const [objectSrc, setObjectSrc] = useState(getInitialObj)
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < MOBILE_BREAKPOINT)
 
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const scrollProgressRef = useRef(0)
   const [scrollProgress, setScrollProgress] = useState(0)
+
+  const offsetRef = useRef({ x: 0, y: 0 })
+  const objElRef = useRef<HTMLDivElement>(null)
 
   const preloaded = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
-  const objRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
   const targetRef = useRef({ x: 0, y: 0 })
   const currentRef = useRef({ x: 0, y: 0 })
@@ -65,7 +67,9 @@ export function Hero() {
         requestAnimationFrame(() => {
           const y = window.scrollY
           const h = window.innerHeight
-          setScrollProgress(clamp(y / h, 0, 1))
+          const progress = clamp(y / h, 0, 1)
+          scrollProgressRef.current = progress
+          setScrollProgress(progress)
           ticking = false
         })
         ticking = true
@@ -112,11 +116,11 @@ export function Hero() {
 
   const handlePointer = useCallback((clientX: number, clientY: number) => {
     const section = sectionRef.current
-    const obj = objRef.current
-    if (!section || !obj) return
+    const objEl = objElRef.current
+    if (!section || !objEl) return
 
     const sectionRect = section.getBoundingClientRect()
-    const objRect = obj.getBoundingClientRect()
+    const objRect = objEl.getBoundingClientRect()
 
     const objCenterX = objRect.left + objRect.width / 2 - sectionRect.left
     const objCenterY = objRect.top + objRect.height / 2 - sectionRect.top
@@ -163,7 +167,11 @@ export function Hero() {
         Math.abs(targetRef.current.x - currentRef.current.x) > 0.05 ||
         Math.abs(targetRef.current.y - currentRef.current.y) > 0.05
       ) {
-        setOffset({ x: currentRef.current.x, y: currentRef.current.y })
+        offsetRef.current = { x: currentRef.current.x, y: currentRef.current.y }
+        if (objElRef.current) {
+          objElRef.current.style.transform = `translate(${currentRef.current.x}px, ${currentRef.current.y}px) scale(${1 - scrollProgressRef.current * 0.05})`
+          objElRef.current.style.opacity = String(1 - scrollProgressRef.current)
+        }
       }
 
       rafRef.current = requestAnimationFrame(animate)
@@ -192,12 +200,17 @@ export function Hero() {
         <img
           src={bgSrc}
           alt=""
+          width={1920}
+          height={1080}
+          fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover"
         />
         {nextBg && (
           <img
             src={nextBg}
             alt=""
+            width={1920}
+            height={1080}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               showNext ? "opacity-100" : "opacity-0"
             }`}
@@ -211,11 +224,12 @@ export function Hero() {
       />
 
         <div
-          ref={objRef}
-          className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px] will-change-transform"
+          ref={objElRef}
+          className="absolute z-20 animate-float right-[2%] top-[10%] w-[320px] sm:w-[420px] lg:w-[600px] max-md:right-2 max-md:top-16 max-md:w-[220px]"
           style={{
-            transform: `translate(${offset.x}px, ${offset.y}px) scale(${1 - scrollProgress * 0.05})`,
+            transform: `translate(${offsetRef.current.x}px, ${offsetRef.current.y}px) scale(${1 - scrollProgress * 0.05})`,
             opacity: 1 - scrollProgress,
+            willChange: "transform, opacity",
           }}
         >
           <div
@@ -227,8 +241,8 @@ export function Hero() {
             <img
               key={isDark ? "obj-dark" : "obj-light"}
               src={objectSrc}
-              alt="MONRU UX — objeto decorativo flotante"
-              loading="lazy"
+              alt=""
+              aria-hidden="true"
               className="w-full h-auto animate-fade-in"
             />
           </div>
@@ -281,6 +295,7 @@ export function Hero() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />

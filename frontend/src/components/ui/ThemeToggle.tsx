@@ -44,6 +44,7 @@ export function ThemeToggle() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
             style={{ color: "var(--toggle-icon)" }}
           >
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
@@ -59,6 +60,7 @@ export function ThemeToggle() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
             style={{ color: "var(--toggle-icon)" }}
           >
             <circle cx="12" cy="12" r="5" />
