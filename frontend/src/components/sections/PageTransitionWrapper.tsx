@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { useMediaQuery } from "../../hooks/use-media-query"
 
 interface PageTransitionWrapperProps {
   isActive: boolean
@@ -26,6 +27,12 @@ export function PageTransitionWrapper({
   className = "",
   children,
 }: PageTransitionWrapperProps) {
+  const isDesktop = useMediaQuery("(min-width: 768px)")
+
+  if (!isDesktop) {
+    return <div className={className}>{children}</div>
+  }
+
   const direction = getDirection(navDirection, scrollDirection)
   const isEntering = isNavigating && isActive
   const isExiting = isNavigating && !isActive

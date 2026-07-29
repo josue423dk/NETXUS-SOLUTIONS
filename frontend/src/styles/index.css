@@ -46,8 +46,14 @@
 @variant dark (&:is([data-theme="dark"] *));
 
 html {
-  scroll-padding-top: 4rem;
+  scroll-padding-top: 3.5rem;
   scroll-behavior: smooth;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 4rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

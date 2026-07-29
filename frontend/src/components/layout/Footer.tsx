@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { Mail } from "lucide-react"
 import { Logo } from "../ui/Logo"
 import { navLinks } from "../../data/navigation"
+import { TextHoverEffect, FooterBackgroundGradient } from "../ui/hover-footer"
 
 const serviceLinks = [
   { label: "Desarrollo Web", href: "/cotizacion" },
@@ -84,42 +86,30 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-neutral-300/50 bg-neutral-50/60 dark:bg-neutral-50/60 backdrop-blur-xl overflow-hidden">
-      <div className="absolute inset-x-0 top-0 bottom-28 lg:bottom-36 flex items-center justify-start overflow-hidden pointer-events-none select-none">
-        <span
-          className="footer-marquee text-[clamp(8rem,22vw,20rem)] font-heading font-bold leading-none whitespace-nowrap text-neutral-900/5 dark:text-neutral-900/5"
-          style={{ WebkitTextStroke: "1px rgba(128,128,128,0.08)" }}
-          aria-hidden="true"
-        >
-          <span>MONRU UX es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
-          <span>MONRU UX es una consultora de desarrollo de software enfocada en la creación de soluciones digitales de alto rendimiento.&nbsp;&nbsp;&nbsp;</span>
-        </span>
-      </div>
+    <footer className="relative bg-neutral-50 overflow-hidden">
+      <FooterBackgroundGradient />
 
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-900/[0.03] via-accent-400/[0.03] to-primary-500/[0.03] dark:from-primary-900/[0.05] dark:via-accent-400/[0.05] dark:to-primary-500/[0.05]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
-          <div className="col-span-2 lg:col-span-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 pb-10">
+          <div className="flex flex-col gap-4">
             <Logo />
-            <p className="hidden lg:block mt-3 text-sm text-neutral-700 leading-relaxed max-w-xs">
+            <p className="text-sm text-neutral-700 leading-relaxed">
               Transformamos ideas en soluciones digitales. Desarrollo de software a medida
               con tecnología de vanguardia.
             </p>
-            <div className="mt-4">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-700/10 text-primary-700 text-xs font-accent border border-primary-700/20">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M22 4l-10 8L2 4" />
-                </svg>
+            <div className="flex items-center gap-2 text-sm text-neutral-700">
+              <Mail size={16} className="text-primary-700 flex-shrink-0" />
+              <a href="mailto:contacto@monru.ux" className="hover:text-primary-700 transition-colors">
                 contacto@monru.ux
-              </span>
+              </a>
             </div>
           </div>
 
-          <div className="hidden lg:block lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</h2>
-            <ul className="space-y-2">
+          <div>
+            <h4 className="text-primary-900 text-sm font-heading font-semibold mb-4 uppercase tracking-wider">
+              Navegación
+            </h4>
+            <ul className="space-y-2.5">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   {l.href.startsWith("#") ? (
@@ -136,9 +126,11 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</h2>
-            <ul className="space-y-2">
+          <div>
+            <h4 className="text-primary-900 text-sm font-heading font-semibold mb-4 uppercase tracking-wider">
+              Servicios
+            </h4>
+            <ul className="space-y-2.5">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
                   <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
@@ -146,31 +138,31 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li className="pt-3">
+                <h5 className="text-primary-900 text-xs font-heading font-semibold mb-3 uppercase tracking-wider">
+                  Legal
+                </h5>
+                <ul className="space-y-2.5">
+                  {legalLinks.map((l) => (
+                    <li key={l.label}>
+                      <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</h2>
-            <ul className="space-y-2">
-              {legalLinks.map((l) => (
-                <li key={l.label}>
-                  <Link to={l.href} className="text-sm text-neutral-700 hover:text-primary-700 transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 lg:col-span-2">
-            <h2 className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</h2>
+          <div>
+            <h4 className="text-primary-900 text-sm font-heading font-semibold mb-4 uppercase tracking-wider">
+              Newsletter
+            </h4>
             <p className="text-sm text-neutral-700 mb-3">
               Recibí novedades y contenido exclusivo.
             </p>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-2"
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
               {subscribed ? (
                 <p className="text-sm text-success font-medium py-2.5">
                   ¡Gracias por suscribirte!
@@ -178,14 +170,7 @@ export function Footer() {
               ) : (
                 <>
                   <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" tabIndex={-1}>
-                    <input
-                      type="text"
-                      name="website"
-                      value={honeypot}
-                      onChange={(e) => setHoneypot(e.target.value)}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
+                    <input type="text" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
                   </div>
                   <input
                     type="email"
@@ -208,7 +193,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-neutral-300/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <hr className="border-neutral-300/50 my-6" />
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-neutral-500">
             &copy; {new Date().getFullYear()} MONRU UX. Todos los derechos reservados.
           </p>
@@ -226,6 +213,10 @@ export function Footer() {
               </a>
             ))}
           </div>
+        </div>
+
+        <div className="hidden lg:flex h-[30rem] -mt-52 -mb-36 justify-center">
+          <TextHoverEffect text="MONRU UX" className="z-50" />
         </div>
       </div>
     </footer>

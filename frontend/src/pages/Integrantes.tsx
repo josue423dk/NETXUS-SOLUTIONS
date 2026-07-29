@@ -7,7 +7,7 @@ export function Integrantes() {
   const { ref, isVisible } = useScrollReveal()
 
   return (
-    <section className="py-24 sm:py-28 px-4">
+    <section className="py-16 md:py-24 sm:py-28 px-4">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           overline="Equipo"
@@ -19,12 +19,14 @@ export function Integrantes() {
 
         <div
           ref={ref}
-          className={`grid sm:grid-cols-2 gap-8 transition-all duration-700 ease-out ${
+          className={`flex flex-wrap justify-center gap-6 md:gap-8 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
           {equipo.map((miembro, index) => (
-            <TeamCard key={miembro.nombre} member={miembro} index={index} />
+            <div key={miembro.nombre} className="w-full sm:w-auto sm:flex-1 sm:min-w-72 lg:min-w-80">
+              <TeamCard member={miembro} index={index} />
+            </div>
           ))}
         </div>
       </div>

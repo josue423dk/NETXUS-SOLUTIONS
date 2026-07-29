@@ -60,7 +60,7 @@ export function Inicio() {
         <div
           id="hero"
           ref={(el) => registerSection(0, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Hero />
         </div>
@@ -76,7 +76,7 @@ export function Inicio() {
         <div
           id="trabajos"
           ref={(el) => registerSection(1, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <TrabajosGrid />
         </div>
@@ -92,7 +92,7 @@ export function Inicio() {
         <div
           id="cotizacion"
           ref={(el) => registerSection(2, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <Cotizacion />
@@ -110,7 +110,7 @@ export function Inicio() {
         <div
           id="planes"
           ref={(el) => registerSection(3, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <PricingSection />
@@ -128,7 +128,7 @@ export function Inicio() {
         <div
           id="quienes-somos"
           ref={(el) => registerSection(4, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <QuienesSomos />
@@ -146,7 +146,7 @@ export function Inicio() {
         <div
           id="integrantes"
           ref={(el) => registerSection(5, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <Integrantes />
@@ -164,7 +164,7 @@ export function Inicio() {
         <div
           id="preguntas-frecuentes"
           ref={(el) => registerSection(6, el)}
-          className="min-h-screen"
+          className="min-h-0 md:min-h-screen"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <PreguntasFrecuentes />

@@ -13,7 +13,7 @@ export function TeamCard({ member, index }: TeamCardProps) {
     <div
       ref={ref}
       className={`
-        group rounded-md overflow-hidden
+        group rounded-md overflow-hidden w-full
         bg-neutral-50 dark:bg-neutral-100
         border border-neutral-300/50
         shadow-md hover:shadow-lg
@@ -24,18 +24,26 @@ export function TeamCard({ member, index }: TeamCardProps) {
     >
       <div className="p-6 sm:p-8">
         <div className="flex items-start gap-5">
-          <div className="shrink-0 w-20 h-20 rounded-full bg-primary-700/10 dark:bg-accent-400/15 border-2 border-accent-400/30 dark:border-primary-500/30 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-primary-700 dark:text-primary-500"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              aria-hidden="true"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+          <div className="shrink-0 w-20 h-20 rounded-full bg-primary-700/10 dark:bg-accent-400/15 border-2 border-accent-400/30 dark:border-primary-500/30 overflow-hidden">
+            {member.imagen ? (
+              <img
+                src={member.imagen}
+                alt={member.nombre}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <svg
+                className="w-10 h-10 text-primary-700 dark:text-primary-500 mx-auto mt-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            )}
           </div>
 
           <div className="min-w-0">

@@ -45,6 +45,7 @@ export interface TeamMember {
   nombre: string
   rol: string
   descripcion: string
+  imagen?: string
   linkedin?: string
   github?: string
 }
