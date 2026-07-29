@@ -19,12 +19,6 @@ export function PricingCard({ plan }: PricingCardProps) {
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
       `}
     >
-      {plan.badge && (
-        <div className="bg-accent-400 dark:bg-primary-500 text-primary-900 dark:text-white text-center py-2 text-sm font-semibold tracking-wide">
-          {plan.badge}
-        </div>
-      )}
-
       <div className="p-6 sm:p-8">
         <h3 className="font-heading font-semibold text-xl text-primary-900 dark:text-neutral-900">
           {plan.nombre}

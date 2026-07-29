@@ -18,6 +18,8 @@ export function useScrollPageTransition({
   const scrollYRef = useRef(0)
   const sectionRefs = useRef<(HTMLElement | null)[]>([])
   const isNavigatingRef = useRef(false)
+  const activeIndexRef = useRef(0)
+  const navigatingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const registerSection = useCallback(
     (index: number, el: HTMLElement | null) => {
@@ -30,7 +32,7 @@ export function useScrollPageTransition({
     (index: number) => {
       if (index < 0 || index >= sectionIds.length) return
 
-      const dir = index > activeIndex ? "down" : "up"
+      const dir = index > activeIndexRef.current ? "down" : "up"
       setNavDirection(dir)
       setNavigating(true)
       isNavigatingRef.current = true
@@ -40,14 +42,26 @@ export function useScrollPageTransition({
         el.scrollIntoView({ behavior: "smooth" })
       }
 
-      setTimeout(() => {
+      if (navigatingTimeoutRef.current) {
+        clearTimeout(navigatingTimeoutRef.current)
+      }
+      navigatingTimeoutRef.current = setTimeout(() => {
         setNavigating(false)
         setNavDirection(null)
         isNavigatingRef.current = false
+        navigatingTimeoutRef.current = null
       }, 650)
     },
-    [sectionIds.length, activeIndex]
+    [sectionIds.length]
   )
+
+  useEffect(() => {
+    return () => {
+      if (navigatingTimeoutRef.current) {
+        clearTimeout(navigatingTimeoutRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const tickingRef = { current: false }
@@ -84,7 +98,8 @@ export function useScrollPageTransition({
           )
           const id = sorted[0].target.id
           const newIndex = sectionIds.indexOf(id)
-          if (newIndex >= 0 && newIndex !== activeIndex && !isNavigatingRef.current) {
+          if (newIndex >= 0 && newIndex !== activeIndexRef.current && !isNavigatingRef.current) {
+            activeIndexRef.current = newIndex
             setActiveIndex(newIndex)
           }
         }
@@ -94,7 +109,7 @@ export function useScrollPageTransition({
 
     elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [sectionIds, activeIndex])
+  }, [sectionIds])
 
   return {
     activeIndex,

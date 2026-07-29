@@ -1,10 +1,66 @@
-@import "tailwindcss";
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap") layer(fonts);
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap") layer(fonts);
+
+@import "tailwindcss" layer(utilities);
+
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("../assets/fonts/ClashDisplay_Complete/Fonts/WEB/fonts/ClashDisplay-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neco";
+  src: url("../assets/fonts/Neco_Complete/Fonts/WEB/fonts/Neco-Variable.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neco";
+  src: url("../assets/fonts/Neco_Complete/Fonts/WEB/fonts/Neco-VariableItalic.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/Switzer_Complete/Fonts/WEB/fonts/Switzer-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/Switzer_Complete/Fonts/WEB/fonts/Switzer-VariableItalic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 @variant dark (&:is([data-theme="dark"] *));
 
 html {
   scroll-padding-top: 4rem;
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
 }
 
 @theme {
@@ -22,8 +78,9 @@ html {
   --color-warning: #92620A;
   --color-error: #B3261E;
 
-  --font-heading: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: "Cabinet Grotesk", sans-serif;
+  --font-body: "General Sans", sans-serif;
+  --font-accent: "ClashDisplay", sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -72,9 +129,9 @@ html {
 
 [data-theme="dark"] {
   --color-primary-900: #FF6B00;
-  --color-primary-700: #E8351A;
+  --color-primary-700: #D45800;
   --color-primary-500: #FF8C00;
-  --color-accent-400: #FFB800;
+  --color-accent-400: #FF8C00;
   --color-neutral-900: #FFFFFF;
   --color-neutral-700: #B0B7C3;
   --color-neutral-500: #666666;
@@ -91,7 +148,7 @@ html {
 
   --toggle-bg-dark: #FF6B00;
   --toggle-bg-light: #FF8C00;
-  --toggle-icon: #E8351A;
+  --toggle-icon: #D45800;
 }
 
 .hero-obj-transition {
@@ -116,6 +173,11 @@ html {
 
 /* --- Base page section (normal flow) --- */
 .page-section {
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-section:has(.sec-active) {
   will-change: transform, opacity, filter;
 }
 

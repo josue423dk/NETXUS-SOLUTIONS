@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
-import { ErrorBoundary } from "../ui/ErrorBoundary"
 
 const PAGE_TRANSITION_MS = 600
 
@@ -25,15 +24,16 @@ export function Layout() {
 
   return (
     <div className="min-h-screen bg-neutral-50 text-neutral-900">
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <main
+        id="main-content"
         className={
           isTransitioning ? "page-transitioning-route" : "page-visible"
         }
       >
-        <ErrorBoundary>
-          <Outlet />
-        </ErrorBoundary>
+        <Outlet />
       </main>
       <Footer />
     </div>

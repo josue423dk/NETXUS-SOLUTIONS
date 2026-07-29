@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { z } from "zod"
+import { api } from "../../lib/api"
 
 const contactSchema = z.object({
   nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -20,6 +21,7 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactData, string>>>({})
   const [status, setStatus] = useState<FormStatus>("idle")
   const [serverError, setServerError] = useState("")
+  const statusRef = useRef<HTMLDivElement>(null)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -51,17 +53,7 @@ export function ContactForm() {
     setErrors({})
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(result.data),
-        }
-      )
-
-      if (!res.ok) throw new Error("Error al enviar el mensaje")
-
+      await api.post("/contact", result.data)
       setStatus("success")
       setForm({ nombre: "", email: "", mensaje: "" })
     } catch {
@@ -72,9 +64,9 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12" role="status" aria-live="polite">
         <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg className="w-8 h-8 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
             <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
@@ -91,6 +83,14 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <div ref={statusRef} aria-live="assertive" aria-atomic="true">
+        {status === "error" && serverError && (
+          <div className="p-3 rounded-lg bg-error/10 border border-error/20" role="alert">
+            <p className="text-sm text-error">{serverError}</p>
+          </div>
+        )}
+      </div>
+
       <div>
         <label htmlFor="nombre" className="block text-sm font-medium text-neutral-700 mb-1">
           Nombre
@@ -101,7 +101,9 @@ export function ContactForm() {
           type="text"
           value={form.nombre}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
+          aria-invalid={!!errors.nombre}
+          aria-describedby={errors.nombre ? "nombre-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
             errors.nombre
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -109,7 +111,7 @@ export function ContactForm() {
           placeholder="Tu nombre"
         />
         {errors.nombre && (
-          <p className="mt-1 text-xs text-error">{errors.nombre}</p>
+          <p id="nombre-error" className="mt-1 text-xs text-error">{errors.nombre}</p>
         )}
       </div>
 
@@ -123,7 +125,9 @@ export function ContactForm() {
           type="email"
           value={form.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 ${
             errors.email
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -131,7 +135,7 @@ export function ContactForm() {
           placeholder="tu@email.com"
         />
         {errors.email && (
-          <p className="mt-1 text-xs text-error">{errors.email}</p>
+          <p id="email-error" className="mt-1 text-xs text-error">{errors.email}</p>
         )}
       </div>
 
@@ -145,7 +149,9 @@ export function ContactForm() {
           rows={4}
           value={form.mensaje}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 resize-y ${
+          aria-invalid={!!errors.mensaje}
+          aria-describedby={errors.mensaje ? "mensaje-error" : undefined}
+          className={`w-full px-4 py-3 rounded-lg border text-sm bg-neutral-50 dark:bg-neutral-100 text-neutral-900 dark:text-neutral-900 placeholder-neutral-500 transition-all focus:outline-none focus:ring-2 resize-y ${
             errors.mensaje
               ? "border-error focus:ring-error/30"
               : "border-neutral-300 focus:ring-primary-700/30 focus:border-primary-700"
@@ -153,15 +159,9 @@ export function ContactForm() {
           placeholder="Contanos sobre tu proyecto..."
         />
         {errors.mensaje && (
-          <p className="mt-1 text-xs text-error">{errors.mensaje}</p>
+          <p id="mensaje-error" className="mt-1 text-xs text-error">{errors.mensaje}</p>
         )}
       </div>
-
-      {status === "error" && serverError && (
-        <div className="p-3 rounded-lg bg-error/10 border border-error/20">
-          <p className="text-sm text-error">{serverError}</p>
-        </div>
-      )}
 
       <button
         type="submit"
