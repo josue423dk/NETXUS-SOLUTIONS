@@ -31,7 +31,7 @@ export function PricingSection() {
   )
 
   return (
-    <section className="py-16 sm:py-20 lg:py-28 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4 sm:mx-6 lg:mx-8">
+    <section className="py-16 sm:py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={headerRef}
@@ -74,7 +74,7 @@ export function PricingSection() {
                 ${
                   activePlanId === plan.id
                     ? "bg-primary-700 text-white shadow-md"
-                    : "bg-neutral-100 dark:bg-neutral-100 text-neutral-700 dark:text-neutral-700 hover:bg-neutral-300/50 dark:hover:bg-neutral-300/50 border border-neutral-300/50"
+                    : "bg-neutral-50 dark:bg-neutral-100 text-neutral-500 dark:text-neutral-500 hover:bg-neutral-300/30 dark:hover:bg-neutral-300/50 border border-neutral-300/50 dark:border-neutral-300/50"
                 }
               `}
             >
@@ -100,7 +100,7 @@ export function PricingSection() {
             ${tableVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
           `}
         >
-          <h3 className="text-center text-xl sm:text-2xl font-heading font-semibold text-primary-900 dark:text-neutral-900 mb-8">
+          <h3 className="text-center text-xl sm:text-2xl font-heading font-semibold text-primary-700 dark:text-neutral-900 mb-8 text-shadow">
             Comparar todos los planes
           </h3>
 

@@ -78,12 +78,12 @@ Los CSS tokens se definen en `frontend/src/styles/index.css` vía `@theme` de Ta
 | `primary-700` | `#0F4C4C` | Botón primario, links, iconos activos |
 | `primary-500` | `#1C7C7E` | Hover/pressed sobre elementos 700 |
 | `accent-400` | `#2DD4BF` | Fondos de badges, gradiente hero, glow decorativo |
-| `neutral-900` | `#16211F` | Texto principal alternativo |
-| `neutral-700` | `#435151` | Texto secundario / párrafos largos |
-| `neutral-500` | `#77898A` | Texto terciario, placeholders |
-| `neutral-300` | `#C7D3D3` | Bordes, separadores |
-| `neutral-100` | `#ECF1F1` | Fondos alternos de sección |
-| `neutral-50`  | `#F7FAFA` | Fondo de página |
+| `neutral-900` | `#1E2828` | Texto principal alternativo |
+| `neutral-700` | `#505559` | Texto secundario / párrafos largos |
+| `neutral-500` | `#7A8585` | Texto terciario, placeholders |
+| `neutral-300` | `#C8D0D0` | Bordes, separadores |
+| `neutral-100` | `#EDF0F0` | Fondos alternos de sección |
+| `neutral-50`  | `#F8F9F9` | Fondo de página |
 | `success` | `#1E8E5A` | Confirmación de formulario |
 | `warning` | `#92620A` | Validaciones, avisos |
 | `error` | `#B3261E` | Errores de formulario |

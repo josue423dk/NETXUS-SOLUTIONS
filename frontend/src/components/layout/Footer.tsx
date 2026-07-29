@@ -85,7 +85,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-neutral-300/50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md overflow-hidden">
+    <footer className="relative border-t border-neutral-300/50 bg-neutral-50/70 dark:bg-neutral-50/70 overflow-hidden">
       <div className="absolute inset-x-0 top-0 bottom-28 lg:bottom-36 flex items-center justify-start overflow-hidden pointer-events-none select-none">
         <span
           className="footer-marquee text-[clamp(8rem,22vw,20rem)] font-heading font-bold leading-none whitespace-nowrap text-neutral-900/5 dark:text-neutral-900/5"
@@ -103,7 +103,7 @@ export function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           <div className="col-span-2 lg:col-span-4">
             <Logo />
-            <p className="hidden lg:block mt-3 text-sm text-neutral-700 leading-relaxed max-w-xs">
+            <p className="hidden lg:block mt-3 text-sm text-neutral-500 dark:text-neutral-700 leading-relaxed max-w-xs">
               Transformamos ideas en soluciones digitales. Desarrollo de software a medida
               con tecnología de vanguardia.
             </p>
@@ -119,7 +119,7 @@ export function Footer() {
           </div>
 
           <div className="hidden lg:block lg:col-span-2">
-            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Navegación</p>
+            <h2 className="text-xs font-heading font-semibold text-primary-700 dark:text-primary-900 mb-3 tracking-wider uppercase">Navegación</h2>
             <ul className="space-y-2">
               {navLinks.map((l) => (
                 <li key={l.href}>
@@ -138,7 +138,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Servicios</p>
+            <h2 className="text-xs font-heading font-semibold text-primary-700 dark:text-primary-900 mb-3 tracking-wider uppercase">Servicios</h2>
             <ul className="space-y-2">
               {serviceLinks.map((l) => (
                 <li key={l.label}>
@@ -151,7 +151,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Legal</p>
+            <h2 className="text-xs font-heading font-semibold text-primary-700 dark:text-primary-900 mb-3 tracking-wider uppercase">Legal</h2>
             <ul className="space-y-2">
               {legalLinks.map((l) => (
                 <li key={l.label}>
@@ -164,8 +164,8 @@ export function Footer() {
           </div>
 
           <div className="col-span-2 lg:col-span-2">
-            <p className="text-xs font-heading font-semibold text-primary-900 mb-3 tracking-wider uppercase">Newsletter</p>
-            <p className="text-sm text-neutral-700 mb-3">
+            <h2 className="text-xs font-heading font-semibold text-primary-700 dark:text-primary-900 mb-3 tracking-wider uppercase">Newsletter</h2>
+            <p className="text-sm text-neutral-500 dark:text-neutral-700 mb-3">
               Recibí novedades y contenido exclusivo.
             </p>
             <form
@@ -188,18 +188,19 @@ export function Footer() {
                       autoComplete="off"
                     />
                   </div>
+                  <label htmlFor="newsletter-email" className="sr-only">Correo electrónico</label>
                   <input
+                    id="newsletter-email"
                     type="email"
                     placeholder="tu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    aria-label="Tu correo electrónico"
-                    className="w-full px-4 py-2.5 text-sm rounded-lg bg-neutral-100 border border-neutral-300 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-700/30 focus:border-primary-700 transition-all"
+                    className="w-full px-4 py-2.5 text-sm rounded-sm bg-neutral-100 border border-neutral-300 text-neutral-900 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-700/30 focus:border-primary-700 transition-all"
                   />
                   <button
                     type="submit"
-                    className="w-full px-4 py-2.5 text-sm font-semibold rounded-lg bg-primary-700 text-white hover:bg-primary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700/50"
+                    className="w-full px-4 py-2.5 text-sm font-semibold rounded-sm bg-primary-700 text-white hover:bg-primary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700/50"
                   >
                     Suscribir
                   </button>
@@ -210,7 +211,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-neutral-300/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-700">
+          <p className="text-xs text-neutral-500 dark:text-neutral-700">
             &copy; {new Date().getFullYear()} MONRU UX. Todos los derechos reservados.
           </p>
           <div className="flex gap-2.5">

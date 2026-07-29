@@ -4,7 +4,10 @@ function getInitialTheme(): boolean {
   if (typeof document === "undefined") return true
   const saved = localStorage.getItem("theme")
   if (saved) return saved === "dark"
-  return document.documentElement.getAttribute("data-theme") !== "light"
+  const attr = document.documentElement.getAttribute("data-theme")
+  if (attr === "light") return false
+  if (attr === "dark") return true
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
 }
 
 export function useTheme(): { isDark: boolean } {

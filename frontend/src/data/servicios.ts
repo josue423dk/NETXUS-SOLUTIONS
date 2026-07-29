@@ -1,9 +1,4 @@
-export interface Service {
-  titulo: string
-  descripcion: string
-  icono: "web" | "mobile" | "sistema" | "consultoria"
-  destacado?: boolean
-}
+import type { Service } from "../types"
 
 export const servicios: Service[] = [
   {

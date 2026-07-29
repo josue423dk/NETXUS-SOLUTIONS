@@ -1,3 +1,12 @@
+export interface Service {
+  titulo: string
+  descripcion: string
+  icono: "web" | "mobile" | "sistema" | "consultoria"
+  destacado?: boolean
+}
+
+export type FeatureMatrix = Record<string, [boolean, boolean, boolean]>
+
 export interface NavItem {
   label: string
   href: string

@@ -6,23 +6,31 @@ interface UseScrollRevealOptions {
 
 export function useScrollReveal(options?: UseScrollRevealOptions) {
   const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  const [isVisible, setIsVisible] = useState(prefersReducedMotion)
+  const threshold = options?.threshold ?? 0.1
 
   useEffect(() => {
+    if (prefersReducedMotion) return
     if (typeof IntersectionObserver === "undefined") return
     const el = ref.current
     if (!el) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible((prev) => prev || entry.isIntersecting)
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(el)
+        }
       },
-      { threshold: options?.threshold ?? 0.1 }
+      { threshold, rootMargin: "0px 0px -10% 0px" }
     )
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [options?.threshold])
+  }, [threshold, prefersReducedMotion])
 
   return { ref, isVisible }
 }

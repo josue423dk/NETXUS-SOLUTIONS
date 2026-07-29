@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 import { faqs } from "../data/faqs"
 import { AccordionItem } from "../components/ui/AccordionItem"
@@ -8,51 +8,59 @@ export function PreguntasFrecuentes() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const { ref, isVisible } = useScrollReveal()
 
-  const handleKeyNavigation = useCallback(
-    (direction: "up" | "down" | "home" | "end") => {
-      const total = faqs.length
-      if (total === 0) return
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const target = e.target as HTMLElement
+    const button = target.closest('button[id^="faq-question-"]')
+    if (!button) return
 
-      let nextIndex: number
+    const currentIndex = parseInt(button.id.replace("faq-question-", ""))
+    const total = faqs.length
+    if (total === 0) return
 
-      switch (direction) {
-        case "down":
-          nextIndex = openIndex === null ? 0 : (openIndex + 1) % total
-          break
-        case "up":
-          nextIndex = openIndex === null ? total - 1 : (openIndex - 1 + total) % total
-          break
-        case "home":
-          nextIndex = 0
-          break
-        case "end":
-          nextIndex = total - 1
-          break
-      }
+    let nextIndex: number
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault()
+        nextIndex = (currentIndex + 1) % total
+        break
+      case "ArrowUp":
+        e.preventDefault()
+        nextIndex = (currentIndex - 1 + total) % total
+        break
+      case "Home":
+        e.preventDefault()
+        nextIndex = 0
+        break
+      case "End":
+        e.preventDefault()
+        nextIndex = total - 1
+        break
+      default:
+        return
+    }
 
-      setOpenIndex(nextIndex)
+    setOpenIndex(nextIndex)
 
-      requestAnimationFrame(() => {
-        const button = document.getElementById(`faq-question-${nextIndex}`)
-        button?.focus()
-      })
-    },
-    [openIndex]
-  )
+    requestAnimationFrame(() => {
+      document.getElementById(`faq-question-${nextIndex}`)?.focus()
+    })
+  }
 
   return (
-    <section className="py-24 sm:py-28 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
+    <section className="py-24 sm:py-28 px-4">
       <div className="max-w-3xl mx-auto">
         <SectionHeader
           overline="FAQ"
           title="Preguntas frecuentes"
           description="Respuestas a las dudas más comunes sobre nuestros servicios y proceso de trabajo."
           as="h1"
+          className="text-shadow"
         />
 
         <div
           ref={ref}
-          className={`rounded-md border border-neutral-300/50 dark:border-neutral-300/30 shadow-md px-6 bg-neutral-100/50 dark:bg-neutral-100/80 backdrop-blur-xl transition-all duration-700 ease-out ${
+          onKeyDown={handleKeyDown}
+          className={`rounded-md border border-neutral-300/50 dark:border-neutral-300/30 shadow-md px-6 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           role="region"
@@ -60,13 +68,12 @@ export function PreguntasFrecuentes() {
         >
           {faqs.map((faq, i) => (
             <AccordionItem
-              key={i}
+              key={faq.pregunta}
               pregunta={faq.pregunta}
               respuesta={faq.respuesta}
               index={i}
               abierto={openIndex === i}
               onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-              onKeyNavigation={handleKeyNavigation}
             />
           ))}
         </div>

@@ -7,14 +7,14 @@ export function Integrantes() {
   const { ref, isVisible } = useScrollReveal()
 
   return (
-    <section className="py-24 sm:py-28 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
+    <section className="py-24 sm:py-28 px-4">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           overline="Equipo"
           title="Conocé al equipo"
           description="Detrás de cada proyecto hay personas comprometidas con la calidad y la innovación."
           as="h1"
-          className="mb-14"
+          className="mb-14 text-shadow"
         />
 
         <div

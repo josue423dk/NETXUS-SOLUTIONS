@@ -1,4 +1,5 @@
 import type { Plan } from "../types"
+import type { FeatureMatrix } from "../types"
 
 export const planes: Plan[] = [
   {
@@ -87,7 +88,7 @@ export const featureLabels = [
   "Monitoreo de uptime",
 ]
 
-export const featureMatrix: Record<string, [boolean, boolean, boolean]> = {
+export const featureMatrix: FeatureMatrix = {
   "Tipo de proyecto": [true, true, true],
   "Diseño responsive": [true, true, true],
   SEO: [true, true, true],

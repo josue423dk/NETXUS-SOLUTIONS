@@ -21,6 +21,7 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactData, string>>>({})
   const [status, setStatus] = useState<FormStatus>("idle")
   const [serverError, setServerError] = useState("")
+  const [honeypot, setHoneypot] = useState("")
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,6 +35,7 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot) return
     setStatus("loading")
     setServerError("")
 
@@ -70,10 +72,10 @@ export function ContactForm() {
             <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
         </div>
-        <h3 className="text-xl font-heading font-semibold text-primary-900 mb-2">
+        <h3 className="text-xl font-heading font-semibold text-primary-700 dark:text-primary-900 mb-2">
           Mensaje enviado
         </h3>
-        <p className="text-neutral-700">
+        <p className="text-neutral-500 dark:text-neutral-700">
           Gracias por contactarnos. Te responderemos a la brevedad.
         </p>
       </div>
@@ -82,6 +84,17 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" tabIndex={-1}>
+        <input
+          type="text"
+          name="website"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div aria-live="assertive" aria-atomic="true">
         {status === "error" && serverError && (
           <div className="p-3 rounded-lg bg-error/10 border border-error/20" role="alert">
@@ -165,7 +178,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full py-3 px-6 rounded-lg bg-primary-700 text-white font-semibold text-sm hover:bg-primary-500 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-700/50 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+        className="w-full py-3 px-6 rounded-lg bg-primary-700 text-white font-semibold text-sm hover:bg-primary-500 active:scale-[0.98] will-change-transform transition-all focus:outline-none focus:ring-2 focus:ring-primary-700/50 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
       >
         {status === "loading" ? (
           <>

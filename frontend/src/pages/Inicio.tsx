@@ -2,8 +2,6 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { PageTransitionWrapper } from "../components/sections/PageTransitionWrapper"
 import { useScrollPageTransition } from "../hooks/useScrollPageTransition"
-import { PersistentBackground } from "../components/sections/PersistentBackground"
-import { FloatingRobot } from "../components/sections/FloatingRobot"
 import { Hero } from "../components/sections/Hero"
 import { TrabajosGrid } from "../components/sections/TrabajosGrid"
 import { Spinner } from "../components/ui/Spinner"
@@ -36,7 +34,7 @@ export function Inicio() {
     scrollToSection,
     registerSection,
   } = useScrollPageTransition({
-    sectionIds: SECTION_IDS as unknown as string[],
+    sectionIds: [...SECTION_IDS],
   })
 
   useEffect(() => {
@@ -53,9 +51,6 @@ export function Inicio() {
 
   return (
     <div>
-      <PersistentBackground />
-      <FloatingRobot />
-
       <PageTransitionWrapper
         isActive={activeIndex === 0}
         isNavigating={navigating}
@@ -66,7 +61,7 @@ export function Inicio() {
         <div
           id="hero"
           ref={(el) => registerSection(0, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Hero />
         </div>
@@ -82,7 +77,7 @@ export function Inicio() {
         <div
           id="trabajos"
           ref={(el) => registerSection(1, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <TrabajosGrid />
         </div>
@@ -98,7 +93,7 @@ export function Inicio() {
         <div
           id="cotizacion"
           ref={(el) => registerSection(2, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <Cotizacion />
@@ -116,7 +111,7 @@ export function Inicio() {
         <div
           id="planes"
           ref={(el) => registerSection(3, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <PricingSection />
@@ -134,7 +129,7 @@ export function Inicio() {
         <div
           id="quienes-somos"
           ref={(el) => registerSection(4, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <QuienesSomos />
@@ -152,7 +147,7 @@ export function Inicio() {
         <div
           id="integrantes"
           ref={(el) => registerSection(5, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <Integrantes />
@@ -170,7 +165,7 @@ export function Inicio() {
         <div
           id="preguntas-frecuentes"
           ref={(el) => registerSection(6, el)}
-          className="min-h-screen"
+          className="min-h-[100dvh]"
         >
           <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>}>
             <PreguntasFrecuentes />

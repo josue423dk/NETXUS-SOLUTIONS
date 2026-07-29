@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 
 interface AccordionItemProps {
   pregunta: string
@@ -6,7 +6,6 @@ interface AccordionItemProps {
   index: number
   abierto: boolean
   onToggle: () => void
-  onKeyNavigation: (direction: "up" | "down" | "home" | "end") => void
 }
 
 export function AccordionItem({
@@ -15,37 +14,8 @@ export function AccordionItem({
   index,
   abierto,
   onToggle,
-  onKeyNavigation,
 }: AccordionItemProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target !== buttonRef.current) return
-
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault()
-          onKeyNavigation("down")
-          break
-        case "ArrowUp":
-          e.preventDefault()
-          onKeyNavigation("up")
-          break
-        case "Home":
-          e.preventDefault()
-          onKeyNavigation("home")
-          break
-        case "End":
-          e.preventDefault()
-          onKeyNavigation("end")
-          break
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [onKeyNavigation])
 
   const questionId = `faq-question-${index}`
   const answerId = `faq-answer-${index}`
@@ -56,13 +26,13 @@ export function AccordionItem({
         <button
           ref={buttonRef}
           onClick={onToggle}
-          className="w-full flex items-center justify-between py-5 text-left hover:bg-neutral-300/10 dark:hover:bg-neutral-300/10 transition-colors duration-200 -mx-1 px-1 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-700/50 dark:focus-visible:ring-primary-500/50"
+          className="w-full flex items-center justify-between py-6 text-left hover:bg-neutral-300/10 dark:hover:bg-neutral-300/10 transition-colors duration-200 -mx-1 px-1 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-700/50 dark:focus-visible:ring-primary-500/50"
           aria-expanded={abierto}
           aria-controls={answerId}
           id={questionId}
           tabIndex={0}
         >
-          <span className="font-heading font-medium text-primary-900 dark:text-neutral-900 pr-4">
+          <span className="font-heading font-medium text-primary-700 dark:text-neutral-900 pr-4">
             {pregunta}
           </span>
           <svg
@@ -89,11 +59,11 @@ export function AccordionItem({
       >
         <div className="overflow-hidden min-h-0">
           <div
-            className={`px-1 pb-5 transition-opacity duration-300 ease-out ${
+            className={`px-1 pb-6 transition-opacity duration-300 ease-out ${
               abierto ? "opacity-100" : "opacity-0"
             }`}
           >
-            <p className="text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed">
+            <p className="text-sm text-neutral-500 dark:text-neutral-700 leading-relaxed">
               {respuesta}
             </p>
           </div>

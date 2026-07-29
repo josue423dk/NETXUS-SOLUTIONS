@@ -39,10 +39,10 @@ export function TeamCard({ member, index }: TeamCardProps) {
           </div>
 
           <div className="min-w-0">
-            <h3 className="font-heading font-semibold text-xl text-primary-900 dark:text-neutral-900 leading-snug">
+            <h3 className="font-heading font-semibold text-xl text-primary-700 dark:text-neutral-900 leading-snug">
               {member.nombre}
             </h3>
-            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-500 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
               {member.rol}
             </p>
           </div>

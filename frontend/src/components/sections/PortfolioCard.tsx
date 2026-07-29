@@ -12,19 +12,29 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
   const { isDark } = useTheme()
   const imageSrc = isDark && project.imagenDark ? project.imagenDark : project.imagen
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      if (project.url) window.open(project.url, "_blank", "noopener,noreferrer")
+    }
+  }
+
   return (
     <div
       ref={ref}
       className={`
-        group relative break-inside-avoid mb-6
-        p-1.5 rounded-[20px] bg-black/[0.03] dark:bg-white/[0.03]
+        group relative         break-inside-avoid mb-6
+        p-1.5 rounded-(--radius-lg) bg-black/[0.03] dark:bg-white/[0.03]
         transition-all duration-700 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
       `}
       style={{ transitionDelay: `${index * 100}ms` }}
       tabIndex={0}
+      onKeyDown={handleKeyDown}
+      role="article"
+      aria-label={project.nombre}
     >
-      <div className="relative overflow-hidden rounded-[14px] bg-neutral-50 dark:bg-neutral-100 border border-neutral-300/50 shadow-md hover:shadow-lg">
+      <div className="relative overflow-hidden rounded-(--radius-md) bg-neutral-50 dark:bg-neutral-100 border border-neutral-300/50 shadow-md hover:shadow-lg">
         <img
           src={imageSrc}
           alt={`Proyecto: ${project.nombre}`}
@@ -84,6 +94,7 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
@@ -93,11 +104,11 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
         </div>
 
         <div className="p-5 sm:p-6">
-          <h3 className="font-heading font-semibold text-lg text-primary-900 dark:text-neutral-900 leading-snug">
+          <h3 className="font-heading font-semibold text-lg text-primary-700 dark:text-neutral-900 leading-snug">
             {project.nombre}
           </h3>
 
-          <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed line-clamp-3">
+          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-700 leading-relaxed line-clamp-3">
             {project.descripción}
           </p>
         </div>

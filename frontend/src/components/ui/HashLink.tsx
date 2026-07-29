@@ -20,8 +20,7 @@ export function HashLink({ href, children, className, onClick, role, style, tabI
       e.preventDefault()
       onClick?.()
       if (pathname === "/") {
-        const el = document.querySelector(href)
-        el?.scrollIntoView({ behavior: "smooth" })
+        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
       } else {
         navigate("/" + href)
       }

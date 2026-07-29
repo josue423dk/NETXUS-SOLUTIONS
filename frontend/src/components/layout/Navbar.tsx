@@ -56,7 +56,7 @@ export function Navbar() {
   }, [open])
 
   return (
-    <nav aria-label="Navegación principal" className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl rounded-full bg-neutral-50/80 dark:bg-neutral-50/80 backdrop-blur-xl shadow-lg border border-neutral-300/50 transition-colors duration-500">
+    <nav aria-label="Navegación principal" className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-[1120px] rounded-full bg-neutral-50/80 dark:bg-neutral-50/80 backdrop-blur-xl shadow-lg border border-neutral-300/50 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <Link to="/" className="flex-shrink-0">
@@ -80,7 +80,7 @@ export function Navbar() {
                 >
                   {link.label}
                   {isActiveSection && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-700 rounded-full" />
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-700 rounded-full" aria-hidden="true" />
                   )}
                 </HashLink>
               ) : (
@@ -110,23 +110,23 @@ export function Navbar() {
                 aria-expanded={open}
                 aria-label={open ? "Cerrar menú" : "Abrir menú"}
               >
-                <span className="flex flex-col justify-center items-center w-6 h-6 gap-1.5">
-                  <span
-                    className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
-                      open ? "rotate-45 translate-y-[4px]" : ""
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-6 bg-current transition-all duration-300 ${
-                      open ? "opacity-0" : ""
-                    }`}
-                  />
-                  <span
-                    className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
-                      open ? "-rotate-45 -translate-y-[4px]" : ""
-                    }`}
-                  />
-                </span>
+                  <span className="flex flex-col justify-center items-center w-6 h-6 gap-1.5" aria-hidden="true">
+                    <span
+                      className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
+                        open ? "rotate-45 translate-y-[4px]" : ""
+                      }`}
+                    />
+                    <span
+                      className={`block h-0.5 w-6 bg-current transition-all duration-300 ${
+                        open ? "opacity-0" : ""
+                      }`}
+                    />
+                    <span
+                      className={`block h-0.5 w-6 bg-current transition-all duration-300 origin-center ${
+                        open ? "-rotate-45 -translate-y-[4px]" : ""
+                      }`}
+                    />
+                  </span>
               </button>
           </div>
         </div>

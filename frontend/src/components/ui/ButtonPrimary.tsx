@@ -45,7 +45,7 @@ export function ButtonPrimary({
   ariaLabel,
 }: ButtonPrimaryProps) {
   const base =
-    "inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+    "inline-flex items-center justify-center font-semibold transition-all duration-200 active:scale-[0.98] will-change-transform focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 
   const classes = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`
 

@@ -4,16 +4,17 @@ import { SectionHeader } from "../components/ui/SectionHeader"
 
 export function QuienesSomos() {
   return (
-    <div className="py-8 px-4 bg-neutral-100/50 backdrop-blur-xl rounded-xl mx-4">
-      <section className="py-16 sm:py-20">
+    <>
+      <section className="py-16 sm:py-20 px-4">
         <div className="max-w-3xl mx-auto">
           <SectionHeader
             overline="Quiénes somos"
             title="Hacemos realidad tus ideas"
             description="En MONRU UX creemos que el software de calidad nace de equipos chicos, enfocados y con altos estándares técnicos. Trabajamos codo a codo con nuestros clientes para transformar conceptos en productos digitales escalables, seguros y con una experiencia de usuario cuidada al detalle."
             as="h1"
+            className="text-shadow"
           />
-          <p className="mt-4 text-base sm:text-lg text-neutral-700 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-neutral-500 dark:text-neutral-700 leading-relaxed max-w-2xl mx-auto">
             Nuestro enfoque combina craftsmanship en el código con diseño
             centrado en el usuario, priorizando rendimiento, accesibilidad
             y mantenibilidad en cada proyecto.
@@ -21,10 +22,10 @@ export function QuienesSomos() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-900">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-700 text-shadow">
               Nuestros servicios
             </h2>
           </div>
@@ -36,9 +37,9 @@ export function QuienesSomos() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
+      <section className="py-16 sm:py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-900">
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-700 text-shadow">
             Metodología
           </h2>
           <div className="mt-10 grid sm:grid-cols-3 gap-8 text-left">
@@ -60,13 +61,13 @@ export function QuienesSomos() {
               },
             ].map((item) => (
               <div key={item.paso}>
-                <span className="text-4xl font-heading font-bold text-primary-700 dark:text-primary-500">
+                <span className="text-4xl font-heading font-bold text-primary-500 dark:text-primary-500">
                   {item.paso}
                 </span>
-                <h3 className="mt-2 font-heading font-semibold text-primary-900">
+                <h3 className="mt-2 font-heading font-semibold text-primary-700 dark:text-primary-900">
                   {item.titulo}
                 </h3>
-                <p className="mt-2 text-sm text-neutral-700 leading-relaxed">
+                <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-700 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -74,6 +75,6 @@ export function QuienesSomos() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }

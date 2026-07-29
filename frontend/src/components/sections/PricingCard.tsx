@@ -12,18 +12,18 @@ export function PricingCard({ plan }: PricingCardProps) {
     <div
       ref={ref}
       className={`
-        p-1.5 rounded-[20px] bg-black/[0.03] dark:bg-white/[0.03]
+        p-1.5 rounded-(--radius-lg) bg-black/[0.03] dark:bg-white/[0.03]
         transition-all duration-700 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
       `}
     >
       <div
-        className={`relative rounded-[14px] border-2 overflow-hidden bg-neutral-50 dark:bg-neutral-100 ${
+        className={`relative rounded-(--radius-md) border-2 overflow-hidden bg-neutral-50 dark:bg-neutral-100 ${
           plan.destacado ? "border-accent-400 dark:border-primary-500 shadow-lg" : "border-neutral-300/50 shadow-md"
         }`}
       >
         <div className="p-6 sm:p-8">
-          <h3 className="font-heading font-semibold text-xl text-primary-900 dark:text-neutral-900">
+          <h3 className="font-heading font-semibold text-xl text-primary-700 dark:text-neutral-900">
             {plan.nombre}
           </h3>
 
@@ -35,7 +35,7 @@ export function PricingCard({ plan }: PricingCardProps) {
             <span className="text-sm text-neutral-700 dark:text-neutral-500">/ {plan.precioPeriodo}</span>
           </div>
 
-          <p className="mt-4 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed">
+          <p className="mt-4 text-sm text-neutral-500 dark:text-neutral-700 leading-relaxed">
             {plan.descripción}
           </p>
 
