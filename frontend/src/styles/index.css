@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap") layer(fonts);
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap") layer(fonts);
+
+@import "tailwindcss" layer(utilities);
 
 @font-face {
   font-family: "ClashDisplay";
@@ -75,8 +78,8 @@ body {
   --color-warning: #92620A;
   --color-error: #B3261E;
 
-  --font-heading: "Neco", serif;
-  --font-body: "Switzer", sans-serif;
+  --font-heading: "Cabinet Grotesk", sans-serif;
+  --font-body: "General Sans", sans-serif;
   --font-accent: "ClashDisplay", sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;

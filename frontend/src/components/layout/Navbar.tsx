@@ -1,10 +1,20 @@
-import { useState, useEffect, useCallback, useRef } from "react"
-import { Link, NavLink, useLocation } from "react-router-dom"
-import { HashLink } from "../ui/HashLink"
+import { useState, useEffect, useCallback, useRef, useMemo } from "react"
+import { Link, useLocation } from "react-router-dom"
+import { LimelightNav } from "../ui/limelight-nav"
 import { Logo } from "../ui/Logo"
-import { ThemeToggle } from "../ui/ThemeToggle"
+import { CinematicThemeSwitcher } from "../ui/cinematic-theme-switcher"
 import { navLinks } from "../../data/navigation"
 import { useActiveSection } from "../../hooks/useActiveSection"
+import { Briefcase, FileText, Package, Users, UserPlus, HelpCircle } from "lucide-react"
+
+const iconMap: Record<string, React.ReactElement> = {
+  "#trabajos": <Briefcase />,
+  "#cotizacion": <FileText />,
+  "#planes": <Package />,
+  "#quienes-somos": <Users />,
+  "#integrantes": <UserPlus />,
+  "#preguntas-frecuentes": <HelpCircle />,
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -15,6 +25,28 @@ export function Navbar() {
     .filter((l) => l.href.startsWith("#"))
     .map((l) => l.href.slice(1))
   const activeSection = useActiveSection(hashIds)
+
+  const activeIndex = useMemo(() => {
+    if (!activeSection) return -1
+    const idx = hashIds.indexOf(activeSection)
+    return idx >= 0 ? idx : -1
+  }, [activeSection, hashIds])
+
+  const handleHashClick = useCallback((href: string) => () => {
+    if (pathname === "/") {
+      const el = document.querySelector(href)
+      el?.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [pathname])
+
+  const limelightItems = useMemo(() =>
+    navLinks.map((link) => ({
+      id: link.href,
+      icon: iconMap[link.href] || <Briefcase />,
+      label: link.label,
+      onClick: link.href.startsWith("#") ? handleHashClick(link.href) : undefined,
+    })),
+  [handleHashClick])
 
   const handleEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") setOpen(false)
@@ -62,46 +94,18 @@ export function Navbar() {
             <Logo />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isHash = link.href.startsWith("#")
-              const sectionId = isHash ? link.href.slice(1) : null
-              const isActiveSection = isHash && pathname === "/" && activeSection === sectionId
-              return isHash ? (
-                <HashLink
-                  key={link.href}
-                  href={link.href}
-                  className={`relative text-sm transition-colors ${
-                    isActiveSection
-                      ? "text-primary-700 font-semibold"
-                      : "text-neutral-700 hover:text-primary-900"
-                  }`}
-                >
-                  {link.label}
-                  {isActiveSection && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-700 rounded-full" />
-                  )}
-                </HashLink>
-              ) : (
-                <NavLink
-                  key={link.href}
-                  to={link.href}
-                  className={({ isActive }) =>
-                    `text-sm transition-colors ${
-                      isActive
-                        ? "text-primary-700 font-semibold"
-                        : "text-neutral-700 hover:text-primary-900"
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              )
-            })}
+          <div className="hidden md:flex items-center">
+            <LimelightNav
+              items={limelightItems}
+              defaultActiveIndex={activeIndex >= 0 ? activeIndex : 0}
+              className="bg-transparent border-none h-auto gap-0"
+              iconContainerClassName="p-3"
+              iconClassName=""
+            />
           </div>
 
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <CinematicThemeSwitcher />
             <button
               ref={toggleButtonRef}
               className="md:hidden text-neutral-900"
@@ -156,27 +160,34 @@ export function Navbar() {
               const sectionId = isHash ? link.href.slice(1) : null
               const isActiveSection = isHash && pathname === "/" && activeSection === sectionId
               return isHash ? (
-                <HashLink
+                <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setOpen(false)
+                    const el = document.querySelector(link.href)
+                    el?.scrollIntoView({ behavior: "smooth" })
+                  }}
                   role="menuitem"
-                  className={`block text-sm transition-colors ${
+                  className={`flex items-center gap-3 text-sm transition-colors ${
                     isActiveSection
                       ? "text-primary-700 font-semibold"
                       : "text-neutral-700 hover:text-primary-900"
                   }`}
                 >
+                  {iconMap[link.href]}
                   {link.label}
-                </HashLink>
+                </a>
               ) : (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={() => setOpen(false)}
                   role="menuitem"
-                  className="block text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                  className="flex items-center gap-3 text-sm text-neutral-700 hover:text-primary-900 transition-colors"
                 >
+                  {iconMap[link.href]}
                   {link.label}
                 </Link>
               )
