@@ -26,3 +26,21 @@ export async function create(req, res, next) {
     next(err)
   }
 }
+
+export async function update(req, res, next) {
+  try {
+    const project = await projectService.update(req.params.id, req.body)
+    res.json(project)
+  } catch (err) {
+    next(err)
+  }
+}
+
+export async function remove(req, res, next) {
+  try {
+    await projectService.remove(req.params.id)
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+}

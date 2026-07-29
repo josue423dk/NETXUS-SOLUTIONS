@@ -1,36 +1,8 @@
-import express from "express"
-import cors from "cors"
-import helmet from "helmet"
-import rateLimit from "express-rate-limit"
-import { env } from "./config/env.js"
 import { connectDB } from "./config/db.js"
-import projectRoutes from "./routes/projectRoutes.js"
-import { errorHandler } from "./middleware/errorHandler.js"
-
-const app = express()
+import app from "./app.js"
+import { env } from "./config/env.js"
 
 connectDB()
-
-app.use(helmet())
-app.use(cors({ origin: env.frontendUrl }))
-app.use(express.json({ limit: "100kb" }))
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: "Demasiadas solicitudes, intentá de nuevo más tarde" },
-})
-app.use("/api/", limiter)
-
-app.get("/", (_req, res) => {
-  res.json({ message: "MONRU UX API" })
-})
-
-app.use("/api/projects", projectRoutes)
-
-app.use(errorHandler)
 
 app.listen(env.port, () => {
   console.log(`Servidor corriendo en http://localhost:${env.port}`)
