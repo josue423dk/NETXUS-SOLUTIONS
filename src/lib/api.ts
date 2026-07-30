@@ -10,12 +10,12 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
 
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
+      ...options,
       headers: {
         "Content-Type": "application/json",
         ...(options?.headers as Record<string, string> | undefined),
       },
       signal: controller.signal,
-      ...options,
     })
 
     if (!res.ok) {
