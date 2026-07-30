@@ -1,0 +1,8 @@
+export { equipo } from "./equipo"
+export type { TeamMember } from "../types"
+export { faqs } from "./faqs"
+export { navLinks } from "./navigation"
+export { planes, featureLabels, featureMatrix } from "./planes"
+export { servicios } from "./servicios"
+export type { Service } from "./servicios"
+export { trabajos } from "./trabajos"

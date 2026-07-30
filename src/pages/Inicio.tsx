@@ -1,16 +1,13 @@
 import { useEffect, lazy, Suspense } from "react"
 import { useLocation } from "react-router-dom"
-import { PageTransitionWrapper } from "../components/sections/PageTransitionWrapper"
+import { PageTransitionWrapper, Hero, TrabajosGrid, PricingSection } from "../components/sections"
 import { useScrollPageTransition } from "../hooks/useScrollPageTransition"
-import { Hero } from "../components/sections/Hero"
-import { TrabajosGrid } from "../components/sections/TrabajosGrid"
 import { Spinner } from "../components/ui/Spinner"
 
 const LazyCotizacion = lazy(() => import("./Cotizacion").then((m) => ({ default: m.Cotizacion })))
 const LazyIntegrantes = lazy(() => import("./Integrantes").then((m) => ({ default: m.Integrantes })))
 const LazyPreguntasFrecuentes = lazy(() => import("./PreguntasFrecuentes").then((m) => ({ default: m.PreguntasFrecuentes })))
 const LazyQuienesSomos = lazy(() => import("./QuienesSomos").then((m) => ({ default: m.QuienesSomos })))
-const LazyPricingSection = lazy(() => import("../components/sections/PricingSection").then((m) => ({ default: m.PricingSection })))
 
 function Loader() {
   return <div className="flex items-center justify-center min-h-[60vh]"><Spinner /></div>
@@ -20,7 +17,7 @@ const SECTIONS = [
   { id: "hero",                Component: Hero },
   { id: "trabajos",            Component: TrabajosGrid },
   { id: "cotizacion",          Component: () => <Suspense fallback={<Loader />}><LazyCotizacion /></Suspense> },
-  { id: "planes",              Component: () => <Suspense fallback={<Loader />}><LazyPricingSection /></Suspense> },
+  { id: "planes",              Component: PricingSection },
   { id: "quienes-somos",       Component: () => <Suspense fallback={<Loader />}><LazyQuienesSomos /></Suspense> },
   { id: "integrantes",         Component: () => <Suspense fallback={<Loader />}><LazyIntegrantes /></Suspense> },
   { id: "preguntas-frecuentes", Component: () => <Suspense fallback={<Loader />}><LazyPreguntasFrecuentes /></Suspense> },

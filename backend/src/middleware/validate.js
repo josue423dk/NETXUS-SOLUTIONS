@@ -19,7 +19,7 @@ export function validate(schema) {
 
 export const projectSchema = z.object({
   nombre: z.string().min(1, "nombre es requerido"),
-  descripción: z.string().min(1, "descripción es requerida"),
+  descripcion: z.string().min(1, "descripción es requerida"),
   imagen: z.string().url().optional().or(z.literal("")),
   tags: z.array(z.string()).optional(),
 }).strip()

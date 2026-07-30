@@ -167,12 +167,12 @@ export function Hero() {
               CONSULTORÍA EN DESARROLLO DE SOFTWARE
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold mt-4 text-white leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold mt-4 text-neutral-900 dark:text-white leading-[1.1]">
               Software a medida que{" "}
               <span className="hero-animated-text animate-back-in-up">impulsa tu negocio</span>
             </h1>
 
-            <p className="mt-4 text-white/80 text-base sm:text-lg lg:text-xl max-w-xl">
+            <p className="mt-4 text-neutral-700 dark:text-white/80 text-base sm:text-lg lg:text-xl max-w-xl">
               Desarrollamos productos digitales escalables, intuitivos y optimizados para convertir ideas en resultados concretos.
             </p>
 

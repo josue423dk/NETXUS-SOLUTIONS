@@ -1,6 +1,20 @@
-@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap") layer(fonts);
-
 @import "tailwindcss" layer(utilities);
+
+@font-face {
+  font-family: "Neco";
+  src: url("../assets/fonts/Neco_Complete/Fonts/WEB/fonts/Neco-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("../assets/fonts/Switzer_Complete/Fonts/WEB/fonts/Switzer-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "ClashDisplay";
@@ -51,8 +65,8 @@ body {
   --color-warning: #92620A;
   --color-error: #B3261E;
 
-  --font-heading: "Cabinet Grotesk", sans-serif;
-  --font-body: "Cabinet Grotesk", sans-serif;
+  --font-heading: "Neco", sans-serif;
+  --font-body: "Switzer", sans-serif;
   --font-accent: "ClashDisplay", sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -164,13 +178,11 @@ body {
 
 .sec-inactive {
   opacity: 0;
-  transform: translate3d(0, 0, 0) scale(0.95) rotate(0deg);
-  filter: blur(8px);
+  transform: translate3d(0, 0, 0) scale(0.95);
   pointer-events: none;
   z-index: 1;
   transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .sec-entering.dir-down {
@@ -187,24 +199,24 @@ body {
 }
 
 @keyframes secEnterDown {
-  0%   { transform: translate3d(0, 100vh, 0) scale(0.85) rotateY(-8deg); opacity: 0; filter: blur(12px); }
+  0%   { transform: translate3d(0, 100vh, 0) scale(0.92); opacity: 0; }
   35%  { opacity: 0.7; }
-  100% { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
 }
 @keyframes secEnterUp {
-  0%   { transform: translate3d(0, -100vh, 0) scale(0.85) rotateY(8deg); opacity: 0; filter: blur(12px); }
+  0%   { transform: translate3d(0, -100vh, 0) scale(0.92); opacity: 0; }
   35%  { opacity: 0.7; }
-  100% { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
 }
 @keyframes secExitDown {
-  0%   { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
-  40%  { transform: translate3d(0, 40px, 0) scale(0.96) rotateY(3deg); opacity: 0.6; filter: blur(5px); }
-  100% { transform: translate3d(0, 100vh, 0) scale(0.85) rotateY(10deg); opacity: 0; filter: blur(14px); }
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  40%  { transform: translate3d(0, 40px, 0) scale(0.96); opacity: 0.6; }
+  100% { transform: translate3d(0, 100vh, 0) scale(0.92); opacity: 0; }
 }
 @keyframes secExitUp {
-  0%   { transform: translate3d(0, 0, 0) scale(1) rotateY(0deg); opacity: 1; filter: blur(0); }
-  40%  { transform: translate3d(0, -40px, 0) scale(0.96) rotateY(-3deg); opacity: 0.6; filter: blur(5px); }
-  100% { transform: translate3d(0, -100vh, 0) scale(0.85) rotateY(-10deg); opacity: 0; filter: blur(14px); }
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  40%  { transform: translate3d(0, -40px, 0) scale(0.96); opacity: 0.6; }
+  100% { transform: translate3d(0, -100vh, 0) scale(0.92); opacity: 0; }
 }
 
 @keyframes gradientWipeRight {
@@ -223,26 +235,16 @@ body {
 }
 
 @keyframes flipEnterRight {
-  0%   { transform: perspective(1200px) rotateY(-90deg) scale(0.9); opacity: 0; filter: blur(8px); }
-  60%  { opacity: 0.8; filter: blur(2px); }
-  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
-}
-@keyframes flipEnterLeft {
-  0%   { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(8px); }
-  60%  { opacity: 0.8; filter: blur(2px); }
-  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
-}
-@keyframes flipExitRight {
-  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
-  100% { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(8px); }
+  0%   { transform: perspective(1200px) rotateY(-15deg) scale(0.95); opacity: 0; }
+  100% { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
 }
 @keyframes secExitFlipRight {
-  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
-  100% { transform: perspective(1200px) rotateY(-90deg) scale(0.9); opacity: 0; filter: blur(12px); }
+  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
+  100% { transform: perspective(1200px) rotateY(-15deg) scale(0.95); opacity: 0; }
 }
 @keyframes secExitFlipLeft {
-  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; filter: blur(0); }
-  100% { transform: perspective(1200px) rotateY(90deg) scale(0.9); opacity: 0; filter: blur(12px); }
+  0%   { transform: perspective(1200px) rotateY(0deg) scale(1); opacity: 1; }
+  100% { transform: perspective(1200px) rotateY(15deg) scale(0.95); opacity: 0; }
 }
 
 .sec-entering > * {
@@ -292,4 +294,21 @@ body {
   30%  { opacity: 0; transform: scale(0.94) translateY(30px); filter: blur(10px); }
   60%  { opacity: 0; transform: scale(0.94) translateY(-20px); filter: blur(10px); }
   100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@keyframes particle-burst {
+  0%   { transform: scale(0); opacity: 0; }
+  30%  { opacity: 1; }
+  100% { transform: scale(6); opacity: 0; }
+}
+
+.active\:scale-98:active { transform: scale(0.98); }
+
+@keyframes stroke-draw {
+  from { stroke-dashoffset: 1000; stroke-dasharray: 1000; }
+  to   { stroke-dashoffset: 0; stroke-dasharray: 1000; }
+}
+
+.animate-stroke-draw {
+  animation: stroke-draw 4s ease-in-out forwards;
 }

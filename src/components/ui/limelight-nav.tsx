@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, cloneElement } from 'react'
+import React, { useState, useRef, useEffect, cloneElement } from 'react'
 
 const DefaultHomeIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>
 const DefaultCompassIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z" /></svg>
@@ -40,8 +40,9 @@ export const LimelightNav = ({
   const [isReady, setIsReady] = useState(false)
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const limelightRef = useRef<HTMLDivElement | null>(null)
+  const rafRef = useRef<number>(0)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (items.length === 0) return
 
     const limelight = limelightRef.current
@@ -52,9 +53,11 @@ export const LimelightNav = ({
       limelight.style.left = `${newLeft}px`
 
       if (!isReady) {
-        setTimeout(() => setIsReady(true), 50)
+        rafRef.current = requestAnimationFrame(() => setIsReady(true))
       }
     }
+
+    return () => cancelAnimationFrame(rafRef.current)
   }, [activeIndex, isReady, items])
 
   if (items.length === 0) {

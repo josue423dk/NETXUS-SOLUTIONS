@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react"
 import { useScrollReveal } from "../hooks/useScrollReveal"
 import { faqs } from "../data/faqs"
-import { AccordionItem } from "../components/ui/AccordionItem"
-import { SectionHeader } from "../components/ui/SectionHeader"
+import { AccordionItem, SectionHeader } from "../components/ui"
 
 export function PreguntasFrecuentes() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)

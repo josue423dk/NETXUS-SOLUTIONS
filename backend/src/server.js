@@ -5,13 +5,32 @@ import rateLimit from "express-rate-limit"
 import { env } from "./config/env.js"
 import { connectDB } from "./config/db.js"
 import projectRoutes from "./routes/projectRoutes.js"
+import contactRoutes from "./routes/contactRoutes.js"
 import { errorHandler } from "./middleware/errorHandler.js"
 
 const app = express()
 
 connectDB()
 
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'strict-dynamic'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      fontSrc: ["'self'", "https://api.fontshare.com"],
+      connectSrc: ["'self'", "https:"],
+      frameAncestors: ["'none'"],
+      baseUri: ["'self'"],
+      formAction: ["'self'"],
+      objectSrc: ["'none'"],
+      frameSrc: ["'none'"],
+    },
+  },
+  crossOriginOpenerPolicy: { policy: "same-origin" },
+  crossOriginEmbedderPolicy: { policy: "require-corp" },
+}))
 app.use(cors({ origin: env.frontendUrl }))
 app.use(express.json({ limit: "100kb" }))
 
@@ -29,6 +48,7 @@ app.get("/", (_req, res) => {
 })
 
 app.use("/api/projects", projectRoutes)
+app.use("/api/contact", contactRoutes)
 
 app.use(errorHandler)
 

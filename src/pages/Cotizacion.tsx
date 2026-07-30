@@ -1,5 +1,4 @@
-import { ContactForm } from "../components/ui/ContactForm"
-import { SectionHeader } from "../components/ui/SectionHeader"
+import { ContactForm, SectionHeader } from "../components/ui"
 
 export function Cotizacion() {
   return (

@@ -1,15 +1,17 @@
+const GENERIC_ERROR = "Error interno del servidor"
+
+const SAFE_MESSAGES = {
+  ValidationError: "Datos inválidos",
+  CastError: "ID inválido",
+}
+
 export function errorHandler(err, _req, res, _next) {
-  console.error("[ERROR]", err.message)
-
-  if (err.name === "ValidationError") {
-    return res.status(400).json({ error: err.message })
+  if (err.name === "ValidationError" || err.name === "CastError") {
+    return res.status(400).json({ error: SAFE_MESSAGES[err.name] })
   }
 
-  if (err.name === "CastError") {
-    return res.status(400).json({ error: "ID inválido" })
-  }
-
-  res.status(err.status || 500).json({
-    error: err.message || "Error interno del servidor",
+  const status = err.status && err.status >= 400 && err.status < 600 ? err.status : 500
+  res.status(status).json({
+    error: status < 500 ? err.message : GENERIC_ERROR,
   })
 }

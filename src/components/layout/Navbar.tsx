@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { LimelightNav } from "../ui/limelight-nav"
-import { Logo } from "../ui/Logo"
-import { CinematicThemeSwitcher } from "../ui/cinematic-theme-switcher"
+import { LimelightNav, Logo, CinematicThemeSwitcher } from "../ui"
 import { navLinks } from "../../data/navigation"
 import { useActiveSection } from "../../hooks/useActiveSection"
 import { Briefcase, FileText, Package, Users, UserPlus, HelpCircle } from "lucide-react"
@@ -161,7 +159,7 @@ export function Navbar() {
       </div>
 
       {open && (
-          <div ref={menuRef} id="mobile-menu" role="dialog" aria-modal="true" className="md:hidden bg-neutral-50 border-t border-neutral-300 shadow-lg">
+          <div ref={menuRef} id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación móvil" className="md:hidden bg-neutral-50 border-t border-neutral-300 shadow-lg">
             <div className="px-4 sm:px-6 py-4 space-y-3">
             {navLinks.map((link) => {
               const isHash = link.href.startsWith("#")

@@ -26,7 +26,6 @@ export default defineConfig({
             if (id.includes("react") || id.includes("react-dom") || id.includes("react-router")) {
               return "vendor-react"
             }
-            if (id.includes("framer-motion")) return "vendor-animations"
             if (id.includes("lucide")) return "vendor-icons"
             if (id.includes("canvas-confetti") || id.includes("@number-flow")) return "vendor-effects"
             return "vendor-other"

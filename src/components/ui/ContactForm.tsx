@@ -21,6 +21,7 @@ export function ContactForm() {
     email: "",
     mensaje: "",
   })
+  const [honeypot, setHoneypot] = useState("")
   const [errors, setErrors] = useState<Partial<Record<keyof ContactData, string>>>({})
   const [status, setStatus] = useState<FormStatus>("idle")
   const [serverError, setServerError] = useState("")
@@ -41,6 +42,7 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot) return
 
     const now = Date.now()
     if (now - lastSubmitRef.current < MIN_SUBMIT_INTERVAL) {
@@ -108,13 +110,17 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-5 relative" noValidate>
       <div ref={statusRef} aria-live="assertive" aria-atomic="true">
         {status === "error" && serverError && (
           <div className="p-3 rounded-lg bg-error/10 border border-error/20" role="alert">
             <p className="text-sm text-error">{serverError}</p>
           </div>
         )}
+      </div>
+
+      <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" tabIndex={-1}>
+        <input type="text" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
       </div>
 
       <div>
