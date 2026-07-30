@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit"
 import { env } from "./config/env.js"
 import { initSchema } from "./config/schema.js"
 import projectRoutes from "./routes/projectRoutes.js"
+import contactRoutes from "./routes/contactRoutes.js"
 import { errorHandler } from "./middleware/errorHandler.js"
 
 const app = express()
@@ -29,6 +30,7 @@ app.get("/", (_req, res) => {
 })
 
 app.use("/api/projects", projectRoutes)
+app.use("/api/contact", contactRoutes)
 
 app.use(errorHandler)
 

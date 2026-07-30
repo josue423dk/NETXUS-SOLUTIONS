@@ -7,7 +7,8 @@ export function validate(schema) {
       next()
     } catch (err) {
       if (err instanceof z.ZodError) {
-        const error = new Error(err.errors.map((e) => e.message).join(", "))
+        const messages = (err.issues || err.errors || []).map((e) => e.message).join(", ")
+        const error = new Error(messages)
         error.status = 400
         next(error)
       } else {
@@ -19,7 +20,13 @@ export function validate(schema) {
 
 export const projectSchema = z.object({
   nombre: z.string().min(1, "nombre es requerido"),
-  descripción: z.string().min(1, "descripción es requerida"),
+  descripcion: z.string().min(1, "descripción es requerida"),
   imagen: z.string().url().optional().or(z.literal("")),
   tags: z.array(z.string()).optional(),
+}).strip()
+
+export const contactSchema = z.object({
+  nombre: z.string().min(2, "nombre debe tener al menos 2 caracteres"),
+  email: z.string().email("email inválido"),
+  mensaje: z.string().min(10, "mensaje debe tener al menos 10 caracteres"),
 }).strip()
