@@ -10,7 +10,7 @@ export type CategoriaProyecto =
   | "consultoria"
 
 export interface Project {
-  _id?: string
+  id?: string
   nombre: string
   descripcion: string
   imagen?: string

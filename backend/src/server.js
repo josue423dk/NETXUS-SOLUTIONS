@@ -3,14 +3,14 @@ import cors from "cors"
 import helmet from "helmet"
 import rateLimit from "express-rate-limit"
 import { env } from "./config/env.js"
-import { connectDB } from "./config/db.js"
+import { initSchema } from "./config/schema.js"
 import projectRoutes from "./routes/projectRoutes.js"
 import contactRoutes from "./routes/contactRoutes.js"
 import { errorHandler } from "./middleware/errorHandler.js"
 
 const app = express()
 
-connectDB()
+initSchema()
 
 app.use(helmet({
   contentSecurityPolicy: {
