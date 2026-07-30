@@ -35,3 +35,5 @@ turso-data.md
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*

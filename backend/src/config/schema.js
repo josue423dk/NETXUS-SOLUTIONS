@@ -12,5 +12,16 @@ export async function initSchema() {
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     )
   `)
+
+  await turso.execute(`
+    CREATE TABLE IF NOT EXISTS contacts (
+      id TEXT PRIMARY KEY,
+      nombre TEXT NOT NULL,
+      email TEXT NOT NULL,
+      mensaje TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    )
+  `)
+
   console.log("Schema de Turso inicializado")
 }

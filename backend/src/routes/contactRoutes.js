@@ -1,4 +1,5 @@
 import { Router } from "express"
+<<<<<<< HEAD
 import rateLimit from "express-rate-limit"
 import { z } from "zod"
 import { validate } from "../middleware/validate.js"
@@ -22,5 +23,13 @@ const router = Router()
 router.post("/", contactLimiter, validate(contactSchema), (_req, res) => {
   res.json({ success: true })
 })
+=======
+import * as controller from "../controllers/contactController.js"
+import { validate, contactSchema } from "../middleware/validate.js"
+
+const router = Router()
+
+router.post("/", validate(contactSchema), controller.create)
+>>>>>>> 7b27ac8 (feature: agregar endpoint, y valicon de proyectos)
 
 export default router
