@@ -36,4 +36,7 @@ export const api = {
   post<T>(endpoint: string, data: unknown, options?: RequestInit) {
     return request<T>(endpoint, { method: "POST", body: JSON.stringify(data), ...options })
   },
+  delete<T>(endpoint: string, options?: RequestInit) {
+    return request<T>(endpoint, { method: "DELETE", ...options })
+  },
 }
