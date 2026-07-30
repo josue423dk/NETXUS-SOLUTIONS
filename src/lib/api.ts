@@ -1,4 +1,4 @@
-const API_BASE = "/api"
+const API_BASE = "https://monru-ux-back.onrender.com/api"
 
 const USER_FRIENDLY_MESSAGES: Record<number, string> = {
   400: "Datos inválidos. Verificá los campos e intentá de nuevo.",
