@@ -12,6 +12,9 @@ type ContactData = z.infer<typeof contactSchema>
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
+const MIN_SUBMIT_INTERVAL = 5000
+const MAX_SUBMITS_PER_MINUTE = 3
+
 export function ContactForm() {
   const [form, setForm] = useState<ContactData>({
     nombre: "",
@@ -22,6 +25,9 @@ export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle")
   const [serverError, setServerError] = useState("")
   const statusRef = useRef<HTMLDivElement>(null)
+  const lastSubmitRef = useRef(0)
+  const submitCountRef = useRef(0)
+  const submitWindowRef = useRef(Date.now())
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,6 +41,25 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const now = Date.now()
+    if (now - lastSubmitRef.current < MIN_SUBMIT_INTERVAL) {
+      setServerError("Por favor esperá unos segundos antes de enviar otro mensaje.")
+      setStatus("error")
+      return
+    }
+
+    if (now - submitWindowRef.current > 60000) {
+      submitCountRef.current = 0
+      submitWindowRef.current = now
+    }
+    submitCountRef.current++
+    if (submitCountRef.current > MAX_SUBMITS_PER_MINUTE) {
+      setServerError("Demasiados intentos. Por favor intentá más tarde.")
+      setStatus("error")
+      return
+    }
+
     setStatus("loading")
     setServerError("")
 
@@ -53,6 +78,7 @@ export function ContactForm() {
     setErrors({})
 
     try {
+      lastSubmitRef.current = now
       await api.post("/contact", result.data)
       setStatus("success")
       setForm({ nombre: "", email: "", mensaje: "" })

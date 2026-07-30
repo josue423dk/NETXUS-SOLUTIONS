@@ -29,9 +29,9 @@ export function Layout() {
       </header>
       <main
         id="main-content"
-        className={
+        className={`pt-14 sm:pt-16 ${
           isTransitioning ? "page-transitioning-route" : "page-visible"
-        }
+        }`}
       >
         <Outlet />
       </main>

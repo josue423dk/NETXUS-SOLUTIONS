@@ -1,6 +1,6 @@
 import type { Project } from "../../types"
 import { useScrollReveal } from "../../hooks/useScrollReveal"
-import { useTheme } from "../../hooks/useTheme"
+import { useTheme } from "next-themes"
 
 interface PortfolioCardProps {
   project: Project
@@ -9,7 +9,8 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ project, index }: PortfolioCardProps) {
   const { ref, isVisible } = useScrollReveal()
-  const { isDark } = useTheme()
+  const { resolvedTheme } = useTheme()
+  const isDark = resolvedTheme === "dark"
   const imageSrc = isDark && project.imagenDark ? project.imagenDark : project.imagen
 
   return (
@@ -102,7 +103,7 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
         </h3>
 
         <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed line-clamp-3">
-          {project.descripción}
+          {project.descripcion}
         </p>
       </div>
     </div>

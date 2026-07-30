@@ -5,7 +5,7 @@ import { SectionHeader } from "../components/ui/SectionHeader"
 export function QuienesSomos() {
   return (
     <>
-      <section className="py-24 sm:py-28 px-4">
+      <section className="py-16 md:py-24 sm:py-28 px-4">
         <div className="max-w-3xl mx-auto">
           <SectionHeader
             overline="Quiénes somos"
@@ -21,14 +21,14 @@ export function QuienesSomos() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-neutral-100/50 px-4">
+      <section className="py-16 sm:py-20 md:py-24 bg-neutral-100/50 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-900">
               Nuestros servicios
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {servicios.map((s, i) => (
               <ServiceCard key={s.titulo} service={s} index={i} />
             ))}
@@ -36,7 +36,7 @@ export function QuienesSomos() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 px-4">
+      <section className="py-16 sm:py-20 md:py-24 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-900">
             Metodología

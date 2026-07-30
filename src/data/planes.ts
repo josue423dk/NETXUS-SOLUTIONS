@@ -7,7 +7,7 @@ export const planes: Plan[] = [
     precio: 499,
     precioPeriodo: "proyecto",
     moneda: "USD",
-    descripción:
+    descripcion:
       "Ideal para emprendedores y startups que necesitan una presencia digital profesional rápida y efectiva.",
     features: [
       { label: "Landing page hasta 3 secciones", included: true },
@@ -30,7 +30,7 @@ export const planes: Plan[] = [
     precio: 1299,
     precioPeriodo: "proyecto",
     moneda: "USD",
-    descripción:
+    descripcion:
       "Para negocios en crecimiento que requieren un sitio completo con gestión de contenido y analytics avanzado.",
     features: [
       { label: "Sitio web hasta 8 secciones", included: true },
@@ -54,7 +54,7 @@ export const planes: Plan[] = [
     precio: 2999,
     precioPeriodo: "proyecto",
     moneda: "USD",
-    descripción:
+    descripcion:
       "Soluciones a medida para empresas que necesitan arquitectura robusta, deploy profesional y soporte continuo.",
     features: [
       { label: "App web completa a medida", included: true },

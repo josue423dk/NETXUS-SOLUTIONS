@@ -54,8 +54,14 @@ export function Navbar() {
 
   useEffect(() => {
     if (open) {
+      document.body.style.overflow = "hidden"
       document.addEventListener("keydown", handleEscape)
-      return () => document.removeEventListener("keydown", handleEscape)
+      return () => {
+        document.body.style.overflow = ""
+        document.removeEventListener("keydown", handleEscape)
+      }
+    } else {
+      document.body.style.overflow = ""
     }
   }, [open, handleEscape])
 
@@ -88,10 +94,11 @@ export function Navbar() {
 
   return (
     <nav aria-label="Navegación principal" className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/70 dark:bg-neutral-50/70 backdrop-blur-md border-b border-neutral-300 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           <Link to="/" className="flex-shrink-0">
-            <Logo />
+            <div className="sm:hidden"><Logo size="sm" /></div>
+            <div className="hidden sm:block"><Logo /></div>
           </Link>
 
           <div className="hidden md:flex items-center">
@@ -108,10 +115,11 @@ export function Navbar() {
             <CinematicThemeSwitcher />
             <button
               ref={toggleButtonRef}
-              className="md:hidden text-neutral-900"
+              className="md:hidden text-neutral-900 p-3"
               onClick={() => setOpen(!open)}
               aria-expanded={open}
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
             >
               {open ? (
                   <svg
@@ -153,8 +161,8 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div ref={menuRef} className="md:hidden bg-neutral-50 border-t border-neutral-300" role="menu">
-          <div className="px-4 py-4 space-y-3">
+          <div ref={menuRef} id="mobile-menu" role="dialog" aria-modal="true" className="md:hidden bg-neutral-50 border-t border-neutral-300 shadow-lg">
+            <div className="px-4 sm:px-6 py-4 space-y-3">
             {navLinks.map((link) => {
               const isHash = link.href.startsWith("#")
               const sectionId = isHash ? link.href.slice(1) : null
@@ -170,7 +178,7 @@ export function Navbar() {
                     el?.scrollIntoView({ behavior: "smooth" })
                   }}
                   role="menuitem"
-                  className={`flex items-center gap-3 text-sm transition-colors ${
+                  className={`flex items-center gap-3 py-2 text-sm transition-colors ${
                     isActiveSection
                       ? "text-primary-700 font-semibold"
                       : "text-neutral-700 hover:text-primary-900"
@@ -185,7 +193,7 @@ export function Navbar() {
                   to={link.href}
                   onClick={() => setOpen(false)}
                   role="menuitem"
-                  className="flex items-center gap-3 text-sm text-neutral-700 hover:text-primary-900 transition-colors"
+                  className="flex items-center gap-3 py-2 text-sm text-neutral-700 hover:text-primary-900 transition-colors"
                 >
                   {iconMap[link.href]}
                   {link.label}

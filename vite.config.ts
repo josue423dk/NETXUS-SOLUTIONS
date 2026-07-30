@@ -10,18 +10,26 @@ export default defineConfig({
       '@': path.resolve('./src'),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: process.env.VITE_API_URL || "http://localhost:5000",
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {
         manualChunks(id: string) {
           if (id.includes("node_modules")) {
-            if (
-              id.includes("react") ||
-              id.includes("react-dom") ||
-              id.includes("react-router")
-            ) {
-              return "vendor"
+            if (id.includes("react") || id.includes("react-dom") || id.includes("react-router")) {
+              return "vendor-react"
             }
+            if (id.includes("framer-motion")) return "vendor-animations"
+            if (id.includes("lucide")) return "vendor-icons"
+            if (id.includes("canvas-confetti") || id.includes("@number-flow")) return "vendor-effects"
+            return "vendor-other"
           }
         },
       },

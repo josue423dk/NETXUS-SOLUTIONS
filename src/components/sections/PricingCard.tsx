@@ -33,7 +33,7 @@ export function PricingCard({ plan }: PricingCardProps) {
         </div>
 
         <p className="mt-4 text-sm text-neutral-700 dark:text-neutral-700 leading-relaxed">
-          {plan.descripción}
+          {plan.descripcion}
         </p>
 
         <ul className="mt-6 space-y-3">

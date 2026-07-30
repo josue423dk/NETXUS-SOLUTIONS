@@ -12,7 +12,7 @@ export type CategoriaProyecto =
 export interface Project {
   _id?: string
   nombre: string
-  descripción: string
+  descripcion: string
   imagen?: string
   imagenDark?: string
   tags?: string[]
@@ -34,7 +34,7 @@ export interface Plan {
   precio: number
   precioPeriodo: string
   moneda: string
-  descripción: string
+  descripcion: string
   features: PlanFeature[]
   badge?: string
   destacado: boolean
@@ -45,6 +45,7 @@ export interface TeamMember {
   nombre: string
   rol: string
   descripcion: string
+  imagen?: string
   linkedin?: string
   github?: string
 }
