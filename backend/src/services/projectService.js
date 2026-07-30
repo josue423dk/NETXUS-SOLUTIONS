@@ -58,3 +58,16 @@ export async function create(data) {
   })
   return formatProject(rs.rows[0])
 }
+
+export async function remove(id) {
+  const rs = await turso.execute({
+    sql: "DELETE FROM projects WHERE id = ? RETURNING *",
+    args: [id],
+  })
+  if (rs.rows.length === 0) {
+    const err = new Error("Proyecto no encontrado")
+    err.status = 404
+    throw err
+  }
+  return formatProject(rs.rows[0])
+}

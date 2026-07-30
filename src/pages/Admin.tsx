@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { api } from "../lib/api"
+import type { Project } from "../types"
 
 type Status = "idle" | "loading" | "error" | "success"
 
@@ -14,6 +15,28 @@ export function Admin() {
   const [imagen, setImagen] = useState("")
   const [tags, setTags] = useState("")
   const [projectStatus, setProjectStatus] = useState<Status>("idle")
+
+  const [projects, setProjects] = useState<Project[]>([])
+  const [projectsLoading, setProjectsLoading] = useState(false)
+  const [deleteStatus, setDeleteStatus] = useState<Record<string, Status>>({})
+
+  async function fetchProjects() {
+    setProjectsLoading(true)
+    try {
+      const data = await api.get<Project[]>("/projects", {
+        headers: { Authorization: `Bearer ${token}` } as Record<string, string>,
+      })
+      setProjects(data)
+    } catch {
+      setError("Error al cargar proyectos")
+    } finally {
+      setProjectsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (token) fetchProjects()
+  }, [token])
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -34,6 +57,7 @@ export function Admin() {
     localStorage.removeItem("admin_token")
     setToken("")
     setStatus("idle")
+    setProjects([])
   }
 
   async function handleCreateProject(e: React.FormEvent) {
@@ -55,10 +79,26 @@ export function Admin() {
       setDescripcion("")
       setImagen("")
       setTags("")
+      fetchProjects()
       setTimeout(() => setProjectStatus("idle"), 3000)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al crear proyecto")
       setProjectStatus("error")
+    }
+  }
+
+  async function handleDelete(id: string) {
+    if (!confirm("¿Eliminar este proyecto?")) return
+    setDeleteStatus((prev) => ({ ...prev, [id]: "loading" }))
+    try {
+      await api.delete(`/projects/${id}`, {
+        headers: { Authorization: `Bearer ${token}` } as Record<string, string>,
+      })
+      setProjects((prev) => prev.filter((p) => p.id !== id))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error al eliminar")
+    } finally {
+      setDeleteStatus((prev) => ({ ...prev, [id]: "idle" }))
     }
   }
 
@@ -111,7 +151,14 @@ export function Admin() {
         </button>
       </div>
 
-      <form onSubmit={handleCreateProject} className="space-y-4 bg-neutral-50 dark:bg-neutral-100 p-6 rounded-2xl shadow-md">
+      {error && (
+        <p className="text-sm text-error mb-4 bg-error/10 px-4 py-2 rounded-lg">{error}</p>
+      )}
+
+      <form onSubmit={handleCreateProject} className="space-y-4 bg-neutral-50 dark:bg-neutral-100 p-6 rounded-2xl shadow-md mb-10">
+        <h2 className="text-lg font-heading font-semibold text-primary-900 dark:text-neutral-900">
+          Crear proyecto
+        </h2>
         <div>
           <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-700 mb-1">Nombre</label>
           <input
@@ -159,9 +206,6 @@ export function Admin() {
         {projectStatus === "success" && (
           <p className="text-sm text-success">Proyecto creado correctamente</p>
         )}
-        {projectStatus === "error" && (
-          <p className="text-sm text-error">{error}</p>
-        )}
 
         <button
           type="submit"
@@ -171,6 +215,41 @@ export function Admin() {
           {projectStatus === "loading" ? "Creando..." : "Crear proyecto"}
         </button>
       </form>
+
+      <section>
+        <h2 className="text-lg font-heading font-semibold text-primary-900 dark:text-neutral-900 mb-4">
+          Proyectos existentes
+        </h2>
+
+        {projectsLoading ? (
+          <p className="text-sm text-neutral-500">Cargando proyectos...</p>
+        ) : projects.length === 0 ? (
+          <p className="text-sm text-neutral-500">No hay proyectos creados desde el panel.</p>
+        ) : (
+          <ul className="space-y-3">
+            {projects.map((p) => (
+              <li
+                key={p.id}
+                className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-100 p-4 rounded-xl shadow-sm"
+              >
+                <div className="min-w-0 flex-1 mr-4">
+                  <p className="font-heading font-semibold text-primary-900 dark:text-neutral-900 truncate">
+                    {p.nombre}
+                  </p>
+                  <p className="text-xs text-neutral-500 truncate mt-0.5">{p.descripcion}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(p.id!)}
+                  disabled={deleteStatus[p.id!] === "loading"}
+                  className="flex-shrink-0 px-3 py-1.5 text-xs font-semibold text-error border border-error/30 rounded-lg hover:bg-error/10 transition-colors disabled:opacity-50"
+                >
+                  {deleteStatus[p.id!] === "loading" ? "Eliminando..." : "Eliminar"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   )
 }
