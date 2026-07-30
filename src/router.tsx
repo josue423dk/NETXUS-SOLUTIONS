@@ -8,6 +8,7 @@ const Cotizacion = lazy(() => import("./pages/Cotizacion").then((m) => ({ defaul
 const QuienesSomos = lazy(() => import("./pages/QuienesSomos").then((m) => ({ default: m.QuienesSomos })))
 const Integrantes = lazy(() => import("./pages/Integrantes").then((m) => ({ default: m.Integrantes })))
 const PreguntasFrecuentes = lazy(() => import("./pages/PreguntasFrecuentes").then((m) => ({ default: m.PreguntasFrecuentes })))
+const Admin = lazy(() => import("./pages/Admin").then((m) => ({ default: m.Admin })))
 
 function PageSuspense({ children }: { children: React.ReactNode }) {
   return (
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "quienes-somos", element: <PageSuspense><QuienesSomos /></PageSuspense> },
       { path: "integrantes", element: <PageSuspense><Integrantes /></PageSuspense> },
       { path: "preguntas-frecuentes", element: <PageSuspense><PreguntasFrecuentes /></PageSuspense> },
+      { path: "admin", element: <PageSuspense><Admin /></PageSuspense> },
       { path: "*", element: <NotFound /> },
     ],
   },
