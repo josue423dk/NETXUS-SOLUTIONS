@@ -10,7 +10,10 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
 
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(options?.headers as Record<string, string> | undefined),
+      },
       signal: controller.signal,
       ...options,
     })
@@ -27,10 +30,10 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  get<T>(endpoint: string) {
-    return request<T>(endpoint)
+  get<T>(endpoint: string, options?: RequestInit) {
+    return request<T>(endpoint, { method: "GET", ...options })
   },
-  post<T>(endpoint: string, data: unknown) {
-    return request<T>(endpoint, { method: "POST", body: JSON.stringify(data) })
+  post<T>(endpoint: string, data: unknown, options?: RequestInit) {
+    return request<T>(endpoint, { method: "POST", body: JSON.stringify(data), ...options })
   },
 }

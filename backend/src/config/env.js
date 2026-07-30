@@ -15,4 +15,6 @@ export const env = {
   tursoDbUrl: process.env.TURSO_DB_URL,
   tursoAuthToken: process.env.TURSO_AUTH_TOKEN,
   frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173",
+  adminApiKey: process.env.ADMIN_API_KEY || "dev-key-123",
+  jwtSecret: process.env.JWT_SECRET || "monru-secret-dev",
 }
