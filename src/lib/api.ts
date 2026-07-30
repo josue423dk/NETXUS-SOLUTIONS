@@ -1,4 +1,4 @@
-const API_BASE = "/api"
+const API_BASE = "https://monru-ux-back.onrender.com/api"
 
 interface ApiError {
   error: string

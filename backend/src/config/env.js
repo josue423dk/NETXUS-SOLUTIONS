@@ -14,7 +14,7 @@ export const env = {
   port: parseInt(process.env.PORT, 10) || 5000,
   tursoDbUrl: process.env.TURSO_DB_URL,
   tursoAuthToken: process.env.TURSO_AUTH_TOKEN,
-  frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173",
+  frontendUrl: process.env.FRONTEND_URL || "https://monru-ux.vercel.app",
   adminApiKey: process.env.ADMIN_API_KEY || "dev-key-123",
   jwtSecret: process.env.JWT_SECRET || "monru-secret-dev",
 }
