@@ -45,7 +45,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div
       ref={ref}
-      className={`rounded-md border bg-neutral-50 p-6 sm:p-8 transition-all duration-700 ease-out ${
+      className={`rounded-md border bg-neutral-50/70 dark:bg-neutral-100/70 backdrop-blur-md p-6 sm:p-8 transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       } ${
         service.destacado

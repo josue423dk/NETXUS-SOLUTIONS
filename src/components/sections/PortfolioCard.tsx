@@ -19,7 +19,8 @@ export function PortfolioCard({ project, index }: PortfolioCardProps) {
       className={`
         group relative break-inside-avoid mb-6
         rounded-md overflow-hidden
-        bg-neutral-50 dark:bg-neutral-100
+        bg-neutral-50/70 dark:bg-neutral-100/70
+        backdrop-blur-md
         border border-neutral-300/50
         shadow-md hover:shadow-lg
         transition-all duration-700 ease-out

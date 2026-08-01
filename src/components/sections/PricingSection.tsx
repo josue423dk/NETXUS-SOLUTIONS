@@ -36,7 +36,7 @@ function PlanCard({ plan, index, isMonthly }: { plan: PlanData; index: number; i
       ref={ref}
       className={`
         relative rounded-2xl border text-center flex flex-col
-        bg-neutral-50 dark:bg-neutral-100
+        bg-neutral-50/70 dark:bg-neutral-100/70 backdrop-blur-md
         ${plan.isPopular ? "border-primary-700 border-2 z-10" : "border-neutral-300/50 z-0"}
         ${!plan.isPopular ? "mt-5" : ""}
         p-6
@@ -114,7 +114,7 @@ function PlanCardMobile({ plan, index, isMonthly }: { plan: PlanData; index: num
       ref={ref}
       className={`
         relative rounded-2xl border
-        bg-neutral-50 dark:bg-neutral-100
+        bg-neutral-50/70 dark:bg-neutral-100/70 backdrop-blur-md
         ${plan.isPopular ? "border-primary-700 border-2" : "border-neutral-300/50 shadow-sm"}
         transition-all duration-500 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
@@ -202,7 +202,7 @@ export function PricingSection() {
   }
 
   return (
-    <section id="planes" className="py-16 sm:py-20 md:py-24 lg:py-28 bg-neutral-50/70 dark:bg-neutral-50">
+    <section id="planes" className="py-16 sm:py-20 md:py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           overline="Nuestros planes"

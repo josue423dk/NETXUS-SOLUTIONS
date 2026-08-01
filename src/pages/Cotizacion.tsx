@@ -11,9 +11,7 @@ export function Cotizacion() {
           as="h1"
         />
 
-        <div className="rounded-md border border-neutral-300/50 shadow-md p-4 sm:p-6 md:p-8 bg-neutral-50">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </div>
     </section>
   )

@@ -13,7 +13,7 @@ export function PricingCard({ plan }: PricingCardProps) {
       ref={ref}
       className={`
         relative rounded-md overflow-hidden
-        bg-neutral-50 dark:bg-neutral-100
+        bg-neutral-50/70 dark:bg-neutral-100/70 backdrop-blur-md
         border-2 ${plan.destacado ? "border-accent-400 dark:border-primary-500 shadow-lg" : "border-neutral-300/50 shadow-md"}
         transition-all duration-700 ease-out
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}

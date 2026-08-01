@@ -51,7 +51,7 @@ export function PreguntasFrecuentes() {
 
         <div
           ref={ref}
-          className={`rounded-md border border-neutral-300/50 dark:border-neutral-300/30 shadow-md px-4 sm:px-6 bg-neutral-50 dark:bg-neutral-100 transition-all duration-700 ease-out ${
+          className={`px-2 sm:px-4 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           role="region"

@@ -21,7 +21,7 @@ export function QuienesSomos() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-24 bg-neutral-100/50 px-4">
+      <section className="py-16 sm:py-20 md:py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-900">
