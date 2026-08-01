@@ -86,7 +86,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden">
+    <footer className="relative bg-neutral-50/80 dark:bg-neutral-50 overflow-hidden">
       <FooterBackgroundGradient />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">

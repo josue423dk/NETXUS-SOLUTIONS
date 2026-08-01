@@ -4,6 +4,7 @@ import { useTheme } from "next-themes"
 import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
 import { ShaderBackground } from "../ui/adisyon-shader"
+import { GradientBackground } from "../ui/paper-design-shader-background"
 
 const PAGE_TRANSITION_MS = 600
 
@@ -28,8 +29,13 @@ export function Layout() {
 
   return (
     <div className="relative min-h-screen text-neutral-900 dark:bg-neutral-50">
-      {isLight && (
+      {isLight ? (
         <ShaderBackground className="fixed inset-0 h-full w-full" />
+      ) : (
+        <div className="fixed inset-0 h-full w-full">
+          <GradientBackground className="absolute inset-0 h-full w-full" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
       )}
       <div className="relative z-10">
         <header>
